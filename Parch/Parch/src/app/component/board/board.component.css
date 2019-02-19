@@ -1,0 +1,15 @@
+div.Post {
+    display: block;
+    border: solid black;
+    border-width: 5px 5px 0px 5px;
+    background: rgb(150, 150, 255);
+}
+div.NewPost {
+    display: block;
+    border: 5px solid black ;
+    background: rgb(150, 150, 255);
+    
+}
+.Interaction {
+    background: rgb(150, 150, 255);
+}
