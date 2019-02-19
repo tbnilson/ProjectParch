@@ -8,6 +8,7 @@ public class RequestHelper {
 	
 	
 	public static void Process(HttpServletRequest request, HttpServletResponse response) {
+		String test = "git test";
 	
 	}
 	
