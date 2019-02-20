@@ -3,7 +3,9 @@ Feature: User Registers new account
  
  Background: 
  Given : The User is on the Parch Home Page
- 
+
+	#This scenario should test whether email and usernames are unique
+	#Also test if bad passwords fail
   Scenario Outline: User tries to register a new account
     Given : The User types in "<username>" and "<password>" and "<email>" in register field
     When : The User "<action>"
