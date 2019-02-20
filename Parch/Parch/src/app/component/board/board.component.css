@@ -1,3 +1,9 @@
+:host ::ng-deep div.Post {
+    display: block;
+    border: solid black;
+    border-width: 5px 5px 0px 5px;
+    background: rgb(150, 150, 255);
+}
 div.Post {
     display: block;
     border: solid black;
