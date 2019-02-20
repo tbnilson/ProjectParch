@@ -12,31 +12,43 @@ import { Post } from './FakeDatabase';
 
 export class BoardComponent implements OnInit {
 
-  text : Array<string>  = [];
+  postText : String[]  = [];
+  boardText : String[] = [];
   selectedBoard : Board = null;
   selectedUser : String = "";
   posts : Post[] = [];
-  newPostText : String = "Post Text Here";
+  boards : Board[] = []
+  newPostText : String = "";
 
   constructor() { 
     this.selectedUser = "Austin";
     FakeDatabase.generateBoards();
     FakeDatabase.generatePosts();
     this.selectedBoard = FakeDatabase.getBoard("Board0");
-    this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
-    for (let i : number = 0; i < this.posts.length; i++) {
-      this.text.push(this.posts[i].user + ": " + this.posts[i].text);
+    this.updatePosts();
+    this.boards = FakeDatabase.getBoards();
+    for (let i : number = 0; i < this.boards.length; i++) {
+      this.boardText.push(this.boards[i].name);
     }
 
   }
 
   createPost() : void {
     FakeDatabase.createPost(this.selectedBoard, this.selectedUser, this.newPostText);
+    this.updatePosts();
+  }
+
+  updatePosts() : void{
     this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
-    this.text = [];
+    this.postText = [];
     for (let i : number = 0; i < this.posts.length; i++) {
-      this.text.push(this.posts[i].user + ": " + this.posts[i].text);
+      this.postText.push(this.posts[i].user + ": " + this.posts[i].text);
     }
+  }
+
+  selectBoard(boardText : String) {
+    this.selectedBoard = FakeDatabase.getBoard(boardText);
+    this.updatePosts();
   }
 
   ngOnInit() {

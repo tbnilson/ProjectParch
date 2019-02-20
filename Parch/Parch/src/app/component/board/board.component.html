@@ -1,9 +1,17 @@
 <div>
-  <div *ngFor = "let text of text" class = "Post">
-    {{text}}
+  <div class="Post">
+      <select class="Interaction">
+        <option *ngFor = "let boardText of boardText" (click) = selectBoard(boardText)>{{boardText}}</option>
+      </select>
   </div>
-  <div>
-    <input type="text" [(ngModel)] = "newPostText"/>
-    <button (click) = "createPost()">Create Post</button>
+  <div *ngFor = "let postText of postText" class = "Post">{{postText}}</div>
+  <div class = "NewPost">
+    <div style="display: inline">
+        <input class="Interaction" type="postText" [(ngModel)] = "newPostText" style = "width: 90%; 
+          max-width: 500px; min-width: 100px"/>
+    </div>
+    <div style="display: inline">
+        <button class="Interaction"  (click) = "createPost()" >Create Post</button>
+    </div>
   </div>
 </div>
