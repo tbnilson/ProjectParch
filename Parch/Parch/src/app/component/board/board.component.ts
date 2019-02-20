@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FakeDatabase } from './FakeDatabase';
+import { Board } from './FakeDatabase';
+import { Post } from './FakeDatabase';
 
 @Component({
   selector: 'app-board',
@@ -9,17 +12,31 @@ import { Component, OnInit } from '@angular/core';
 
 export class BoardComponent implements OnInit {
 
-  private posts : string[][];
   text : Array<string>  = [];
+  selectedBoard : Board = null;
+  selectedUser : String = "";
+  posts : Post[] = [];
+  newPostText : String = "Post Text Here";
 
   constructor() { 
-    this.posts = [["Idiot0", "post0"], ["Idiot1", "post1"], ["Idiot2", "post2"],
-     ["Idiot3", "post3"]];
-    
+    this.selectedUser = "Austin";
+    FakeDatabase.generateBoards();
+    FakeDatabase.generatePosts();
+    this.selectedBoard = FakeDatabase.getBoard("Board0");
+    this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
     for (let i : number = 0; i < this.posts.length; i++) {
-      this.text.push(this.posts[i][0] + ": " + this.posts[i][1]);
+      this.text.push(this.posts[i].user + ": " + this.posts[i].text);
     }
 
+  }
+
+  createPost() : void {
+    FakeDatabase.createPost(this.selectedBoard, this.selectedUser, this.newPostText);
+    this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
+    this.text = [];
+    for (let i : number = 0; i < this.posts.length; i++) {
+      this.text.push(this.posts[i].user + ": " + this.posts[i].text);
+    }
   }
 
   ngOnInit() {
@@ -27,3 +44,5 @@ export class BoardComponent implements OnInit {
   }
 
 }
+
+
