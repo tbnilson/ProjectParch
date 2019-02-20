@@ -1,5 +1,17 @@
 import { BrowserTransferStateModule } from '@angular/platform-browser';
 
+export class User {
+    static idGenerator : number = 0;
+
+    id : number;
+    name : string;
+
+    constructor(name : string) {
+        this.id = User.idGenerator++;
+        this.name = name;
+    }
+}
+
 export class Board {
     name : String;
 

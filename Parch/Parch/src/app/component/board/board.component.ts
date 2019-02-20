@@ -13,6 +13,7 @@ import { Post } from './FakeDatabase';
 export class BoardComponent implements OnInit {
 
   //postText : String[]  = [];
+  admin : boolean = false;
   boardText : String[] = [];
   selectedBoard : Board = null;
   selectedUser : String = "";
@@ -36,31 +37,22 @@ export class BoardComponent implements OnInit {
 
   createPost() : void {
     FakeDatabase.createPost(this.selectedBoard, this.selectedUser, this.newPostText);
+    this.newPostText = "";
     this.updatePosts();
   }
 
   deletePost(id : Number) : void {
+    if (!this.admin) {
+      return;
+    }
     FakeDatabase.deletePost(id);
     this.updatePosts();
   }
 
   updatePosts() : void{
-    //let postHTML : string = ""
     this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
+    let adminOnly : HTMLCollectionOf<Element> = document.getElementsByClassName("AdminOnly")
     
-    // this.selectedPosts = [];
-    // for (let i : number = 0; i < this.posts.length; i++) {
-    //   this.postText.push(this.posts[i].user + ": " + this.posts[i].text);
-
-    // postHTML += "<div class= \"Post\" id=\"" + this.posts[i].id + 
-    //   "\" value=" + this.posts[i].id +">" 
-    //   + this.posts[i].user + ": " + this.posts[i].text + "</div>";
-    //   document.getElementById(this.posts[i].id.toString()).
-    //}
-
-    
-
-    //document.getElementById("postContainer").innerHTML = postHTML;
   }
 
   selectBoard(boardText : String) {
