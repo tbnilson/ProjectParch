@@ -2,7 +2,11 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import model.Permission;
 import model.Room;
@@ -14,18 +18,42 @@ public class UserDao implements IUser {
 	public static SessionFactory sf = HibernateUtil.getSessionFactory();
 
 	public User getUser(String username) {
-		
-		return null;
+		try {
+			Session sess = sf.openSession();
+			Criteria crit = sess.createCriteria(User.class);
+			crit.add(Restrictions.like("username", username));
+			User u = (User) crit.uniqueResult();
+			sf.close();
+			return u;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
+		try {
+			Session sess = sf.openSession();
+			sess.beginTransaction();
+			sess.persist(user);
+			sess.getTransaction().commit();
+			sess.close();
+			return true;
+		} catch (HibernateException e) {
+				e.printStackTrace();
+				return false;
+		}
+
+	}
+
+	public boolean verifyUser(String username, String password) {
+		Session sess = sf.openSession();
+		Criteria crit = sess.createCriteria(User.class);
+		crit.add(Restrictions.like("username", username));
+		User u = (User) crit.uniqueResult();
 		return false;
 	}
 
-	public List<Room> getRooms(List<Permission> permissions) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
