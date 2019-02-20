@@ -1288,3 +1288,9 @@ java.lang.IndexOutOfBoundsException: Index: 5, Size: 5
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2019-02-20 13:43:59.692
 !MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-02-20 13:52:54.446
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-02-20 13:52:54.500
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
