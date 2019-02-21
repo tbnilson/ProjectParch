@@ -1,12 +1,13 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Post {
@@ -60,6 +61,11 @@ public class Post {
 	private ParchUser parchUser;
 	private Date timestamp;
 	
+	@PrePersist
+	protected void onCreate() {
+		this.timestamp = new Date();
+	}
+
 	@ManyToOne
 	private Room room;
 
