@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Entity
-public class User {
+public class ParchUser {
 	
 	@OneToMany
 	private List<Post> posts;
@@ -52,7 +52,6 @@ public class User {
 		try {
 			return om.writeValueAsString(node);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
