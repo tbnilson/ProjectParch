@@ -22,8 +22,9 @@ export class BoardComponent implements OnInit {
   newPostText : String = "";
 
   constructor() { 
-    this.selectedUser = new User("Austin", false);
     FakeDatabase.generateDatabase();
+    this.selectedUser = FakeDatabase.getUser("User0");
+    //console.log(this.selectedUser.name);
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.boards = FakeDatabase.getBoards();
     for (let i : number = 0; i < this.boards.length; i++) {
@@ -38,7 +39,7 @@ export class BoardComponent implements OnInit {
   }
 
   deletePost(id : Number) : void {
-    if (!this.selectedUser.admin) {
+    if (FakeDatabase.getPermissionOfUserBoard(this.selectedUser, this.selectedBoard).type != "admin") {
       return;
     }
     FakeDatabase.deletePost(id);
@@ -56,6 +57,16 @@ export class BoardComponent implements OnInit {
       postText.disabled = true;
       let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
       newPostButton.disabled = true;
+    }
+    //Block access to boards where there is no permission.
+    else if (FakeDatabase.getPermissionOfUserBoard(this.selectedUser, FakeDatabase.getBoard(boardText)) == null) {
+        this.selectedBoard = FakeDatabase.getBoard("Select Board");
+        let boardSelection : HTMLSelectElement =  <HTMLSelectElement> document.getElementById("boards");
+        boardSelection.selectedIndex = 0;
+        let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");
+        postText.disabled = true;
+        let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
+        newPostButton.disabled = true;
     }
     else {
       let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");

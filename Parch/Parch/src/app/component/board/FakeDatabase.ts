@@ -5,12 +5,12 @@ export class User {
     
     id : number;
     name : string;
-    admin : boolean;
+    email : string;
 
-    constructor(name : string, admin : boolean) {
+    constructor(name : string, email : string) {
         this.id = User.idGenerator++;
         this.name = name;
-        this.admin = admin;
+        this.email = email;
     }
 }
 
@@ -20,6 +20,24 @@ export class Board {
     constructor(name : String) {
         this.name = name;
     }
+}
+
+export class Permission {
+    static idGenerator : number = 0;
+
+    id : number;
+    user : User;
+    board : Board;
+    type : string;
+
+    constructor(user : User, board : Board, type : string) {
+        this.id = Permission.idGenerator++;
+        this.user = user;
+        this.board = board;
+        this.type = type;
+    }
+
+
 }
 
 export class Post {
@@ -43,6 +61,7 @@ export class FakeDatabase {
 
     static boards : Board[];
     static users : User[];
+    static permissions : Permission[];
     static posts : Post[];
 
     static generateBoards() : void {
@@ -50,19 +69,32 @@ export class FakeDatabase {
     }
 
     static generateUsers() : void {
-        this.users = [new User("User0", false), new User("User1", false), new User("User2", false)];
+        this.users = [new User("User0", "Austin.Tauer@gmail.com"), new User("User1", "Austin.Tauer@gmail.com"),
+         new User("User2", "Austin.Tauer@gmail.com")];
+    }
+
+    static generatePermissions() : void {
+        this.permissions = [ new Permission(FakeDatabase.users[0], FakeDatabase.boards[1], "admin") ,
+        new Permission(FakeDatabase.users[0], FakeDatabase.boards[2], "user")];
     }
 
     static generatePosts() : void {
-        this.posts = [new Post(this.boards[1], this.users[0], "Post0"), 
-            new Post(this.boards[1], this.users[1], "Post1"), new Post(this.boards[1],
-            this.users[2], "Post2")];
+        this.posts = [];
     }
 
     static generateDatabase() : void {
         this.generateBoards();
         this.generateUsers();
+        this.generatePermissions();
         this.generatePosts();
+    }
+
+    static getUser(name : string) : User {
+        for (let i :number = 0; i < this.users.length ; i++) {
+            if (this.users[i].name == name) {
+                return this.users[i];
+            }
+        }
     }
 
     static getPost(id : Number) : Post {
@@ -108,5 +140,26 @@ export class FakeDatabase {
     static getBoards() : Board[] {
         return this.boards;
     }
+
+    static getPermissionsOfUser(user : User) : Permission[] {
+        let userPermissions : Permission[] = [];
+
+        for (let i = 0; i < this.permissions.length; i++ ) {
+            if (this.permissions[i].user == user) {
+                userPermissions.push(this.permissions[i]);
+            }
+        }
+        return userPermissions;
+    }
+
+    static getPermissionOfUserBoard(user : User, board : Board) : Permission {
+
+        for (let i = 0; i < this.permissions.length; i++ ) {
+            if (this.permissions[i].user == user && this.permissions[i].board == board) {
+                return this.permissions[i];
+            }
+        }
+    }
+
 }
 
