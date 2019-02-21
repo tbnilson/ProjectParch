@@ -3,9 +3,11 @@ package dao;
 import java.sql.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import model.ParchUser;
 import model.Post;
@@ -30,8 +32,24 @@ public class PostDao implements IPost {
 
 	@Override
 	public List<Post> getUserPosts(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Session sess = sf.openSession();
+			
+			Criteria crit = sess.createCriteria(Post.class);
+			crit.add(Restrictions.like("PARCHUSER_USERNAME", username));
+			List<Post> posts = crit.list();
+			
+			if (posts!=null) {
+				sess.close();
+				return posts;
+			} else {
+				sess.close();
+				return null;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
