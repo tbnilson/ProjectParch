@@ -75,12 +75,12 @@ public class UserDao implements IUser {
 				sess.beginTransaction();
 				sess.delete(u);
 				sess.getTransaction().commit();
+				sess.close();
+				return true;
 			} else {
+				sess.close();
 				return false;
 			}
-			
-			sess.close();
-			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
