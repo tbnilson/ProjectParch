@@ -36,14 +36,41 @@ public class PostDao implements IPost {
 
 	@Override
 	public boolean deletePost(int messageID) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Session sess = sf.openSession();
+			sess.beginTransaction();
+			
+			Post post = sess.get(Post.class, messageID);
+			
+			sess.delete(post);
+			
+			sess.getTransaction().commit();
+			sess.close();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
 	public boolean editPost(int messageID, String newmessage) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Session sess = sf.openSession();
+			sess.beginTransaction();
+			
+			Post post = sess.get(Post.class, messageID);
+			
+			post.setMessage(newmessage);
+			sess.update(post);
+			
+			sess.getTransaction().commit();
+			sess.close();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
