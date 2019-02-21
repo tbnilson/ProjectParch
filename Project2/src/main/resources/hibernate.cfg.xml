@@ -14,6 +14,10 @@
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<property name="hibernate.show_sql">true</property>
 		
+		<mapping class = "model.ParchUser"/>
+		<mapping class = "model.Post"/>
+		<mapping class = "model.Permission"/>
+		<mapping class = "model.Room"/>
 
 		
 	</session-factory>

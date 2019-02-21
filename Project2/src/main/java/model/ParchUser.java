@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Entity
-public class User {
+public class ParchUser {
 	
 	@OneToMany
 	private List<Post> posts;

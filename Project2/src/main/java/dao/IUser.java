@@ -1,12 +1,12 @@
 package dao;
 
 
-import model.User;
+import model.ParchUser;
 
 public interface IUser {
 	
-	public User getUser(String username);
-	public boolean addUser(User user);
+	public ParchUser getUser(String username);
+	public boolean addUser(ParchUser parchUser);
 	public boolean verifyUser(String username, String password);
 	
 

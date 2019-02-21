@@ -32,12 +32,12 @@ public class Post {
 		this.message = message;
 	}
 
-	public User getUser() {
-		return user;
+	public ParchUser getUser() {
+		return parchUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(ParchUser parchUser) {
+		this.parchUser = parchUser;
 	}
 
 	public Date getTimestamp() {
@@ -57,7 +57,7 @@ public class Post {
 	}
 
 	@ManyToOne
-	private User user;
+	private ParchUser parchUser;
 	private Date timestamp;
 	
 	@ManyToOne

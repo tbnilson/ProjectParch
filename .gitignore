@@ -6,4 +6,5 @@
 .metadata/.plugins/org.eclipse.wst.jsdt.core/externalLibsTimeStamps
 .metadata/.plugins/org.eclipse.wst.jsdt.core/indexes/savedIndexNames.txt
 .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
-
+Project2/target
+Project2/.settings
