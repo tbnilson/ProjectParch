@@ -48,11 +48,12 @@ public class UserDao implements IUser {
 			Criteria crit = sess.createCriteria(ParchUser.class);
 			crit.add(Restrictions.like("username", username));
 			ParchUser u = (ParchUser) crit.uniqueResult();
-			if(username.equals(u.getUsername()) && password.equals(u.getPassword())) {
+			if(u!=null && username.equals(u.getUsername()) && password.equals(u.getPassword())) {
 				return true;
 			}
-			else
+			else {
 				return false;
+			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
