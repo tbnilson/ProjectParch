@@ -97,7 +97,7 @@ public class UserDao implements IUser {
 			
 			if (u!=null) {
 				sess.beginTransaction();
-//				u.setEmail(newemail);
+				u.setEmail(newemail);
 				sess.getTransaction().commit();
 			}
 			

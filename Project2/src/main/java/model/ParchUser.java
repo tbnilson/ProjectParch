@@ -20,6 +20,13 @@ public class ParchUser {
 	@OneToMany
 	private List<Permission> permissions;
 	
+	private String email;
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	private String password;
 	public String getPassword() {
 		return password;
