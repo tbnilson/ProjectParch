@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeDatabase } from './FakeDatabase';
+import { FakeDatabase, User } from './FakeDatabase';
 import { Board } from './FakeDatabase';
 import { Post } from './FakeDatabase';
 
@@ -13,26 +13,22 @@ import { Post } from './FakeDatabase';
 export class BoardComponent implements OnInit {
 
   //postText : String[]  = [];
-  admin : boolean = false;
   boardText : String[] = [];
   selectedBoard : Board = null;
-  selectedUser : String = "";
+  selectedUser : User;
   selectedPosts : Post[] = [];
   posts : Post[] = [];
   boards : Board[] = []
   newPostText : String = "";
 
   constructor() { 
-    this.selectedUser = "Austin";
-    FakeDatabase.generateBoards();
-    FakeDatabase.generatePosts();
-    this.selectedBoard = FakeDatabase.getBoard("Board0");
-    //this.updatePosts();
+    this.selectedUser = new User("Austin", false);
+    FakeDatabase.generateDatabase();
+    this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.boards = FakeDatabase.getBoards();
     for (let i : number = 0; i < this.boards.length; i++) {
       this.boardText.push(this.boards[i].name);
     }
-
   }
 
   createPost() : void {
@@ -42,7 +38,7 @@ export class BoardComponent implements OnInit {
   }
 
   deletePost(id : Number) : void {
-    if (!this.admin) {
+    if (!this.selectedUser.admin) {
       return;
     }
     FakeDatabase.deletePost(id);
@@ -51,12 +47,23 @@ export class BoardComponent implements OnInit {
 
   updatePosts() : void{
     this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
-    let adminOnly : HTMLCollectionOf<Element> = document.getElementsByClassName("AdminOnly")
-    
   }
 
   selectBoard(boardText : String) {
     this.selectedBoard = FakeDatabase.getBoard(boardText);
+    if (this.selectedBoard.name == "Select Board") {
+      let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");
+      postText.disabled = true;
+      let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
+      newPostButton.disabled = true;
+    }
+    else {
+      let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");
+      postText.disabled = false;
+      let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
+      newPostButton.disabled = false;
+    }
+    
     this.updatePosts();
   }
 
