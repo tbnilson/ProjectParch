@@ -2,10 +2,12 @@ package dao;
 
 import java.util.List;
 
+import model.ParchUser;
 import model.Post;
+import model.Room;
 
 public interface IPost {
-	public Post makePost(int roomID, String username, String message);
+	public Post makePost(Room room, ParchUser name, String message);
 	public Post getPost(int messageID);
 	public List<Post> getRoomPosts(int roomID);
 	public List<Post> getUserPosts(String username);

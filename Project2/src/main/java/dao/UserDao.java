@@ -11,7 +11,7 @@ import util.HibernateUtil;
 
 public class UserDao implements IUser {
 	
-	public static SessionFactory sf = HibernateUtil.getSessionFactory();
+	private static SessionFactory sf = HibernateUtil.getSessionFactory();
 
 	public ParchUser getUser(String username) {
 		try {
