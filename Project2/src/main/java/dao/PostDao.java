@@ -20,14 +20,41 @@ public class PostDao implements IPost {
 
 	@Override
 	public Post getPost(int messageID) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Session sess = sf.openSession();
+			sess.beginTransaction();
+			
+			Post post = sess.get(Post.class, messageID);
+			
+			sess.getTransaction().commit();
+			sess.close();
+			return post;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<Post> getRoomPosts(int roomID) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Session sess = sf.openSession();
+			
+			Criteria crit = sess.createCriteria(Post.class);
+			crit.add(Restrictions.like("ROOM_ID", roomID));
+			List<Post> posts = crit.list();
+			
+			if (posts!=null) {
+				sess.close();
+				return posts;
+			} else {
+				sess.close();
+				return null;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
