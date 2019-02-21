@@ -40,5 +40,7 @@ public class Permission {
 	public void setPermissions(String permissions) {
 		this.permissions = permissions;
 	}
-	
+	public String toJsonString() {
+		return null;
+	}
 }
