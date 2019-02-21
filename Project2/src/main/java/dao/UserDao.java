@@ -19,7 +19,7 @@ public class UserDao implements IUser {
 			Criteria crit = sess.createCriteria(ParchUser.class);
 			crit.add(Restrictions.like("username", username));
 			ParchUser u = (ParchUser) crit.uniqueResult();
-			sf.close();
+			sess.close();
 			return u;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -48,16 +48,93 @@ public class UserDao implements IUser {
 			Criteria crit = sess.createCriteria(ParchUser.class);
 			crit.add(Restrictions.like("username", username));
 			ParchUser u = (ParchUser) crit.uniqueResult();
-			if(username.equals(u.getUsername()) && password.equals(u.getPassword())) {
+			sess.close();
+			if(u!=null && username.equals(u.getUsername()) && password.equals(u.getPassword())) {
 				return true;
 			}
-			else
+			else {
 				return false;
+			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return false;
 		}
 		
+	}
+
+	@Override
+	public boolean deleteUser(String username) {
+		try {
+			Session sess = sf.openSession();
+			
+			Criteria crit = sess.createCriteria(ParchUser.class);
+			crit.add(Restrictions.like("username", username));
+			ParchUser u = (ParchUser) crit.uniqueResult();
+			
+			if (u!=null) {
+				sess.beginTransaction();
+				sess.delete(u);
+				sess.getTransaction().commit();
+				sess.close();
+				return true;
+			} else {
+				sess.close();
+				return false;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean setEmail(String username, String newemail) {
+		try {
+			Session sess = sf.openSession();
+			Criteria crit = sess.createCriteria(ParchUser.class);
+			crit.add(Restrictions.like("username", username));
+			ParchUser u = (ParchUser) crit.uniqueResult();
+			
+			if (u!=null) {
+				sess.beginTransaction();
+				u.setEmail(newemail);
+				sess.getTransaction().commit();
+			}
+			
+			sess.close();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean setUsername(String username, String newusername) {
+		try {
+			Session sess = sf.openSession();
+			Criteria crit = sess.createCriteria(ParchUser.class);
+			crit.add(Restrictions.like("username", username));
+			ParchUser u = (ParchUser) crit.uniqueResult();
+			
+			if (u!=null && !this.userExists(newusername)) {
+				sess.beginTransaction();
+				u.setUsername(newusername);
+				sess.getTransaction().commit();
+			}
+			
+			sess.close();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean userExists(String username) {
+		// TODO Auto-generated method stub
+		return this.getUser(username)!=null;
 	}
 
 	
