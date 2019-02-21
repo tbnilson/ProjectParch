@@ -13,9 +13,10 @@ public class Playground {
 		System.out.println(ud.verifyUser("test1", "testpass"));
 		System.out.println(ud.verifyUser("test2", "testpass"));
 		System.out.println(ud.verifyUser("baduser", "testpass"));
-		System.out.println(ud.getUser("test1").toJsonString());
+//		System.out.println(ud.getUser("test1").toJsonString());
 		
-		
+		System.out.println(ud.deleteUser("test1"));
+		System.out.println(ud.deleteUser("test1"));
 		
 		HibernateUtil.getSessionFactory().close();
 	}
