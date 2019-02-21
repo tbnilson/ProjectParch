@@ -74,7 +74,7 @@ export class FakeDatabase {
     }
 
     static generatePermissions() : void {
-        this.permissions = [ new Permission(FakeDatabase.users[0], FakeDatabase.boards[1], "admin") ,
+        this.permissions = [new Permission(FakeDatabase.users[0], FakeDatabase.boards[1], "admin"),
         new Permission(FakeDatabase.users[0], FakeDatabase.boards[2], "user")];
     }
 
@@ -130,7 +130,7 @@ export class FakeDatabase {
     }
 
     static  getBoard(name : String) : Board {
-        for (let i = 0; i < this.boards[i].name.length; i++ ) {
+        for (let i = 0; i < this.boards.length; i++ ) {
             if (this.boards[i].name == name) {
                 return this.boards[i];
             }
@@ -139,6 +139,16 @@ export class FakeDatabase {
 
     static getBoards() : Board[] {
         return this.boards;
+    }
+
+    static getBoardsOfUser(user : User) : Board[] {
+        let userBoards : Board[] = [this.boards[0]];
+        for (let i = 0; i < this.boards.length; i++ ) {
+            if (this.getPermissionOfUserBoard(user, this.boards[i]) != null) {
+                userBoards.push(this.boards[i]);
+            }
+        }
+        return userBoards;
     }
 
     static getPermissionsOfUser(user : User) : Permission[] {

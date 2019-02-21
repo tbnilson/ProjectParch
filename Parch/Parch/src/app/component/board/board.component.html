@@ -1,7 +1,8 @@
 <div>
   <div class="Post">
       <select class="Interaction" id = "boards" >
-        <option *ngFor = "let boardText of boardText" (click) = selectBoard(boardText)>{{boardText}}</option>
+        <option *ngFor = "let selectedUserBoard of selectedUserBoards" (click) = selectBoard(selectedUserBoard.name)>
+          {{selectedUserBoard.name}}</option>
       </select>
   </div>
   <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
