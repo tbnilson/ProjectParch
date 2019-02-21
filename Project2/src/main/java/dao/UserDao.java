@@ -1,15 +1,11 @@
 package dao;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
-import model.Permission;
-import model.Room;
 import model.User;
 import util.HibernateUtil;
 
@@ -47,11 +43,21 @@ public class UserDao implements IUser {
 	}
 
 	public boolean verifyUser(String username, String password) {
-		Session sess = sf.openSession();
-		Criteria crit = sess.createCriteria(User.class);
-		crit.add(Restrictions.like("username", username));
-		User u = (User) crit.uniqueResult();
-		return false;
+		try {
+			Session sess = sf.openSession();
+			Criteria crit = sess.createCriteria(User.class);
+			crit.add(Restrictions.like("username", username));
+			User u = (User) crit.uniqueResult();
+			if(username.equals(u.getUsername()) && password.equals(u.getPassword())) {
+				return true;
+			}
+			else
+				return false;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 	

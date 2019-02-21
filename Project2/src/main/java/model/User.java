@@ -52,7 +52,6 @@ public class User {
 		try {
 			return om.writeValueAsString(node);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
