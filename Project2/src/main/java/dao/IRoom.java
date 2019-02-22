@@ -10,4 +10,5 @@ public interface IRoom {
 	public Room getRoom(int roomID);
 	public List<ParchUser> getUsers(int roomID);
 	public List<ParchUser> getAdmins(int roomID);
+	public boolean inviteUser(int roomID, String username);
 }

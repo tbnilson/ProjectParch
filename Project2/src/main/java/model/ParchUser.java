@@ -17,7 +17,7 @@ public class ParchUser {
 	private List<Post> posts;
 	@Id
 	private String username;
-	@OneToMany
+	@OneToMany(mappedBy="parchUser")
 	private List<Permission> permissions;
 	
 	private String email;
