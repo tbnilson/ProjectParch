@@ -61,12 +61,8 @@ public class Post {
 
 	@ManyToOne
 	private ParchUser parchUser;
-	private Date timestamp;
 	
-	@PrePersist
-	protected void onCreate() {
-		this.timestamp = new Date();
-	}
+	private Date timestamp;
 
 	@ManyToOne
 	private Room room;

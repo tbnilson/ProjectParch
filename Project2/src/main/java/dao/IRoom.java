@@ -28,5 +28,4 @@ public interface IRoom {
 	 * @return A list of all users with Permission of "admin" in the Room of roomID
 	 */
 	public List<ParchUser> getAdmins(int roomID);
-	
 }

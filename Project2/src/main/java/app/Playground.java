@@ -1,10 +1,13 @@
 package app;
 
+import java.util.List;
+
 import dao.PermissionDao;
 import dao.PostDao;
 import dao.RoomDao;
 import dao.UserDao;
 import model.ParchUser;
+import model.Permission;
 import model.Room;
 import util.HibernateUtil;
 
@@ -17,11 +20,20 @@ public class Playground {
 		
 		populateTestDB();
 		
-		
+		postMessages();
 		
 		HibernateUtil.getSessionFactory().close();
 	}
 	
+	private static void postMessages() {
+		// TODO Auto-generated method stub
+		List<Permission> test2perms = pd.getUserPermissions("test2");
+		for (Permission p : test2perms) {
+			System.out.println(p.getUser().getUsername() + " : " + p.getPermissions() + " = " + p.getRoom().getRoomname());
+		}
+		pod.makePost(test2perms.get(0).getRoom(), test2perms.get(0).getUser(), "First test posting message");
+	}
+
 	public static void populateTestDB() {
 		ParchUser u1 = new ParchUser();
 		u1.setUsername("test1");
