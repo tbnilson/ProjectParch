@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -124,10 +125,12 @@ public class PostDao implements IPost {
 			sess.beginTransaction();
 			
 			Post post = new Post();
+			sess.persist(post);
 			post.setUser(user);
 			post.setRoom(room);
 			post.setMessage(message);
-			sess.persist(post);
+			post.setTimestamp(new Date());
+			
 			
 			sess.getTransaction().commit();
 			sess.close();

@@ -27,9 +27,15 @@ public class PermissionDao implements IPermission {
 	public List<Permission> getUserPermissions(String username) {
 		try {
 			Session sess = sf.openSession();
-			ParchUser user = sess.get(ParchUser.class, username);
+			String hql = "select P from Permission as P "
+					+ "where P.parchUser.username = ?";
+			Query q = sess.createQuery(hql);
+			q.setString(0, username);
+			
+			List<Permission> p = q.list();
+
 			sess.close();
-			return user.getPermissions();
+			return p;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -40,9 +46,15 @@ public class PermissionDao implements IPermission {
 	public List<Permission> getRoomPermissions(int roomID) {
 		try {
 			Session sess = sf.openSession();
-			Room room = sess.get(Room.class, roomID);
+			String hql = "select P from Permission as P "
+					+ "where P.room.id = ?";
+			Query q = sess.createQuery(hql);
+			q.setInteger(0, roomID);
+			
+			List<Permission> p = q.list();
+
 			sess.close();
-			return room.getPermissions();
+			return p;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -81,9 +93,10 @@ public class PermissionDao implements IPermission {
 		try {
 			Session sess = sf.openSession();
 			String hql = "select P from Permission as P "
-					+ "where P.parchUser.username = ?";
+					+ "where P.parchUser.username = ? and P.room.id = ?";
 			Query q = sess.createQuery(hql);
 			q.setString(0, username);
+			q.setInteger(1, roomID);
 //			q.setParameter(1, roomID);
 			
 			Permission p = (Permission) q.uniqueResult();
@@ -122,7 +135,8 @@ public class PermissionDao implements IPermission {
 //			return false;
 //		}
 		// Make sure the user isn't already a part of the room
-		if (getPermission(username, roomID)==null) {
+		Permission testperm = getPermission(username, roomID);
+		if (testperm==null) {
 			return setPermission(username, roomID, "invited")!=null;
 		} else {
 			return false;
