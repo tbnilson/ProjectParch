@@ -49,18 +49,31 @@ public class WebService {
 
 	public static void login(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		boolean b = MainService.verifyUser(username, password);
+		System.out.println(b);
+		try {
+			response.getWriter().append( (b ? "true" : "false") ).close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static void getUser(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");
 		ParchUser u = MainService.getUser(username);
 		ObjectMapper om = new ObjectMapper();
-		
+
 		try {
-//			String json = om.writeValueAsString(u);//
-			System.out.println("JSON: " + u.toJsonString());
-			response.getWriter().append(u.toJsonString()).close();
+			if (u!=null) {
+				//			String json = om.writeValueAsString(u);//
+				System.out.println("JSON: " + u.toJsonString());
+				response.getWriter().append(u.toJsonString()).close();
+			} else {
+				response.getWriter().append("No user of name : " + username).close();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
