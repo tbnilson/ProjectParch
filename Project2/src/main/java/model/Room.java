@@ -2,6 +2,7 @@ package model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,16 @@ public class Room {
 	private int id;
 	@OneToMany
 	private List<Post> posts;
-	@OneToMany
+	@OneToMany(mappedBy="room")
 	private List<Permission> permissions;
+	private String roomname;
+
+	public String getRoomname() {
+		return roomname;
+	}
+	public void setRoomName(String roomname) {
+		this.roomname = roomname;
+	}
 	public int getId() {
 		return id;
 	}

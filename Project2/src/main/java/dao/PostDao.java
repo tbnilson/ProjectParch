@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
