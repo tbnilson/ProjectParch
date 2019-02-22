@@ -2,7 +2,10 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.query.Query;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -77,10 +80,15 @@ public class PermissionDao implements IPermission {
 	public Permission getPermission(String username, int roomID) {
 		try {
 			Session sess = sf.openSession();
-			Criteria crit = sess.createCriteria(Permission.class);
-			crit.add(Restrictions.like("room_id", roomID));
-			crit.add(Restrictions.like("parchuser_username", username));
-			Permission p = (Permission) crit.uniqueResult();
+			String hql = "select P from Permission as P "
+					+ "where P.parchUser.username = ?";
+			Query q = sess.createQuery(hql);
+			q.setString(0, username);
+//			q.setParameter(1, roomID);
+			
+			Permission p = (Permission) q.uniqueResult();
+//			q.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
+//			List aliasToValueMapList=q.getResultList();
 			sess.close();
 			return p;
 		} catch (HibernateException e) {

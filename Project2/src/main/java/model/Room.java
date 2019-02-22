@@ -25,10 +25,10 @@ public class Room {
 	public void setRoomName(String roomname) {
 		this.roomname = roomname;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public List<Post> getPosts() {

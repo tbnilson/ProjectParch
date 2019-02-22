@@ -15,12 +15,12 @@ public class Permission {
 	private String permissions;
 	@Id
 	@GeneratedValue
-	private int id;
-	public int getId() {
-		return id;
+	private int perm_id;
+	public Integer getId() {
+		return perm_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(Integer id) {
+		this.perm_id = id;
 	}
 	public ParchUser getUser() {
 		return parchUser;
