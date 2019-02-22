@@ -8,3 +8,5 @@
 .metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
 Project2/target
 Project2/.settings
+Project2/target/classes/serf/MasterServlet.class
+*.class

@@ -59,6 +59,7 @@ public class WebService {
 		
 		try {
 			String json = om.writeValueAsString(u);
+			System.out.println(json);
 			response.getWriter().append(json).close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
