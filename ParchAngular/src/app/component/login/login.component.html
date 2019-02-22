@@ -1,12 +1,16 @@
 <h1>Login</h1>
-<input name='username' type="text"[(ngModel)]=username>Username</input></br>
-<input name='password' type="password"[(ngModel)]=password>Password</input>
-<button (click)='Login()'>Login</button>
-
-{{answer}}
+<form>
+<input type="text" [(ngModel)] = "username" name="Username" placeholder="Username"><br>
+<input type="password" [(ngModel)] = "password" name="Password" placeholder="Password"><br>
+<input type="submit" (click)="Login()" class="button">
+</form>
+<p>{{answer}}</p>
 
 <h1>Registration</h1>
-<input name='email' type="text"[(ngModel)]=email>Email</input></br>
-<input name='newusername' type="text"[(ngModel)]=username>Username</input></br>
-<input name='newpassword' type="password"[ngModel]=password>Password</input>
-<button (click)='Register()'>Register</button>
+<form>
+<input type="text" [(ngModel)] = "newemail" name ="Email" placeholder="Email"><br>
+<input type="text" [(ngModel)] = "newusername" name="Username" placeholder="Username"><br>
+<input type="password" [(ngModel)] = "newpassword" name="Password" placeholder="Password" onkeyup="Register()"><br>
+<input type="submit" (click)="Register()" class="button">
+</form>
+<p>{{check}}</p>
