@@ -23,7 +23,9 @@ public class Playground {
 		
 		postMessages();
 		
-		
+		System.out.println(ud.verifyUser("test1", "testpass"));
+		System.out.println(ud.verifyUser("kjubag", "testpass"));
+		System.out.println(ud.verifyUser("test1", "sdgdf"));
 		
 		HibernateUtil.getSessionFactory().close();
 	}

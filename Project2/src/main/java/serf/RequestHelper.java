@@ -21,39 +21,39 @@ public class RequestHelper {
 			WebService.getUser(request, response);
 			break;
 		}
-		case "/MasterServlet/getRoomUsers.do":{
+		case "/Project2/getRoomUsers.do":{
 			WebService.getRoomUsers(request, response);
 			break;
 		}
-		case "/MasterServlet/getAllRooms.do":{
+		case "/Project2/getAllRooms.do":{
 			WebService.getAllRooms(request, response);
 			break;
 		}
-		case "/MasterServlet/getUserRooms.do":{
+		case "/Project2/getUserRooms.do":{
 			WebService.getUserRooms(request, response);
 			break;
 		}
-		case "/MasterServlet/login.do":{
+		case "/Project2/login.do":{
 			WebService.login(request, response);
 			break;
 		}
-		case "/MasterServlet/postMessage.do":{
+		case "/Project2/postMessage.do":{
 			WebService.postMessage(request, response);
 			break;
 		}
-		case "/MasterServlet/editMessage.do":{
+		case "/Project2/editMessage.do":{
 			WebService.editMessage(request, response);
 			break;
 		}
-		case "/MasterServlet/deleteMessage.do":{
+		case "/Project2/deleteMessage.do":{
 			WebService.deleteMessage(request, response);
 			break;
 		}
-		case "/MasterServlet/registerUser.do":{
+		case "/Project2/registerUser.do":{
 			WebService.registerUser(request, response);
 			break;
 		}
-		case "/MasterServlet/createRoom.do":{
+		case "/Project2/createRoom.do":{
 			WebService.createRoom(request, response);
 			break;
 		}
