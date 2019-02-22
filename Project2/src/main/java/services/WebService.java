@@ -58,8 +58,9 @@ public class WebService {
 		ObjectMapper om = new ObjectMapper();
 		
 		try {
-			String json = om.writeValueAsString(u);
-			response.getWriter().append(json).close();
+//			String json = om.writeValueAsString(u);//
+			System.out.println("JSON: " + u.toJsonString());
+			response.getWriter().append(u.toJsonString()).close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
