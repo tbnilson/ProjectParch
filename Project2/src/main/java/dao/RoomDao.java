@@ -95,31 +95,4 @@ public class RoomDao implements IRoom {
 			return null;
 		}
 	}
-	
-	@Override
-	public boolean inviteUser(int roomID, String username) {
-		try {
-			Session sess = sf.openSession();
-			sess.beginTransaction();
-			ParchUser user = ud.getUser(username);
-			Room room = getRoom(roomID);
-			if (room!=null && user!=null) {
-				Permission p = new Permission();
-				p.setRoom(room);
-				p.setUser(user);
-				p.setPermissions("invited");
-				sess.persist(p);
-				sess.getTransaction().commit();
-				sess.close();
-				return true;
-			} else {
-				sess.close();
-				return false;
-			}
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 }
