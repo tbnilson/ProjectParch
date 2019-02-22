@@ -16,9 +16,7 @@ public class UserDao implements IUser {
 	public ParchUser getUser(String username) {
 		try {
 			Session sess = sf.openSession();
-			Criteria crit = sess.createCriteria(ParchUser.class);
-			crit.add(Restrictions.like("username", username));
-			ParchUser u = (ParchUser) crit.uniqueResult();
+			ParchUser u = sess.get(ParchUser.class, username);
 			sess.close();
 			return u;
 		} catch (HibernateException e) {
