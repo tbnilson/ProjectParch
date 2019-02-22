@@ -188,7 +188,9 @@ export class FakeDatabase {
         }
     }
 
-
+    static deletePermission(permission : Permission) : void {
+        this.permissions.splice(this.permissions.indexOf(permission), 1);
+    }
 
 }
 

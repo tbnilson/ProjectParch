@@ -19,7 +19,6 @@ export class BoardComponent implements OnInit {
   selectedPosts : Post[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
-  boards : Board[] = []
   newPostText : String = "";
 
   constructor(/*selectedUser : user*/) { 
@@ -27,7 +26,6 @@ export class BoardComponent implements OnInit {
     FakeDatabase.generateDatabase();
     this.selectedUser = FakeDatabase.getUser("User0");
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
-    this.boards = FakeDatabase.getBoards();
     this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
     this.update();
   }
@@ -75,11 +73,24 @@ export class BoardComponent implements OnInit {
   acceptInvitation(invite : Permission) : void {
     invite.type = "user";
     this.update();
+    if (this.invites.length == 0) {
+      this.hideInvites();
+    }
+  }
+
+  rejectInvitation(invite : Permission) : void {
+    FakeDatabase.deletePermission(invite);
+    this.update();
+    if (this.invites.length == 0) {
+      this.hideInvites();
+    }
   }
 
   showInvites() : void {
-    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
-    inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 40px");
+    if (this.invites.length != 0) {
+      let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
+      inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 40px");
+    }
   }
 
   hideInvites() : void {

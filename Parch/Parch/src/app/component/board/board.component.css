@@ -5,25 +5,31 @@
     background: rgb(150, 150, 255);
 }
 div.Post {
+    font-size: 16px;
     display: block;
     border: solid black;
     border-width: 5px 5px 0px 5px;
     background: rgb(150, 150, 255);
 }
 div.NewPost {
+    font-size: 16px;
     display: block;
     border: 5px solid black ;
     background: rgb(150, 150, 255);
 }
 div.NavBar {
     display: inline-block;
-    font-size: 16pt;
-    margin: 5px;
+    font-size: 24pt;
+    padding: 5px;
+    border: solid black;
+    border-width: 0px 5px 0px 0px;
 }
 .Interaction {
+    font-size: 16px;
     background: rgb(200, 200, 255);
 }
 .InteractionBordered {
+    font-size: 16px;
     display: block;
     border: solid black;
     border-width: 5px 5px 5px 5px;

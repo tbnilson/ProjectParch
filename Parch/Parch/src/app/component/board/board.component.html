@@ -4,8 +4,10 @@
     <div (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">Invites</div>
     <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;" 
       (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">
-      <div *ngFor = "let invite of invites" (click) = acceptInvitation(invite)>
-        {{invite.board.name}}
+      <div *ngFor = "let invite of invites">
+        <span>{{invite.board.name}}</span>
+        <button (click) = acceptInvitation(invite)>Accept</button>
+        <button (click) = rejectInvitation(invite)>Reject</button>
       </div>
     </div>
   </div>
