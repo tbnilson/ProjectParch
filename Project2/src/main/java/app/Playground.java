@@ -8,6 +8,7 @@ import dao.RoomDao;
 import dao.UserDao;
 import model.ParchUser;
 import model.Permission;
+import model.Post;
 import model.Room;
 import util.HibernateUtil;
 
@@ -22,6 +23,8 @@ public class Playground {
 		
 		postMessages();
 		
+		
+		
 		HibernateUtil.getSessionFactory().close();
 	}
 	
@@ -31,7 +34,13 @@ public class Playground {
 		for (Permission p : test2perms) {
 			System.out.println(p.getUser().getUsername() + " : " + p.getPermissions() + " = " + p.getRoom().getRoomname());
 		}
-		pod.makePost(test2perms.get(0).getRoom(), test2perms.get(0).getUser(), "First test posting message");
+		Post post1 = pod.makePost(test2perms.get(0).getRoom(), test2perms.get(0).getUser(), "First test posting message");
+		Post post2 = pod.makePost(test2perms.get(0).getRoom(), test2perms.get(0).getUser(), "Second test posting message");
+		Post post3 = pod.makePost(test2perms.get(0).getRoom(), test2perms.get(0).getUser(), "Third test posting message");
+		
+		pod.editPost(post2.getId(), "Edited second message");
+		System.out.println("Post " + post3.getId() + " : " + pod.getPost(post3.getId()).getMessage());
+		pod.deletePost(post3.getId());
 	}
 
 	public static void populateTestDB() {

@@ -135,7 +135,8 @@ public class PermissionDao implements IPermission {
 //			return false;
 //		}
 		// Make sure the user isn't already a part of the room
-		if (getPermission(username, roomID)==null) {
+		Permission testperm = getPermission(username, roomID);
+		if (testperm==null) {
 			return setPermission(username, roomID, "invited")!=null;
 		} else {
 			return false;
