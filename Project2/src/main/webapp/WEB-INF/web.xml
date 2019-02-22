@@ -12,6 +12,6 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>MasterServlet</servlet-name>
-  	<url-pattern>/MasterServlet</url-pattern>
+  	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
 </web-app>

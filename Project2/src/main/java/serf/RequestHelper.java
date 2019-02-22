@@ -13,11 +13,11 @@ public class RequestHelper {
 		String uri = request.getRequestURI();
 		
 		switch (uri) {
-		case "/MasterServlet/getAllUsers.do":{
+		case "/Project2/getAllUsers.do":{
 			WebService.getAllUsers(request, response);
 			break;
 		}
-		case "/MasterServlet/getUser.do":{
+		case "/Project2/getUser.do":{
 			WebService.getUser(request, response);
 			break;
 		}
