@@ -50,7 +50,7 @@ public class PermissionDao implements IPermission {
 	}
 
 	@Override
-	public Permission addPermission(String username, int roomID, String permissions) {
+	public Permission setPermission(String username, int roomID, String permissions) {
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
@@ -123,7 +123,7 @@ public class PermissionDao implements IPermission {
 //		}
 		// Make sure the user isn't already a part of the room
 		if (getPermission(username, roomID)==null) {
-			return addPermission(username, roomID, "invited")!=null;
+			return setPermission(username, roomID, "invited")!=null;
 		} else {
 			return false;
 		}
