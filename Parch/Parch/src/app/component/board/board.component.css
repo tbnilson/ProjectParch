@@ -14,9 +14,27 @@ div.NewPost {
     display: block;
     border: 5px solid black ;
     background: rgb(150, 150, 255);
-    
-    
+}
+div.NavBar {
+    display: inline-block;
+    font-size: 16pt;
+    margin: 5px;
 }
 .Interaction {
     background: rgb(200, 200, 255);
 }
+.InteractionBordered {
+    display: block;
+    border: solid black;
+    border-width: 5px 5px 5px 5px;
+    background: rgb(200, 200, 255);
+    outline: solid 10px rgba(100, 100, 150, 0.8);
+    padding: 5px;
+    
+}
+
+
+
+
+
+

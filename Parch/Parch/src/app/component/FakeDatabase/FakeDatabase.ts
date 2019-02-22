@@ -65,7 +65,8 @@ export class FakeDatabase {
     static posts : Post[];
 
     static generateBoards() : void {
-        this.boards = [new Board("Select Board"), new Board("Board0"), new Board("Board1"), new Board("Board2")];
+        this.boards = [new Board("Select Board"), new Board("Board0"), new Board("Board1"), new Board("Board2"),
+        new Board("Board3")];
     }
 
     static generateUsers() : void {
@@ -75,7 +76,9 @@ export class FakeDatabase {
 
     static generatePermissions() : void {
         this.permissions = [new Permission(FakeDatabase.users[0], FakeDatabase.boards[1], "admin"),
-        new Permission(FakeDatabase.users[0], FakeDatabase.boards[2], "user")];
+            new Permission(FakeDatabase.users[0], FakeDatabase.boards[2], "user"), 
+            new Permission(FakeDatabase.users[0], FakeDatabase.boards[3], "invite"),
+            new Permission(FakeDatabase.users[0], FakeDatabase.boards[4], "invite")];
     }
 
     static generatePosts() : void {
@@ -144,7 +147,8 @@ export class FakeDatabase {
     static getBoardsOfUser(user : User) : Board[] {
         let userBoards : Board[] = [this.boards[0]];
         for (let i = 0; i < this.boards.length; i++ ) {
-            if (this.getPermissionOfUserBoard(user, this.boards[i]) != null) {
+            if (this.getPermissionOfUserBoard(user, this.boards[i]) != null &&
+             this.getPermissionOfUserBoard(user, this.boards[i]).type != "invite") {
                 userBoards.push(this.boards[i]);
             }
         }
@@ -162,6 +166,19 @@ export class FakeDatabase {
         return userPermissions;
     }
 
+    static getInvitesOfUser(user : User) : Permission[] {
+        let userPermissions : Permission[] = [];
+
+        for (let i = 0; i < this.permissions.length; i++ ) {
+            if (this.permissions[i].user == user) {
+                if (this.permissions[i].type == "invite") {
+                    userPermissions.push(this.permissions[i]);
+                }
+            }
+        }
+        return userPermissions;
+    }
+
     static getPermissionOfUserBoard(user : User, board : Board) : Permission {
 
         for (let i = 0; i < this.permissions.length; i++ ) {
@@ -170,6 +187,8 @@ export class FakeDatabase {
             }
         }
     }
+
+
 
 }
 

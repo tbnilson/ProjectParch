@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeDatabase, User } from '../FakeDatabase/FakeDatabase';
+import { FakeDatabase, User, Permission } from '../FakeDatabase/FakeDatabase';
 import { Board } from '../FakeDatabase/FakeDatabase';
 import { Post } from '../FakeDatabase/FakeDatabase';
 
@@ -18,23 +18,24 @@ export class BoardComponent implements OnInit {
   selectedUser : User;
   selectedPosts : Post[] = [];
   posts : Post[] = [];
+  invites : Permission[] = [];
   boards : Board[] = []
   newPostText : String = "";
 
-  constructor() { 
+  constructor(/*selectedUser : user*/) { 
     
     FakeDatabase.generateDatabase();
     this.selectedUser = FakeDatabase.getUser("User0");
-    this.selectedUserBoards = FakeDatabase.getBoardsOfUser(this.selectedUser);
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.boards = FakeDatabase.getBoards();
-    
+    this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
+    this.update();
   }
 
   createPost() : void {
     FakeDatabase.createPost(this.selectedBoard, this.selectedUser, this.newPostText);
     this.newPostText = "";
-    this.updatePosts();
+    this.update();
   }
 
   deletePost(id : Number) : void {
@@ -42,11 +43,13 @@ export class BoardComponent implements OnInit {
       return;
     }
     FakeDatabase.deletePost(id);
-    this.updatePosts();
+    this.update();
   }
 
-  updatePosts() : void{
+  update() : void{
     this.posts = FakeDatabase.getPostsOfBoard(this.selectedBoard);
+    this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
+    this.selectedUserBoards = FakeDatabase.getBoardsOfUser(this.selectedUser);
   }
 
   selectBoard(boardText : String) {
@@ -59,16 +62,6 @@ export class BoardComponent implements OnInit {
       let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
       newPostButton.disabled = true;
     }
-    //Block access to boards where there is no permission.
-    // else if (FakeDatabase.getPermissionOfUserBoard(this.selectedUser, FakeDatabase.getBoard(boardText)) == null) {
-    //     this.selectedBoard = FakeDatabase.getBoard("Select Board");
-    //     let boardSelection : HTMLSelectElement =  <HTMLSelectElement> document.getElementById("boards");
-    //     boardSelection.selectedIndex = 0;
-    //     let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");
-    //     postText.disabled = true;
-    //     let newPostButton : HTMLButtonElement = <HTMLButtonElement> document.getElementById("newPostButton");
-    //     newPostButton.disabled = true;
-    // }
     else {
       let postText : HTMLInputElement = <HTMLInputElement> document.getElementById("postText");
       postText.disabled = false;
@@ -76,10 +69,23 @@ export class BoardComponent implements OnInit {
       newPostButton.disabled = false;
     }
     
-    this.updatePosts();
+    this.update();
   }
 
+  acceptInvitation(invite : Permission) : void {
+    invite.type = "user";
+    this.update();
+  }
 
+  showInvites() : void {
+    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
+    inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 40px");
+  }
+
+  hideInvites() : void {
+    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
+    inviteDiv.setAttribute("style", "z-index: 1; display: none");
+  }
 
   ngOnInit() {
 

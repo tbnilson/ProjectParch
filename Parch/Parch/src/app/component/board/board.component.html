@@ -1,3 +1,16 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<div class="Post">
+  <div class = "NavBar">
+    <div (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">Invites</div>
+    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;" 
+      (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">
+      <div *ngFor = "let invite of invites" (click) = acceptInvitation(invite)>
+        {{invite.board.name}}
+      </div>
+    </div>
+  </div>
+  <div class = "NavBar">{{selectedUser.name}}</div>
+</div>
 <div>
   <div class="Post">
       <select class="Interaction" id = "boards" >
