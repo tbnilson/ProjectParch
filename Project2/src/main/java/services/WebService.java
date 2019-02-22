@@ -6,6 +6,10 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import model.ParchUser;
+
 public class WebService {
 
 	public static void getAllUsers(HttpServletRequest request, HttpServletResponse response) {
@@ -49,14 +53,13 @@ public class WebService {
 	}
 
 	public static void getUser(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
-		String result = MainService.getUser(username);
+		ParchUser u = MainService.getUser(username);
+		ObjectMapper om = new ObjectMapper();
 		
 		try {
-			PrintWriter pr = response.getWriter();
-			pr.append(result);
-			pr.close();
+			String json = om.writeValueAsString(u);
+			response.getWriter().append(json).close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
