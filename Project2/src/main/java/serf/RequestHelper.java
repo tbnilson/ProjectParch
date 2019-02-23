@@ -22,7 +22,7 @@ public class RequestHelper {
 			break;
 		}
 		case "/Project2/getRoomUsers.do":{
-			WebService.getRoomUsers(request, response);
+			WebService.getActiveRoomUsers(request, response);
 			break;
 		}
 		case "/Project2/getAllRooms.do":{
@@ -30,7 +30,7 @@ public class RequestHelper {
 			break;
 		}
 		case "/Project2/getUserRooms.do":{
-			WebService.getUserRooms(request, response);
+			WebService.getActiveUserRooms(request, response);
 			break;
 		}
 		case "/Project2/login.do":{

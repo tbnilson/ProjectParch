@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Room {
+public class Room implements Jsonable {
 	@Id
 	@GeneratedValue
 	private int id;
@@ -42,6 +42,13 @@ public class Room {
 	}
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
+	}
+	@Override
+	public String toJsonString() {
+		return "{" + 
+				" \"roomID\": \""+this.id+"\"," + 
+				" \"roomname\": \""+this.roomname+"\"" + 
+				"}";
 	}
 	
 }
