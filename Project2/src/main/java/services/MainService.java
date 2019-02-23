@@ -8,6 +8,7 @@ import dao.*;
 import model.Jsonable;
 import model.ParchUser;
 import model.Permission;
+import model.Post;
 import model.Room;
 
 public class MainService {
@@ -69,6 +70,10 @@ public class MainService {
 	public static List<Permission> getRoomPerms(int roomID) {
 		// TODO Auto-generated method stub
 		return permd.getRoomPermissions(roomID);
+	}
+
+	public static Post makePost(String username, int roomID, String message) {
+		return postd.makePost(rd.getRoom(roomID), ud.getUser(username), message);
 	}
 	
 

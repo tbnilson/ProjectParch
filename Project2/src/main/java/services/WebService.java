@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Jsonable;
 import model.ParchUser;
 import model.Permission;
+import model.Post;
 import model.Room;
 
 public class WebService {
@@ -48,8 +49,6 @@ public class WebService {
 	}
 
 	public static void postMessage(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
 		PrintWriter pr;
 		
 		try {
@@ -70,10 +69,13 @@ public class WebService {
 			pr.append("roomID is not an integer");
 			return;
 		}
+		String message = request.getParameter("message");
+		Post post = MainService.makePost(username, roomID, message);
+		pr.append(post.toJsonString());
+		
 	}
 
 	public static void login(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		boolean b = MainService.verifyUser(username, password);
