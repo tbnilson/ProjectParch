@@ -53,15 +53,6 @@ public class ParchUser implements Jsonable{
 		this.permissions = permissions;
 	}
 	public String toJsonString() {
-//		ObjectMapper om = new ObjectMapper();
-//		ObjectNode node = om.valueToTree(this);
-//		node.remove("password");
-//		try {
-//			return om.writeValueAsString(node);
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
 		return "{" + 
 				" \"email\": \""+this.email+"\"," + 
 				" \"username\": \""+this.username+"\"" + 

@@ -69,8 +69,12 @@ public class Post implements Jsonable {
 
 	@Override
 	public String toJsonString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "{" + 
+				" \"roomID\": \""+this.room.getId()+"\"," + 
+				" \"username\": \""+this.parchUser.getUsername()+"\"" + 
+				" \"message\": \""+this.message+"\"," + 
+				" \"timestamp\": \""+this.timestamp.getTime()+"\"," + 
+				"}";
 	}
 
 }

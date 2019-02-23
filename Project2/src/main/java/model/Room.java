@@ -45,8 +45,10 @@ public class Room implements Jsonable {
 	}
 	@Override
 	public String toJsonString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "{" + 
+				" \"roomID\": \""+this.id+"\"," + 
+				" \"roomname\": \""+this.roomname+"\"" + 
+				"}";
 	}
 	
 }

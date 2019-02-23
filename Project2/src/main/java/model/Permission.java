@@ -41,6 +41,10 @@ public class Permission implements Jsonable {
 		this.permissions = permissions;
 	}
 	public String toJsonString() {
-		return null;
+		return "{" + 
+				" \"roomID\": \""+this.room.getId()+"\"," + 
+				" \"username\": \""+this.parchUser.getUsername()+"\"" + 
+				" \"permissions\": \""+this.permissions+"\"," + 
+				"}";
 	}
 }
