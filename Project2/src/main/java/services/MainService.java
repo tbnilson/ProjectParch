@@ -1,9 +1,11 @@
 package services;
 
+import java.util.Iterator;
 import java.util.List;
 
 import dao.RoomDao;
 import dao.*;
+import model.Jsonable;
 import model.ParchUser;
 import model.Permission;
 import model.Room;
@@ -45,9 +47,23 @@ public class MainService {
 		return ud.setUsername(username, newusername);
 	}
 
-	public static List<Permission> getUserRooms(String username) {
+	public static List<Permission> getUserPerms(String username) {
 		// TODO Auto-generated method stub
 		return permd.getUserPermissions(username);
+	}
+
+	public static String toJsonArray(List<? extends Jsonable> models) {
+		StringBuilder json = new StringBuilder("[");
+		
+		for (int i = 0; i < models.size(); i++) {
+			json.append(models.get(i).toJsonString());
+			if (i < (models.size()-1)) {
+				json.append(", ");
+			}
+		}
+		
+		json.append("]");
+		return json.toString();
 	}
 	
 

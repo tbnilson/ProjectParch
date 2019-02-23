@@ -2,6 +2,7 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.Jsonable;
 import model.ParchUser;
 import model.Permission;
 import model.Room;
@@ -84,17 +86,27 @@ public class WebService {
 		
 	}
 
-	public static void getRoomUsers(HttpServletRequest request, HttpServletResponse response) {
+	public static void getActiveRoomUsers(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public static void getUserRooms(HttpServletRequest request, HttpServletResponse response) {
+	public static void getActiveUserRooms(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
-		List<Permission> perms = MainService.getUserRooms(username);
+		List<Permission> perms = MainService.getUserPerms(username);
+		List<Room> rooms = new ArrayList<Room>();
 		for (Permission p : perms) {
-			
+			if (!p.getPermissions().equals("invited") && !p.getPermissions().equals("banned")) {
+				rooms.add(p.getRoom());
+			}
+		}
+		String jsonarray = MainService.toJsonArray(rooms);
+		try {
+			response.getWriter().append(jsonarray).close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
