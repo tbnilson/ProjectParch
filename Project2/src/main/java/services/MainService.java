@@ -1,11 +1,19 @@
 package services;
 
-import dao.UserDao;
+import java.util.List;
+
+import dao.RoomDao;
+import dao.*;
 import model.ParchUser;
+import model.Permission;
+import model.Room;
 
 public class MainService {
 	
 	public static UserDao ud = new UserDao();
+	public static RoomDao rd = new RoomDao();
+	public static PermissionDao permd = new PermissionDao();
+	public static PostDao postd = new PostDao();
 
 	/**
 	 * @param username
@@ -35,6 +43,11 @@ public class MainService {
 	
 	public static boolean setUsername(String username, String newusername) {
 		return ud.setUsername(username, newusername);
+	}
+
+	public static List<Permission> getUserRooms(String username) {
+		// TODO Auto-generated method stub
+		return permd.getUserPermissions(username);
 	}
 	
 

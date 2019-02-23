@@ -2,6 +2,7 @@ package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.ParchUser;
+import model.Permission;
+import model.Room;
 
 public class WebService {
 
@@ -88,7 +91,11 @@ public class WebService {
 
 	public static void getUserRooms(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+		String username = request.getParameter("username");
+		List<Permission> perms = MainService.getUserRooms(username);
+		for (Permission p : perms) {
+			
+		}
 	}
 
 }

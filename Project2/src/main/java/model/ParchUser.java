@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Entity
-public class ParchUser {
+public class ParchUser implements Jsonable{
 	
 	@OneToMany
 	private List<Post> posts;

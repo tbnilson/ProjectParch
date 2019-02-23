@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Permission {
+public class Permission implements Jsonable {
 	
 	@ManyToOne
 	private ParchUser parchUser;

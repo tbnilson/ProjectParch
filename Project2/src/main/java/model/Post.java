@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 @Entity
-public class Post {
+public class Post implements Jsonable {
 	
 	@Id
 	@GeneratedValue
@@ -66,5 +66,11 @@ public class Post {
 
 	@ManyToOne
 	private Room room;
+
+	@Override
+	public String toJsonString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
