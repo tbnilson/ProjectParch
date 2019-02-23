@@ -65,6 +65,11 @@ public class MainService {
 		json.append("]");
 		return json.toString();
 	}
+
+	public static List<Permission> getRoomPerms(int roomID) {
+		// TODO Auto-generated method stub
+		return permd.getRoomPermissions(roomID);
+	}
 	
 
 }

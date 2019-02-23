@@ -50,6 +50,26 @@ public class WebService {
 	public static void postMessage(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		String username = request.getParameter("username");
+		int roomID;
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
 	}
 
 	public static void login(HttpServletRequest request, HttpServletResponse response) {
@@ -87,12 +107,40 @@ public class WebService {
 	}
 
 	public static void getActiveRoomUsers(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		
+		List<Permission> perms = MainService.getRoomPerms(roomID);
+		List<ParchUser> users = new ArrayList<ParchUser>();
+		for (Permission p : perms) {
+			if (!p.getPermissions().equals("invited") && !p.getPermissions().equals("banned")) {
+				users.add(p.getUser());
+			}
+		}
+		
+		String jsonarray = MainService.toJsonArray(users);
+		pr.append(jsonarray).close();
 		
 	}
 
 	public static void getActiveUserRooms(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		List<Permission> perms = MainService.getUserPerms(username);
 		List<Room> rooms = new ArrayList<Room>();
