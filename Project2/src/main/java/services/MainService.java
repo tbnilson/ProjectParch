@@ -28,7 +28,11 @@ public class MainService {
 		return ud.getUser(username);
 	}
 	
-	public static boolean addUser(ParchUser u) {
+	public static boolean addUser(String username, String password, String email) {
+		ParchUser u = new ParchUser();
+		u.setEmail(email);
+		u.setPassword(password);
+		u.setUsername(username);
 		return ud.addUser(u);
 	}
 	
@@ -74,6 +78,11 @@ public class MainService {
 
 	public static Post makePost(String username, int roomID, String message) {
 		return postd.makePost(rd.getRoom(roomID), ud.getUser(username), message);
+	}
+
+	public static Room addRoom(String username, String roomname) {
+		// TODO Auto-generated method stub
+		return rd.makeRoom(roomname, username);
 	}
 	
 
