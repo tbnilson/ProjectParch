@@ -71,9 +71,9 @@ public class Post implements Jsonable {
 	public String toJsonString() {
 		return "{" + 
 				" \"roomID\": \""+this.room.getId()+"\"," + 
-				" \"username\": \""+this.parchUser.getUsername()+"\"" + 
+				" \"username\": \""+this.parchUser.getUsername()+"\"," + 
 				" \"message\": \""+this.message+"\"," + 
-				" \"timestamp\": \""+this.timestamp.getTime()+"\"," + 
+				" \"timestamp\": \""+this.timestamp.getTime()+"\"" + 
 				"}";
 	}
 

@@ -1,5 +1,7 @@
 package serf;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,6 +58,14 @@ public class RequestHelper {
 		case "/Project2/createRoom.do":{
 			WebService.createRoom(request, response);
 			break;
+		}
+		default:{
+			try {
+				response.getWriter().append("bad url").close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		}
 	
