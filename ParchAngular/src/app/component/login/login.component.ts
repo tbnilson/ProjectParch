@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { defineBase } from '@angular/core/src/render3';
-import { checkAndUpdateElementInline } from '@angular/core/src/view/element';
-import { User } from 'src/app/models/User'
-import { checkBinding } from '@angular/core/src/view/util';
-//import { userInfo } from 'os';
+import { User } from 'src/app/models/User';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { Observable } from 'rxjs';
+
+
 
 
 @Component({
@@ -13,7 +13,7 @@ import { checkBinding } from '@angular/core/src/view/util';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private logserv:LoginServiceService) { }
 
   ngOnInit() {
   }
@@ -21,24 +21,36 @@ export class LoginComponent implements OnInit {
   username:string;
   password:string;
   email:string;
+  curuser:User;
 
  answer:string;
-  //User("admin@admin.com","admin","admin",)
- db: Array<User>=[(new User("admin","admin","admin"))];
- checkDB(uid){
-   if(this.username==uid.username&&this.password==uid.password){
-     this.answer="it works";
-     return uid.username;
-   }
-   else
-    return null;
- };
- x:User;
+ 
+ 
+ 
 Login(){
-  for(let i=0;i<this.db.length;i++){
-    this.checkDB(this.db[i]);
-  }
-//this.db.forEach(this.checkDB(User));
+  let verify:Observable<boolean> = this.logserv.login(this.username, this.password);
+  verify.subscribe(
+
+    (response)=>{
+      console.log(response);
+      if(response){
+        this.answer = "Successful login"
+      }
+      else{
+        this.answer = "Invalid login"
+      }
+
+    }
+    ,
+
+    (response)=>{
+      console.log(response);
+      this.answer = "Fail";
+
+    }
+  
+  );
+  
 } ;
  newemail:string;
  newusername:string;
@@ -46,9 +58,7 @@ Login(){
 
 check:string;
 Register(){
-  this.db.push(new User(this.newemail,this.newusername,this.newpassword,));
-  this.check="registered"
-  console.log(this.db);
+  
 }; 
 
 }
