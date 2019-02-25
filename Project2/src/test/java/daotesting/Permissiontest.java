@@ -61,4 +61,20 @@ public class Permissiontest {
 		Assert.assertNotNull(pd.setPermission("PermTesting", permtestroom.getId(), "user"));
 		Assert.assertEquals(pd.getPermission("PermTesting", permtestroom.getId()).getPermissions(), "user");
 	}
+	
+	@Test(priority=4)
+	public void getPermissionsValidUser() {
+		Assert.assertEquals(pd.getPermission("PermTesting", permtestroom.getId()).getPermissions(), "user");
+	}
+	
+	@Test(priority=4)
+	public void getPermissionsInvalidUser() {
+		Assert.assertNull(pd.getPermission("PermTestingBadUsername", permtestroom.getId()));
+	}
+	
+	@Test(priority=4)
+	public void getPermissionsInvalidRoom() {
+		Assert.assertNull(pd.getPermission("PermTesting", -87));
+	}
+	
 }
