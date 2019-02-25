@@ -20,13 +20,26 @@ export class BoardComponent implements OnInit {
   invites : Permission[] = [];
   newPostText : String = "";
 
+  username : string;
+  password : string;
+
   constructor(private router: Router, private route: ActivatedRoute) { 
     
-    // let username : string = route.snapshot.paramMap["username"];
-    // let password : string = route.snapshot.paramMap["password"];
-    // if (username == null) {
-    //   this.router.navigateByUrl("login");
-    // }
+    this.username = this.password = null;
+
+    try {
+      this.username = this.router.url.split("?")[1].split("&")[0].split("=")[1];
+      this.password = this.router.url.split("?")[1].split("&")[1].split("=")[1];
+    }
+    catch (e) {
+
+    }
+    if (this.username == null) {
+      this.router.navigateByUrl("login");
+    }
+    
+    // console.log(this.username);
+    // console.log(this.password);
     
     
     FakeDatabase.generateDatabase();
@@ -105,7 +118,7 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
 }
