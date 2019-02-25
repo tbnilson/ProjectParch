@@ -64,6 +64,14 @@ public class RequestHelper {
 			WebService.getNewMessages(request, response);
 			break;
 		}
+		case "/Project2/inviteUser.do":{
+			WebService.inviteUser(request, response);
+			break;
+		}
+		case "/Project2/acceptInvite.do":{
+			WebService.acceptInvite(request, response);
+			break;
+		}
 		case "/Project2/populate.do":{
 			Playground.populateTestDB();
 			Playground.postMessages();
@@ -71,7 +79,7 @@ public class RequestHelper {
 		}
 		default:{
 			try {
-				response.getWriter().append("bad url").close();
+				response.getWriter().append("That is not a valid URL for this server").close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -151,7 +151,7 @@ public class PostDao implements IPost {
 			Session sess = sf.openSession();
 
 			String hql = "select P from Post as P "
-					+ "where P.room.id = ? and P.timestamp>?";
+					+ "where P.room.id = ? and P.timestamp>? ORDER BY P.timestamp DESC";
 			Query q = sess.createQuery(hql);
 			q.setParameter(0, latestpost.getRoom().getId());
 			q.setParameter(1, latestpost.getTimestamp());

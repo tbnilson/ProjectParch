@@ -95,6 +95,59 @@ public class MainService {
 	public static List<Post> getNewMessages(int postID) {
 		return postd.getNewPosts(postID);
 	}
+
+	public static boolean editMessage(int postID, String username, String message) {
+		Post p = postd.getPost(postID);
+		int roomID = p.getRoom().getId();
+		String postowner = p.getUser().getUsername();
+		Permission perm = permd.getPermission(username, roomID);
+		
+		//Check if the editor is the one who made the post, or an admin:
+		if (postowner.equals(username) || perm.getPermissions().equals("admin")) {
+			return postd.editPost(postID, message);
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean deleteMessage(int postID, String username) {
+		Post p = postd.getPost(postID);
+		if (p==null) {return false;}
+		int roomID = p.getRoom().getId();
+		String postowner = p.getUser().getUsername();
+		Permission perm = permd.getPermission(username, roomID);
+		
+		//Check if the editor is the one who made the post, or an admin:
+		if (postowner.equals(username) || perm.getPermissions().equals("admin")) {
+			return postd.deletePost(postID);
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean inviteUser(String inviter, String invitee, int roomID) {
+		// TODO Auto-generated method stub
+		Room room = rd.getRoom(roomID);
+		if (room==null) {return false;}
+		Permission perm = permd.getPermission(inviter, roomID);
+		if (ud.userExists(invitee) && 
+				ud.userExists(inviter) && 
+				perm!=null && 
+				perm.getPermissions().equals("admin")) {
+			return permd.inviteUser(roomID, invitee);
+		} else {
+			return false;
+		}
+		
+	}
+
+	public static Permission acceptInvite(int roomID, String username) {
+		Permission perm = permd.getPermission(username, roomID);
+		if (perm==null || !perm.getPermissions().equals("invited")) {
+			return null;
+		}
+		return permd.setPermission(username, roomID, "user");
+	}
 	
 
 }
