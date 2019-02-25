@@ -3,6 +3,8 @@ import { FakeDatabase, User, Permission } from '../FakeDatabase/FakeDatabase';
 import { Board } from '../FakeDatabase/FakeDatabase';
 import { Post } from '../FakeDatabase/FakeDatabase';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -23,13 +25,28 @@ export class BoardComponent implements OnInit {
   username : string;
   password : string;
 
-  constructor(private router: Router, private route: ActivatedRoute) { 
+  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService) { 
     
     this.username = this.password = null;
 
     try {
       this.username = this.router.url.split("?")[1].split("&")[0].split("=")[1];
       this.password = this.router.url.split("?")[1].split("&")[1].split("=")[1];
+      let loggedIn : Observable<Boolean> = this.logserv.login(this.username, this.password);
+      loggedIn.subscribe(
+        (response)=>{
+          console.log(response);
+          if(!response){
+            this.router.navigateByUrl("login");
+          }
+        }
+        ,
+        (response)=>{
+          console.log(response);
+          this.router.navigateByUrl("login");
+        }
+      );
+      
     }
     catch (e) {
 
@@ -37,9 +54,6 @@ export class BoardComponent implements OnInit {
     if (this.username == null) {
       this.router.navigateByUrl("login");
     }
-    
-    // console.log(this.username);
-    // console.log(this.password);
     
     
     FakeDatabase.generateDatabase();
