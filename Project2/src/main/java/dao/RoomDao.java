@@ -67,7 +67,6 @@ public class RoomDao implements IRoom {
 			List<ParchUser> users = new ArrayList<ParchUser>();
 			Session sess = sf.openSession();
 			Room room = sess.get(Room.class, roomID);
-			if (room==null) {return null;}
 			for (Permission p : room.getPermissions()) {
 				users.add(p.getUser());
 			}
