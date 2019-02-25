@@ -52,7 +52,9 @@ public class PermissionDao implements IPermission {
 			q.setInteger(0, roomID);
 			
 			List<Permission> p = q.list();
-
+			if (p.size()==0) {
+				p=null;
+			}
 			sess.close();
 			return p;
 		} catch (HibernateException e) {

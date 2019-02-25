@@ -12,7 +12,8 @@ public interface IPermission {
 	public List<Permission> getUserPermissions(String username);
 	/**
 	 * @param roomID
-	 * @return A list of detached permissions relating to a specific room
+	 * @return A list of detached permissions relating to a specific room. Returns null if there are none, or roomID 
+	 * is invalid
 	 */
 	public List<Permission> getRoomPermissions(int roomID);
 	/**
