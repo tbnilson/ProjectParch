@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FakeDatabase, User, Permission } from '../FakeDatabase/FakeDatabase';
 import { Board } from '../FakeDatabase/FakeDatabase';
 import { Post } from '../FakeDatabase/FakeDatabase';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -11,8 +12,6 @@ import { Post } from '../FakeDatabase/FakeDatabase';
 
 
 export class BoardComponent implements OnInit {
-
-  
   selectedBoard : Board = null;
   selectedUserBoards : Board[] = [];
   selectedUser : User;
@@ -21,7 +20,14 @@ export class BoardComponent implements OnInit {
   invites : Permission[] = [];
   newPostText : String = "";
 
-  constructor(/*selectedUser : user*/) { 
+  constructor(private router: Router, private route: ActivatedRoute) { 
+    
+    // let username : string = route.snapshot.paramMap["username"];
+    // let password : string = route.snapshot.paramMap["password"];
+    // if (username == null) {
+    //   this.router.navigateByUrl("login");
+    // }
+    
     
     FakeDatabase.generateDatabase();
     this.selectedUser = FakeDatabase.getUser("User0");
