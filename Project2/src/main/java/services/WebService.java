@@ -29,7 +29,7 @@ public class WebService {
 	}
 
 	public static void createRoom(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");//Maybe get from session
 		String roomname = request.getParameter("roomname");
 		PrintWriter pr;
 		
@@ -73,11 +73,62 @@ public class WebService {
 
 	public static void deleteMessage(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		PrintWriter pr;
 		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		String username = request.getParameter("username");//Maybe get from session
+		int postID;
+		try {
+			postID = Integer.parseInt(request.getParameter("postID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("postID is not an integer");
+			return;
+		}
+		
+		if (MainService.deleteMessage(postID,username)) {
+			pr.append("true").close();
+		} else {
+			pr.append("false").close();
+		}
 	}
 
 	public static void editMessage(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		String username = request.getParameter("username");//Maybe get from session
+		int postID;
+		try {
+			postID = Integer.parseInt(request.getParameter("postID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("postID is not an integer");
+			return;
+		}
+		String message = request.getParameter("message");
+		
+		if (MainService.editMessage(postID,username,message)) {
+			pr.append("true").close();
+		} else {
+			pr.append("false").close();
+		}
 		
 	}
 
@@ -92,7 +143,7 @@ public class WebService {
 			return;
 		}
 		
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");//Maybe get from session
 		int roomID;
 		try {
 			roomID = Integer.parseInt(request.getParameter("roomID"));
@@ -126,7 +177,7 @@ public class WebService {
 	}
 
 	public static void getUser(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");//Maybe get from session
 		ParchUser u = MainService.getUser(username);
 		ObjectMapper om = new ObjectMapper();
 
@@ -180,7 +231,7 @@ public class WebService {
 	}
 
 	public static void getActiveUserRooms(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
 		List<Room> rooms = new ArrayList<Room>();
 		for (Permission p : perms) {
@@ -198,7 +249,7 @@ public class WebService {
 	}
 	
 	public static void getUserInvites(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
+		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
 		List<Room> rooms = new ArrayList<Room>();
 		for (Permission p : perms) {
@@ -241,6 +292,61 @@ public class WebService {
 			pr.append(MainService.toJsonArray(newposts)).close();
 		} else {
 			pr.append("No new messages in this room").close();
+		}
+	}
+
+	public static void inviteUser(HttpServletRequest request, HttpServletResponse response) {
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		String inviter = request.getParameter("inviter"); //Maybe get from session
+		String invitee = request.getParameter("invitee");
+		boolean b = MainService.inviteUser(inviter, invitee, roomID);
+		pr.append(b ? "true" : "false").close();
+	}
+
+	public static void acceptInvite(HttpServletRequest request, HttpServletResponse response) {
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		String username = request.getParameter("username");//Maybe get from session
+		Permission newperm = MainService.acceptInvite(roomID,username);
+		if (newperm!=null) {
+			pr.append("true").close();
+		} else {
+			pr.append("false").close();
 		}
 	}
 
