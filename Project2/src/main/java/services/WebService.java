@@ -28,6 +28,12 @@ public class WebService {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json string to response representing the room that was just created,
+	 * or writes "not a user" if the provided username could not be found.
+	 */
 	public static void createRoom(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");//Maybe get from session
 		String roomname = request.getParameter("roomname");
@@ -42,7 +48,11 @@ public class WebService {
 		}
 		
 		Room room = MainService.addRoom(username,roomname);
-		pr.append(room.toJsonString()).close();
+		if (room!=null) {
+			pr.append(room.toJsonString()).close();
+		} else {
+			
+		}
 	}
 
 	/**
@@ -71,6 +81,12 @@ public class WebService {
 		pr.append(b ? "true" : "false").close();
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes "true" to response if the deletion was successful, "false" if the user does not have the 
+	 * necessary permissions or if something goes wrong.
+	 */
 	public static void deleteMessage(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		PrintWriter pr;
@@ -101,6 +117,12 @@ public class WebService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes "true" to response if the edit was successful, "false" if the user does not have the 
+	 * necessary permissions or if something goes wrong.
+	 */
 	public static void editMessage(HttpServletRequest request, HttpServletResponse response) {
 		PrintWriter pr;
 		
@@ -132,6 +154,12 @@ public class WebService {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json string representing the new Post object created, or writes an error message if
+	 * something goes wrong
+	 */
 	public static void postMessage(HttpServletRequest request, HttpServletResponse response) {
 		PrintWriter pr;
 		
@@ -163,6 +191,11 @@ public class WebService {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes "true" to response if the username/password combo are valid, false otherwise
+	 */
 	public static void login(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -176,6 +209,12 @@ public class WebService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json string to response representing the requested user, or error message if something goes
+	 * wrong.
+	 */
 	public static void getUser(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");//Maybe get from session
 		ParchUser u = MainService.getUser(username);
@@ -196,6 +235,12 @@ public class WebService {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json array representing all the active users of a room (either "admin" or "user" permissions)
+	 * or writes an error message if something goes wrong.
+	 */
 	public static void getActiveRoomUsers(HttpServletRequest request, HttpServletResponse response) {
 		int roomID;
 		PrintWriter pr;
@@ -230,6 +275,12 @@ public class WebService {
 		
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json array representing the rooms that a user is active in. Does not include invited rooms
+	 * or rooms where a user is banned.
+	 */
 	public static void getActiveUserRooms(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
@@ -248,6 +299,11 @@ public class WebService {
 		}
 	}
 	
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a jsonarray representing the rooms where a user has been invited.
+	 */
 	public static void getUserInvites(HttpServletRequest request, HttpServletResponse response) {
 		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
@@ -266,6 +322,11 @@ public class WebService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes a json array representing the posts created after the supplied post in the same room.
+	 */
 	public static void getNewMessages(HttpServletRequest request, HttpServletResponse response) {
 		int postID;
 		PrintWriter pr;
@@ -295,6 +356,12 @@ public class WebService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes "true" to response if a new Permission is created, giving the invitee "invited" permissions
+	 * in the suppied room. Writes "false" otherwise.
+	 */
 	public static void inviteUser(HttpServletRequest request, HttpServletResponse response) {
 		int roomID;
 		PrintWriter pr;
@@ -321,6 +388,12 @@ public class WebService {
 		pr.append(b ? "true" : "false").close();
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * Writes "true" if the supplied user is successfully changed permissions from "invited" to "user" in
+	 * the supplied room.
+	 */
 	public static void acceptInvite(HttpServletRequest request, HttpServletResponse response) {
 		int roomID;
 		PrintWriter pr;
