@@ -33,7 +33,9 @@ public class PermissionDao implements IPermission {
 			q.setString(0, username);
 			
 			List<Permission> p = q.list();
-
+			if (p.size()==0) {
+				p=null;
+			}
 			sess.close();
 			return p;
 		} catch (HibernateException e) {
