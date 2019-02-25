@@ -54,10 +54,12 @@ export class BoardComponent implements OnInit {
     if (this.username == null) {
       this.router.navigateByUrl("login");
     }
+    else {
+      this.selectedUser = new User(this.username, this.password);
+    }
     
     
     FakeDatabase.generateDatabase();
-    this.selectedUser = FakeDatabase.getUser("User0");
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
     this.update();
