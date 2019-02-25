@@ -63,6 +63,7 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public Permission setPermission(String username, int roomID, String permissions) {
+		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;} //This should maybe throw an exception
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
@@ -90,6 +91,7 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public Permission getPermission(String username, int roomID) {
+		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;}//This should maybe throw an exception
 		try {
 			Session sess = sf.openSession();
 			String hql = "select P from Permission as P "

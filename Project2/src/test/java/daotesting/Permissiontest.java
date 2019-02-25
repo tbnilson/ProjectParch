@@ -7,6 +7,7 @@ import dao.PermissionDao;
 import dao.PostDao;
 import dao.RoomDao;
 import dao.UserDao;
+import model.ParchUser;
 import model.Room;
 import util.HibernateUtil;
 
@@ -23,12 +24,13 @@ public class Permissiontest {
 	public static RoomDao rd = new RoomDao();
 	public static PermissionDao pd = new PermissionDao();
 	public static PostDao pod = new PostDao();
+	private static Room permtestroom;
 	
 	@BeforeClass
 	public void startup() {
 		Playground.populateTestDB();
 		Playground.postMessages();
-		HibernateUtil.getSessionFactory();
+		permtestroom = rd.makeRoom("Perm Testing Room", "test1");
 	}
 	
 	@AfterClass
@@ -36,4 +38,27 @@ public class Permissiontest {
 		HibernateUtil.getSessionFactory().close();
 	}
 	
+	@Test(priority=1)
+	public void inviteUserTest() {
+		ParchUser u1 = new ParchUser();
+		u1.setUsername("PermTesting");
+		u1.setPassword("testpass");
+		u1.setEmail("u@aol.com");
+		ud.addUser(u1);
+		
+		
+		Assert.assertTrue(pd.inviteUser(permtestroom.getId(), "PermTesting"));
+		Assert.assertEquals(pd.getPermission("PermTesting", permtestroom.getId()).getPermissions(), "invited");
+	}
+	
+	@Test(priority=2)
+	public void inviteInvalidUserTest() {
+		Assert.assertFalse(pd.inviteUser(permtestroom.getId(), "PermTestingBadUsername"));
+	}
+	
+	@Test(priority=3)
+	public void acceptValidInviteTest() {
+		Assert.assertNotNull(pd.setPermission("PermTesting", permtestroom.getId(), "user"));
+		Assert.assertEquals(pd.getPermission("PermTesting", permtestroom.getId()).getPermissions(), "user");
+	}
 }
