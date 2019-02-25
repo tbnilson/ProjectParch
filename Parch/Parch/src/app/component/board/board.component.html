@@ -12,24 +12,28 @@
     </div>
   </div>
   <div class = "NavBar">{{selectedUser.name}}</div>
+  <div class = "NavBar">{{selectedBoard.name}}</div>
 </div>
-<div>
-  <div class="Post">
-      <select class="Interaction" id = "boards" >
-        <option *ngFor = "let selectedUserBoard of selectedUserBoards" (click) = selectBoard(selectedUserBoard.name)>
-          {{selectedUserBoard.name}}</option>
-      </select>
-  </div>
-  <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
-    {{post.user.name + " " + post.text}}
-  </div>
-  <div class = "NewPost">
-    <div style="display: inline">
-      <input class="Interaction" id="postText" [(ngModel)] = "newPostText" style = "width: 90%; 
-        max-width: 500px; min-width: 100px" disabled = "true"/>
-    </div>
-    <div style="display: inline">
-        <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">Create Post</button>
+<div class="NewPost">
+  <div style="display: inline-block">
+    <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
+      (click) = selectBoard(selectedUserBoard.name)>
+      {{selectedUserBoard.name}}
     </div>
   </div>
+  <div style="display: inline-block">
+    <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
+      {{post.user.name + " " + post.text}}
+    </div>
+    <div>
+      <div style="display: inline">
+        <input class="Interaction" id="postText" [(ngModel)] = "newPostText" style = "width: 90%; 
+          max-width: 500px; min-width: 100px" disabled = "true"/>
+      </div>
+      <div style="display: inline">
+          <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">Create Post</button>
+      </div>
+    </div>
+  </div>
 </div>
+
