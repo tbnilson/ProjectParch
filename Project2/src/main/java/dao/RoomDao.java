@@ -21,6 +21,7 @@ public class RoomDao implements IRoom {
 
 	@Override
 	public Room makeRoom(String roomname, String username) {
+		if (!ud.userExists(username)) {return null;}
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
