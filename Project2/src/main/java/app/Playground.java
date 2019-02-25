@@ -30,7 +30,7 @@ public class Playground {
 		HibernateUtil.getSessionFactory().close();
 	}
 	
-	private static void postMessages() {
+	public static void postMessages() {
 		// TODO Auto-generated method stub
 		List<Permission> test2perms = pd.getUserPermissions("test2");
 		for (Permission p : test2perms) {

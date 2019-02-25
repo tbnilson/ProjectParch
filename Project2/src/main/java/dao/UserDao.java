@@ -26,6 +26,9 @@ public class UserDao implements IUser {
 	}
 
 	public boolean addUser(ParchUser parchUser) {
+		if (userExists(parchUser.getUsername())) {
+			return false;
+		}
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();

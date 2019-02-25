@@ -8,6 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
 import model.ParchUser;
 import model.Post;
@@ -120,6 +121,7 @@ public class PostDao implements IPost {
 
 	@Override
 	public Post makePost(Room room, ParchUser user, String message) {
+		
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
@@ -138,6 +140,34 @@ public class PostDao implements IPost {
 		} catch (HibernateException e) {
 				e.printStackTrace();
 				return null;
+		}
+	}
+
+	@Override
+	public List<Post> getNewPosts(int postID) {
+		Post latestpost = getPost(postID);
+		if (latestpost==null) {return null;}
+		try {
+			Session sess = sf.openSession();
+
+			String hql = "select P from Post as P "
+					+ "where P.room.id = ? and P.timestamp>?";
+			Query q = sess.createQuery(hql);
+			q.setParameter(0, latestpost.getRoom().getId());
+			q.setParameter(1, latestpost.getTimestamp());
+			
+			List<Post> posts = q.getResultList();
+			
+			if (posts!=null) {
+				sess.close();
+				return posts;
+			} else {
+				sess.close();
+				return null;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

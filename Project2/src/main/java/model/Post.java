@@ -70,6 +70,7 @@ public class Post implements Jsonable {
 	@Override
 	public String toJsonString() {
 		return "{" + 
+				" \"postID\": \""+this.id+"\"," + 
 				" \"roomID\": \""+this.room.getId()+"\"," + 
 				" \"username\": \""+this.parchUser.getUsername()+"\"," + 
 				" \"message\": \""+this.message+"\"," + 

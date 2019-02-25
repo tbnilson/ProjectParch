@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import app.Playground;
 import services.WebService;
 
 public class RequestHelper {
@@ -57,6 +58,15 @@ public class RequestHelper {
 		}
 		case "/Project2/createRoom.do":{
 			WebService.createRoom(request, response);
+			break;
+		}
+		case "/Project2/getNewMessages.do":{
+			WebService.getNewMessages(request, response);
+			break;
+		}
+		case "/Project2/populate.do":{
+			Playground.populateTestDB();
+			Playground.postMessages();
 			break;
 		}
 		default:{
