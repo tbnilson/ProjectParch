@@ -104,7 +104,11 @@ public class WebService {
 		}
 		String message = request.getParameter("message");
 		Post post = MainService.makePost(username, roomID, message);
-		pr.append(post.toJsonString());
+		if (post!=null) {
+			pr.append(post.toJsonString()).close();
+		} else {
+			pr.append("not a valid username or roomID").close();
+		}
 		
 	}
 
@@ -208,6 +212,35 @@ public class WebService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public static void getNewMessages(HttpServletRequest request, HttpServletResponse response) {
+		int postID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			postID = Integer.parseInt(request.getParameter("postID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("postID is not an integer");
+			return;
+		}
+		
+		List<Post> newposts = MainService.getNewMessages(postID);
+		if (newposts!=null && newposts.size()>0) {
+			pr.append(MainService.toJsonArray(newposts)).close();
+		} else {
+			pr.append("No new messages in this room").close();
 		}
 	}
 

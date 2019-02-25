@@ -13,4 +13,5 @@ public interface IPost {
 	public List<Post> getUserPosts(String username);
 	public boolean deletePost(int messageID);
 	public boolean editPost(int messageID, String newmessage);
+	public List<Post> getNewPosts(int postID); 
 }

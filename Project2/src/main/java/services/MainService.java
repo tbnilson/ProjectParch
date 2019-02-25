@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -77,12 +78,22 @@ public class MainService {
 	}
 
 	public static Post makePost(String username, int roomID, String message) {
+		if (!ud.userExists(username)) {
+			return null;
+		}
+		if (rd.getRoom(roomID)==null) {
+			return null;
+		}
 		return postd.makePost(rd.getRoom(roomID), ud.getUser(username), message);
 	}
 
 	public static Room addRoom(String username, String roomname) {
 		// TODO Auto-generated method stub
 		return rd.makeRoom(roomname, username);
+	}
+
+	public static List<Post> getNewMessages(int postID) {
+		return postd.getNewPosts(postID);
 	}
 	
 
