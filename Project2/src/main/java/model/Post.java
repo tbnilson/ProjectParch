@@ -59,7 +59,7 @@ public class Post implements Jsonable {
 		this.room = room;
 	}
 
-	@ManyToOne
+	@ManyToOne(optional=false)
 	private ParchUser parchUser;
 	
 	private Date timestamp;

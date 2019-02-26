@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.PropertyValueException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -63,11 +64,14 @@ public class PostDao implements IPost {
 		try {
 			Session sess = sf.openSession();
 			
-			Criteria crit = sess.createCriteria(Post.class);
-			crit.add(Restrictions.like("PARCHUSER_USERNAME", username));
-			List<Post> posts = crit.list();
+			String hql = "select P from Post as P "
+					+ "where P.parchUser.username=? ORDER BY P.timestamp DESC";
+			Query q = sess.createQuery(hql);
+			q.setParameter(0, username);
 			
-			if (posts!=null) {
+			List<Post> posts = q.getResultList();
+			
+			if (posts!=null && posts.size()>0) {
 				sess.close();
 				return posts;
 			} else {
@@ -121,25 +125,25 @@ public class PostDao implements IPost {
 
 	@Override
 	public Post makePost(Room room, ParchUser user, String message) {
-		
+		if (room==null || user==null) {return null;}
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
 			
 			Post post = new Post();
-			sess.persist(post);
+			
 			post.setUser(user);
 			post.setRoom(room);
 			post.setMessage(message);
 			post.setTimestamp(new Date());
-			
+			sess.persist(post);
 			
 			sess.getTransaction().commit();
 			sess.close();
 			return post;
 		} catch (HibernateException e) {
-				e.printStackTrace();
-				return null;
+			e.printStackTrace();
+			return null;
 		}
 	}
 
