@@ -1,5 +1,7 @@
 package model;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -45,10 +47,16 @@ public class Room implements Jsonable {
 	}
 	@Override
 	public String toJsonString() {
-		return "{" + 
-				" \"roomID\": \""+this.id+"\"," + 
-				" \"roomname\": \""+this.roomname+"\"" + 
-				"}";
+		try {
+			return "{" + 
+					" \"roomID\": \""+this.id+"\"," + 
+					" \"roomname\": \""+ new URI(null,null,this.roomname,null).getRawPath() +"\"" + 
+					"}";
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 }

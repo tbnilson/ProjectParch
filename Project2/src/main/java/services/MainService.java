@@ -148,6 +148,10 @@ public class MainService {
 		}
 		return permd.setPermission(username, roomID, "user");
 	}
+
+	public static List<Post> getRoomMessages(int roomID, int startnum, int endnum) {
+		return postd.getRoomPosts(roomID,startnum,endnum);
+	}
 	
 
 }

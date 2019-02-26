@@ -33,7 +33,9 @@ public class PermissionDao implements IPermission {
 			q.setString(0, username);
 			
 			List<Permission> p = q.list();
-
+			if (p.size()==0) {
+				p=null;
+			}
 			sess.close();
 			return p;
 		} catch (HibernateException e) {
@@ -52,7 +54,9 @@ public class PermissionDao implements IPermission {
 			q.setInteger(0, roomID);
 			
 			List<Permission> p = q.list();
-
+			if (p.size()==0) {
+				p=null;
+			}
 			sess.close();
 			return p;
 		} catch (HibernateException e) {
@@ -63,6 +67,7 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public Permission setPermission(String username, int roomID, String permissions) {
+		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;} //This should maybe throw an exception
 		try {
 			Session sess = sf.openSession();
 			sess.beginTransaction();
@@ -90,6 +95,7 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public Permission getPermission(String username, int roomID) {
+		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;}//This should maybe throw an exception
 		try {
 			Session sess = sf.openSession();
 			String hql = "select P from Permission as P "

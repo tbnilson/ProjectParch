@@ -1,5 +1,7 @@
 package model;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -59,7 +61,7 @@ public class Post implements Jsonable {
 		this.room = room;
 	}
 
-	@ManyToOne
+	@ManyToOne(optional=false)
 	private ParchUser parchUser;
 	
 	private Date timestamp;
@@ -69,13 +71,17 @@ public class Post implements Jsonable {
 
 	@Override
 	public String toJsonString() {
-		return "{" + 
-				" \"postID\": \""+this.id+"\"," + 
-				" \"roomID\": \""+this.room.getId()+"\"," + 
-				" \"username\": \""+this.parchUser.getUsername()+"\"," + 
-				" \"message\": \""+this.message+"\"," + 
-				" \"timestamp\": \""+this.timestamp.getTime()+"\"" + 
-				"}";
+		try {
+			return "{" + 
+					" \"postID\": \""+this.id+"\"," + 
+					" \"roomID\": \""+this.room.getId()+"\"," + 
+					" \"username\": \""+this.parchUser.getUsername()+"\"," + 
+					" \"message\": \""+new URI(null,null,this.message,null).getRawPath()+"\"," + 
+					" \"timestamp\": \""+this.timestamp.getTime()+"\"" + 
+					"}";
+		} catch (URISyntaxException e) {
+			return "";
+		}
 	}
 
 }

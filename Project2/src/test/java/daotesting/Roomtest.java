@@ -28,7 +28,6 @@ public class Roomtest {
 	public void startup() {
 		Playground.populateTestDB();
 		Playground.postMessages();
-		HibernateUtil.getSessionFactory();
 	}
 	
 	@AfterClass
