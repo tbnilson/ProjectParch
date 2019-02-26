@@ -423,4 +423,43 @@ public class WebService {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * 
+	 */
+	public static void getMessagesBefore(HttpServletRequest request, HttpServletResponse response) {
+		int startnum,roomID,endnum;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			startnum = Integer.parseInt(request.getParameter("postID"));
+		} catch (NumberFormatException e) {
+			// This just means that no post was
+			startnum=0;
+		}
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		try {
+			endnum = Integer.parseInt(request.getParameter("N"));
+		} catch (NumberFormatException e) {
+			endnum=50;
+		}
+		List<Post> posts = MainService.getRoomMessages(roomID, startnum, endnum);
+	}
+
 }

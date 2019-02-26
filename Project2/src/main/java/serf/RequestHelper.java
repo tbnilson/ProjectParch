@@ -64,6 +64,10 @@ public class RequestHelper {
 			WebService.getNewMessages(request, response);
 			break;
 		}
+		case "/Project2/getMessagesBefore.do":{
+			WebService.getMessagesBefore(request, response);
+			break;
+		}
 		case "/Project2/inviteUser.do":{
 			WebService.inviteUser(request, response);
 			break;
@@ -77,6 +81,7 @@ public class RequestHelper {
 			Playground.postMessages();
 			break;
 		}
+		
 		default:{
 			try {
 				response.getWriter().append("That is not a valid URL for this server").close();
