@@ -20,13 +20,27 @@ export class BoardComponent implements OnInit {
   selectedPosts : Post[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
+  newBoardText : String = "";
   newPostText : String = "";
+  testing : boolean = true;   //set if real database is not attached
 
   username : string;
   password : string;
 
   constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService) { 
-    
+    if (this.testing) {
+      FakeDatabase.generateDatabase();
+      this.selectedUser = FakeDatabase.users[0];
+    }
+    else {
+      this.confirmUser();
+    }
+    this.selectedBoard = FakeDatabase.getBoard("Select Board");
+    this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
+    this.update();
+  }
+
+  confirmUser() : void {
     this.username = this.password = null;
 
     try {
@@ -57,12 +71,6 @@ export class BoardComponent implements OnInit {
     else {
       this.selectedUser = new User(this.username, this.password);
     }
-    
-    
-    FakeDatabase.generateDatabase();
-    this.selectedBoard = FakeDatabase.getBoard("Select Board");
-    this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
-    this.update();
   }
 
   createPost() : void {
@@ -103,6 +111,10 @@ export class BoardComponent implements OnInit {
     }
     
     this.update();
+  }
+
+  addBoard() : void {
+
   }
 
   acceptInvitation(invite : Permission) : void {
