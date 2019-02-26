@@ -39,7 +39,7 @@ Login(){
         this.router.navigateByUrl("board?username=" + this.username + "&password=" + this.password);
       }
       else{
-        this.answer = "Invalid login"
+        this.answer = "Invalid login";
       }
 
     }
@@ -60,6 +60,24 @@ Login(){
 
 check:string;
 Register(){
+  let reg:Observable<boolean> = this.logserv.register(this.newusername, this.newpassword, this.newemail);
+  reg.subscribe(
+
+    (response)=>{
+      console.log(response);
+      if(response){
+        this.answer = "You successfully registered";
+      }
+      else{
+        this.answer = "Unsuccessful login";
+      }
+    }
+    ,
+    (response)=>{
+      console.log(response);
+      this.answer = "Fail";
+    }
+  );
   
 }; 
 
