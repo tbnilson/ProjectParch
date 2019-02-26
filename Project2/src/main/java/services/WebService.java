@@ -441,7 +441,7 @@ public class WebService {
 		}
 		
 		try {
-			startnum = Integer.parseInt(request.getParameter("startnum"));
+			startnum = Integer.parseInt(request.getParameter("start"));
 		} catch (NumberFormatException e) {
 			// This just means that no post was
 			startnum=0;
@@ -455,7 +455,7 @@ public class WebService {
 			return;
 		}
 		try {
-			endnum = Integer.parseInt(request.getParameter("endnum"));
+			endnum = Integer.parseInt(request.getParameter("num"));
 		} catch (NumberFormatException e) {
 			endnum=50;
 		}
