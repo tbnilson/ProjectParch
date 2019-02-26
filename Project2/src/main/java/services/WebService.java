@@ -460,7 +460,11 @@ public class WebService {
 			endnum=50;
 		}
 		List<Post> posts = MainService.getRoomMessages(roomID, startnum, endnum);
-		pr.append(MainService.toJsonArray(posts)).close();
+		if (posts!=null) {
+			pr.append(MainService.toJsonArray(posts)).close();
+		} else {
+			pr.append("Error: roomID is invalid, start is too high, or something went wrong");
+		}
 	}
 
 }
