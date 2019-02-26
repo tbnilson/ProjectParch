@@ -175,4 +175,32 @@ public class PostDao implements IPost {
 		}
 	}
 
+	@Override
+	public List<Post> getRoomPosts(int roomID, int startnum, int endnum) {
+		
+		try {
+			Session sess = sf.openSession();
+
+			String hql = "select P from Post as P "
+					+ "where P.room.id = ? ORDER BY P.timestamp DESC";
+			Query q = sess.createQuery(hql);
+			q.setParameter(0, roomID);
+			q.setFirstResult(startnum);
+			q.setMaxResults(endnum);
+			
+			List<Post> posts = q.getResultList();
+			
+			if (posts!=null && posts.size()>0) {
+				sess.close();
+				return posts;
+			} else {
+				sess.close();
+				return null;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
