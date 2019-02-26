@@ -428,7 +428,7 @@ public class WebService {
 	 * @param response
 	 * 
 	 */
-	public static void getMessagesBefore(HttpServletRequest request, HttpServletResponse response) {
+	public static void getRoomMessages(HttpServletRequest request, HttpServletResponse response) {
 		int startnum,roomID,endnum;
 		PrintWriter pr;
 		
@@ -441,7 +441,7 @@ public class WebService {
 		}
 		
 		try {
-			startnum = Integer.parseInt(request.getParameter("postID"));
+			startnum = Integer.parseInt(request.getParameter("startnum"));
 		} catch (NumberFormatException e) {
 			// This just means that no post was
 			startnum=0;
@@ -455,11 +455,12 @@ public class WebService {
 			return;
 		}
 		try {
-			endnum = Integer.parseInt(request.getParameter("N"));
+			endnum = Integer.parseInt(request.getParameter("endnum"));
 		} catch (NumberFormatException e) {
 			endnum=50;
 		}
 		List<Post> posts = MainService.getRoomMessages(roomID, startnum, endnum);
+		pr.append(MainService.toJsonArray(posts)).close();
 	}
 
 }

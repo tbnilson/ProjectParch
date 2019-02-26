@@ -65,7 +65,7 @@ public class RequestHelper {
 			break;
 		}
 		case "/Project2/getMessagesBefore.do":{
-			WebService.getMessagesBefore(request, response);
+			WebService.getRoomMessages(request, response);
 			break;
 		}
 		case "/Project2/inviteUser.do":{
