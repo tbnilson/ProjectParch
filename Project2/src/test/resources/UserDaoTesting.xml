@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name = "UserDao Tests">
+<test name= "User Actions">
+<!-- <parameter name = "owner" value="Adam"></parameter> -->
+
+<groups>
+<run>
+<include name = "User"/>
+</run>
+</groups>
+
+<classes>
+
+
+<class name = "daotesting.Usertest"></class>
+</classes>
+
+
+</test>
+</suite>

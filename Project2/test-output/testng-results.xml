@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="9" ignored="0" total="42" passed="33">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="5330" started-at="2019-02-26T14:12:37Z" finished-at="2019-02-26T14:12:43Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="5330" started-at="2019-02-26T14:12:37Z" finished-at="2019-02-26T14:12:43Z">
+      <class name="daotesting.Usertest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:daotesting.Usertest@3d829787]" name="setup" is-config="true" duration-ms="13" started-at="2019-02-26T14:12:37Z" finished-at="2019-02-26T14:12:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:daotesting.Usertest@3d829787]" name="beforeTest" is-config="true" duration-ms="0" started-at="2019-02-26T14:12:37Z" finished-at="2019-02-26T14:12:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="getUserFail(model.ParchUser)[pri:1, instance:daotesting.Usertest@3d829787]" name="getUserFail" duration-ms="219" started-at="2019-02-26T14:12:37Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@7af707e0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserFail -->
+        <test-method status="PASS" signature="getUserFail(model.ParchUser)[pri:1, instance:daotesting.Usertest@3d829787]" name="getUserFail" duration-ms="46" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@5173200b]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserFail -->
+        <test-method status="PASS" signature="getUserFail(model.ParchUser)[pri:1, instance:daotesting.Usertest@3d829787]" name="getUserFail" duration-ms="52" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@69b2f8e5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserFail -->
+        <test-method status="PASS" signature="addUserTest(model.ParchUser)[pri:2, instance:daotesting.Usertest@3d829787]" name="addUserTest" duration-ms="298" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@5f462e3b]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserTest -->
+        <test-method status="PASS" signature="addUserTest(model.ParchUser)[pri:2, instance:daotesting.Usertest@3d829787]" name="addUserTest" duration-ms="100" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@baf1bb3]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserTest -->
+        <test-method status="PASS" signature="addUserTest(model.ParchUser)[pri:2, instance:daotesting.Usertest@3d829787]" name="addUserTest" duration-ms="101" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@34cf5a97]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserTest -->
+        <test-method status="PASS" signature="addUserFail(model.ParchUser)[pri:3, instance:daotesting.Usertest@3d829787]" name="addUserFail" duration-ms="45" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@4b1abd11]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserFail -->
+        <test-method status="PASS" signature="addUserFail(model.ParchUser)[pri:3, instance:daotesting.Usertest@3d829787]" name="addUserFail" duration-ms="30" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@1d207fad]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserFail -->
+        <test-method status="PASS" signature="addUserFail(model.ParchUser)[pri:3, instance:daotesting.Usertest@3d829787]" name="addUserFail" duration-ms="80" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@488b50ec]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUserFail -->
+        <test-method status="PASS" signature="UserExistsTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="UserExistsTest" duration-ms="33" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@6d2d99fc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- UserExistsTest -->
+        <test-method status="PASS" signature="UserExistsTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="UserExistsTest" duration-ms="48" started-at="2019-02-26T14:12:38Z" data-provider="pu" finished-at="2019-02-26T14:12:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@3a095ec0]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- UserExistsTest -->
+        <test-method status="PASS" signature="UserExistsTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="UserExistsTest" duration-ms="60" started-at="2019-02-26T14:12:39Z" data-provider="pu" finished-at="2019-02-26T14:12:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@7e8a46b7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- UserExistsTest -->
+        <test-method status="PASS" signature="getUserTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="getUserTest" duration-ms="39" started-at="2019-02-26T14:12:39Z" data-provider="pu" finished-at="2019-02-26T14:12:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@1e6308a9]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserTest -->
+        <test-method status="PASS" signature="getUserTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="getUserTest" duration-ms="40" started-at="2019-02-26T14:12:39Z" data-provider="pu" finished-at="2019-02-26T14:12:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@783ec989]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserTest -->
+        <test-method status="PASS" signature="getUserTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="getUserTest" duration-ms="68" started-at="2019-02-26T14:12:39Z" data-provider="pu" finished-at="2019-02-26T14:12:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@50825a02]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserTest -->
+        <test-method status="FAIL" signature="setEmailFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailFail" duration-ms="1042" started-at="2019-02-26T14:12:39Z" data-provider="pu" finished-at="2019-02-26T14:12:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@2abc224d]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: null
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.assertNotEquals(Assert.java:1157)
+at org.testng.Assert.assertNotEquals(Assert.java:1162)
+at daotesting.Usertest.setEmailFail(Usertest.java:64)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailFail -->
+        <test-method status="FAIL" signature="setEmailFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailFail" duration-ms="144" started-at="2019-02-26T14:12:40Z" data-provider="pu" finished-at="2019-02-26T14:12:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@37095ded]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: null
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.assertNotEquals(Assert.java:1157)
+at org.testng.Assert.assertNotEquals(Assert.java:1162)
+at daotesting.Usertest.setEmailFail(Usertest.java:64)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailFail -->
+        <test-method status="FAIL" signature="setEmailFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailFail" duration-ms="145" started-at="2019-02-26T14:12:40Z" data-provider="pu" finished-at="2019-02-26T14:12:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@11a7ba62]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: null
+at org.testng.Assert.fail(Assert.java:96)
+at org.testng.Assert.assertNotEquals(Assert.java:1157)
+at org.testng.Assert.assertNotEquals(Assert.java:1162)
+at daotesting.Usertest.setEmailFail(Usertest.java:64)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailFail -->
+        <test-method status="PASS" signature="setEmailTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailTest" duration-ms="133" started-at="2019-02-26T14:12:40Z" data-provider="pu" finished-at="2019-02-26T14:12:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@34523d46]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailTest -->
+        <test-method status="PASS" signature="setEmailTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailTest" duration-ms="277" started-at="2019-02-26T14:12:40Z" data-provider="pu" finished-at="2019-02-26T14:12:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@7e46d648]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailTest -->
+        <test-method status="PASS" signature="setEmailTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setEmailTest" duration-ms="157" started-at="2019-02-26T14:12:40Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@d1a10ac]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setEmailTest -->
+        <test-method status="FAIL" signature="setUsernameFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameFail" duration-ms="129" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@41f35f7c]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to ben]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to ben
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameFail(Usertest.java:73)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to ben
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameFail -->
+        <test-method status="FAIL" signature="setUsernameFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameFail" duration-ms="149" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@982bb90]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to ben]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to ben
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameFail(Usertest.java:73)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to ben
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameFail -->
+        <test-method status="FAIL" signature="setUsernameFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameFail" duration-ms="153" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@489543a6]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ben]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ben
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameFail(Usertest.java:73)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ben
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameFail -->
+        <test-method status="FAIL" signature="setUsernameTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameTest" duration-ms="124" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@659925f4]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to flaming1]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to flaming1
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameTest(Usertest.java:69)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from flaming to flaming1
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameTest -->
+        <test-method status="FAIL" signature="setUsernameTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameTest" duration-ms="139" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@1bc425e7]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to hello11]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to hello11
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameTest(Usertest.java:69)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from hello1 to hello11
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameTest -->
+        <test-method status="FAIL" signature="setUsernameTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="setUsernameTest" duration-ms="139" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@6d4a65c6]]>
+              </value>
+            </param>
+          </params>
+          <exception class="javax.persistence.PersistenceException">
+            <message>
+              <![CDATA[org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ken1]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[javax.persistence.PersistenceException: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ken1
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:147)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:155)
+at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:162)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1434)
+at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:484)
+at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3190)
+at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2404)
+at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:467)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:146)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$100(JdbcResourceLocalTransactionCoordinatorImpl.java:38)
+at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:220)
+at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:68)
+at dao.UserDao.setUsername(UserDao.java:124)
+at daotesting.Usertest.setUsernameTest(Usertest.java:69)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: org.hibernate.HibernateException: identifier of an instance of model.ParchUser was altered from ken to ken1
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.checkId(DefaultFlushEntityEventListener.java:64)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.getValues(DefaultFlushEntityEventListener.java:175)
+at org.hibernate.event.internal.DefaultFlushEntityEventListener.onFlushEntity(DefaultFlushEntityEventListener.java:135)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEntities(AbstractFlushingEventListener.java:216)
+at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:85)
+at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:38)
+at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1428)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- javax.persistence.PersistenceException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUsernameTest -->
+        <test-method status="PASS" signature="verifyFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyFail" duration-ms="47" started-at="2019-02-26T14:12:41Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@7b2a3ff8]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFail -->
+        <test-method status="PASS" signature="verifyFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyFail" duration-ms="49" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@74971ed9]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFail -->
+        <test-method status="PASS" signature="verifyFail(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyFail" duration-ms="32" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@6c37bd27]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyFail -->
+        <test-method status="PASS" signature="verifyTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyTest" duration-ms="43" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@4c27d39d]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTest -->
+        <test-method status="PASS" signature="verifyTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyTest" duration-ms="38" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@629f066f]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTest -->
+        <test-method status="PASS" signature="verifyTest(model.ParchUser)[pri:4, instance:daotesting.Usertest@3d829787]" name="verifyTest" duration-ms="45" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@65004ff6]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTest -->
+        <test-method status="PASS" signature="deleteUserTest(model.ParchUser)[pri:9, instance:daotesting.Usertest@3d829787]" name="deleteUserTest" duration-ms="289" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@2032e725]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserTest -->
+        <test-method status="PASS" signature="deleteUserTest(model.ParchUser)[pri:9, instance:daotesting.Usertest@3d829787]" name="deleteUserTest" duration-ms="202" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@22d1886d]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserTest -->
+        <test-method status="PASS" signature="deleteUserTest(model.ParchUser)[pri:9, instance:daotesting.Usertest@3d829787]" name="deleteUserTest" duration-ms="201" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:42Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@4158debd]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserTest -->
+        <test-method status="PASS" signature="deleteUserFail(model.ParchUser)[pri:10, instance:daotesting.Usertest@3d829787]" name="deleteUserFail" duration-ms="35" started-at="2019-02-26T14:12:42Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@8c46918]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserFail -->
+        <test-method status="PASS" signature="deleteUserFail(model.ParchUser)[pri:10, instance:daotesting.Usertest@3d829787]" name="deleteUserFail" duration-ms="40" started-at="2019-02-26T14:12:43Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@5eb97ced]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserFail -->
+        <test-method status="PASS" signature="deleteUserFail(model.ParchUser)[pri:10, instance:daotesting.Usertest@3d829787]" name="deleteUserFail" duration-ms="45" started-at="2019-02-26T14:12:43Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@566d0c69]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserFail -->
+        <test-method status="PASS" signature="userExistsFail(model.ParchUser)[pri:12, instance:daotesting.Usertest@3d829787]" name="userExistsFail" duration-ms="65" started-at="2019-02-26T14:12:43Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@2bfbffb2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userExistsFail -->
+        <test-method status="PASS" signature="userExistsFail(model.ParchUser)[pri:12, instance:daotesting.Usertest@3d829787]" name="userExistsFail" duration-ms="43" started-at="2019-02-26T14:12:43Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@3e850122]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userExistsFail -->
+        <test-method status="PASS" signature="userExistsFail(model.ParchUser)[pri:12, instance:daotesting.Usertest@3d829787]" name="userExistsFail" duration-ms="34" started-at="2019-02-26T14:12:43Z" data-provider="pu" finished-at="2019-02-26T14:12:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[model.ParchUser@4cdd2c73]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userExistsFail -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:daotesting.Usertest@3d829787]" name="afterTest" is-config="true" duration-ms="0" started-at="2019-02-26T14:12:43Z" finished-at="2019-02-26T14:12:43Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="cleanup()[pri:0, instance:daotesting.Usertest@3d829787]" name="cleanup" is-config="true" duration-ms="746" started-at="2019-02-26T14:12:43Z" finished-at="2019-02-26T14:12:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cleanup -->
+      </class> <!-- daotesting.Usertest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
