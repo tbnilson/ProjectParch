@@ -27,7 +27,7 @@ export class PostingService {
   }
 
   editMessage(postID:number, editor:string, newmessage:string):Observable<boolean>{
-    return this.http.get<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/editMessage.do",
+    return this.http.post<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/editMessage.do",
     "postID=" + postID + 
     "&username=" + editor + 
     "&message=" + newmessage,
@@ -35,7 +35,7 @@ export class PostingService {
   }
 
   deleteMessage(postID:number, editor:string):Observable<boolean>{
-    return this.http.get<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/deleteMessage.do",
+    return this.http.post<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/deleteMessage.do",
     "postID=" + postID + 
     "&username=" + editor,
     this.httpOptions);
