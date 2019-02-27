@@ -2,14 +2,45 @@
 <div class="Post">
   <div class = "NavBar">{{selectedBoard.name}}</div>
   <div class = "NavBar">
-    <div (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">Invites</div>
-    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;" 
-      (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">
+    <div >
+      <span>Permissions</span>
+      <span (click) = "showInvites()"style="font-size: 12px">
+        Invitations
+      </span>
+      <span (click) = "showInviteCreator()"style="font-size: 12px">
+        Change
+      </span>
+    </div>
+    <!-- Invitation Viewer -->
+    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;">
       <div *ngFor = "let invite of invites">
         <span>{{invite.board.name}}</span>
         <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
         <button class="Interaction" (click) = rejectInvitation(invite)>Reject</button>
       </div>
+    </div>
+    <!-- Invite Creator -->
+    <div class="InteractionBordered" id = "inviteCreator" style = "z-index: 2; display: none">
+      <select>
+        <option *ngFor = "let selectedUserBoard of selectedUserBoards">
+          {{selectedUserBoard.name}}
+        </option>
+      </select>
+      <select>
+          <option *ngFor = "let user of users">
+            {{user.name}}
+          </option>
+      </select>
+      <!-- Certain options would only be available to users with certain permissions. -->
+      <select>
+          <option>User</option>
+          <option>Mod</option>
+          <option>Remove Mod</option>
+          <option>Ban</option>
+      </select>
+      <br/>
+      <span id="permissionError"></span>
+      <button (click) = "changePermission()">Send Invite</button>
     </div>
   </div>
   <div class = "NavBar">
@@ -19,14 +50,15 @@
 </div>
 <div class="PostBottomless">
   <div>
-    <button class="Interaction">Add New</button>
-    <div style= "display: none">
+    <button class="Interaction" (click) = "showCreateBoard()">Add New</button>
+    <br/>
+    <div id="createBoard" style= "display: none">
       <div style="display: inline-block">
         <input class="Interaction" [(ngModel)] = "newBoardText" style = "max-width: 500px;
-          min-width: 100px" disabled = "true"/>
+          min-width: 100px"/>
       </div>
       <div style="display: inline-block">
-        <button class="Interaction" (click) = "createBoard()" disabled = "true">Create Post</button>
+        <button class="Interaction" (click) = "createBoard()">Create Post</button>
       </div>
     </div>
   </div>
@@ -38,7 +70,8 @@
   </div>
   <div style="display: inline-block">
     <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
-      {{post.user.name + " " + post.text}}
+      <span>{{post.user.name + " " + post.text}}</span>
+      <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.id)"></button>
     </div>
     <div class="Post">
       <div style="display: inline-block">
