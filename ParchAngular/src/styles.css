@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    background-color: darkslategrey;
-    color: darkviolet;
+    margin: 0;
+    padding:0;
+    background-color: rgb(46, 49, 49);
+    color: rgb(232, 236, 241);
+    font-family: sans-serif;
 }
-.button{
-    background-color: green;
-    border-color: greenyellow;
-}
-.input{
-    background-color: darkseagreen;
+::placeholder{
+    color:rgb(232, 236, 241);
+    opacity: .5;
 }
