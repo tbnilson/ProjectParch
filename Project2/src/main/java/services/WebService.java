@@ -519,4 +519,97 @@ public class WebService {
 		pr.append(b ? "true" : "false").close();
 	}
 
+	public static void banUser(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int roomID;
+		PrintWriter pr;
+
+		try {
+			pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		
+		String adminname = request.getParameter("admin");
+		String bannedusername = request.getParameter("banneduser");
+		
+		boolean b = MainService.banUser(roomID, adminname, bannedusername);
+		pr.append(b ? "true" : "false").close();
+	}
+
+	public static void unBanUser(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int roomID;
+		PrintWriter pr;
+
+		try {
+			pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+
+		String adminname = request.getParameter("admin");
+		String bannedusername = request.getParameter("banneduser");
+
+		boolean b = MainService.unBanUser(roomID, adminname, bannedusername);
+		pr.append(b ? "true" : "false").close();
+	}
+
+	
+	public static void getBannedUsers(HttpServletRequest request, HttpServletResponse response) {
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		
+		List<Permission> perms = MainService.getRoomPerms(roomID);
+		List<ParchUser> users = new ArrayList<ParchUser>();
+		for (Permission p : perms) {
+			if (p.getPermissions().equals("banned")) {
+				users.add(p.getUser());
+			}
+		}
+		
+		String jsonarray = MainService.toJsonArray(users);
+		pr.append(jsonarray).close();
+	}
+
+	
 }

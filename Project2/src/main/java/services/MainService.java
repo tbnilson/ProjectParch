@@ -174,6 +174,28 @@ public class MainService {
 			return false;
 		}
 	}
+
+	public static boolean banUser(int roomID, String adminname, String bannedusername) {
+		Permission adminperm = permd.getPermission(adminname, roomID);
+		Permission banneduserperm = permd.getPermission(bannedusername, roomID);
+		if (banneduserperm!=null && banneduserperm.getPermissions().equals("banned")) {return true;}
+		if (adminperm!=null && adminperm.getPermissions().equals("admin")) {
+			return permd.setPermission(bannedusername, roomID, "banned")!=null;
+		} else {
+			return false;
+		}
+	}
+
+	public static boolean unBanUser(int roomID, String adminname, String bannedusername) {
+		Permission adminperm = permd.getPermission(adminname, roomID);
+		Permission banneduserperm = permd.getPermission(bannedusername, roomID);
+		if (banneduserperm!=null && !banneduserperm.getPermissions().equals("banned")) {return true;}
+		if (adminperm!=null && adminperm.getPermissions().equals("admin")) {
+			return permd.setPermission(bannedusername, roomID, "invited")!=null;
+		} else {
+			return false;
+		}
+	}
 	
 
 }

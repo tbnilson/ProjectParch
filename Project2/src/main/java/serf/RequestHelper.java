@@ -84,6 +84,18 @@ public class RequestHelper {
 			WebService.deleteRoom(request, response);
 			break;
 		}
+		case "/Project2/banUser.do":{
+			WebService.banUser(request, response);
+			break;
+		}
+		case "/Project2/unBanUser.do":{
+			WebService.unBanUser(request, response);
+			break;
+		}
+		case "/Project2/getBannedUsers.do":{
+			WebService.getBannedUsers(request, response);
+			break;
+		}
 		case "/Project2/populate.do":{
 			Playground.populateTestDB();
 			Playground.postMessages();
