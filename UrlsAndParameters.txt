@@ -1,0 +1,78 @@
+getUser.do
+    Parameters
+        username: the username of the user you want
+    Response: a json representing the specified user
+
+getRoomUsers.do
+    Parameters
+        roomID: the id of the room you want
+    Response: A json array of all users that are admins, moderators, or users of a room.
+
+getUserRooms.do
+    Parameters
+        username: the username of the user you want
+    Response: A json array of all rooms where the specified user is an admin, moderator, or user.
+
+login.do
+    Parameters
+        username: 
+        password: 
+    Response: "true" if valid username/password, "false" otherwise
+
+postMessage.do
+    Parameters
+        username:
+        roomID:
+        message: The URI encoded message the user wants to post
+    Response: A json string representing the newly created Post object, or an error message.
+
+editMessage.do
+    Parameters
+        username:
+        postID:
+        message: the new message
+    Response: "true" if the post was successfully edited, "false" otherwise. Can only edit a post if you are the user who made the post, or have admin permissions in the room.
+
+deleteMessage.do
+    Parameters
+        username:
+        postID:
+    Response: "true" if the post was successfully deleted, "false" otherwise. Can only delete a post if you are the user who made the post, or have admin permissions in the room.
+
+registerUser.do
+    Parameters
+        username:
+        password:
+        email:
+    Response: "true" if user was successfully created, "false" otherwise.
+
+createRoom.do
+    Parameters
+        username:
+        roomname: The URI encoded name of the new room
+    Response: A json string representing the newly created room, or "false" otherwise.
+
+getNewMessages.do
+    Parameters
+        postID:
+    Response: a json array representing all posts created after postID in the same room, or an error message otherwise.
+
+getMessagesBefore.do
+    Parameters
+        start:
+        num:
+        roomID:
+    Response: a json array of posts in the specified room. start specifies the number of the first post to be displayed, and num is the number of posts in the array. ***Kind of confusing, may need to rewrite this explanation***
+
+inviteUser.do
+    Parameters
+        roomID:
+        inviter:
+        invitee:
+    Response: "true" if the invitee was successfully given "invited" permissions to roomID, "false otherwise. Will return "false" if invitee already has permissions in roomID.
+
+acceptInvite.do
+    Parameters
+        roomID:
+        username:
+    Response: "true" if the user's permissions in roomID were successfully changed to "user", "false" otherwise.

@@ -51,7 +51,7 @@ public class WebService {
 		if (room!=null) {
 			pr.append(room.toJsonString()).close();
 		} else {
-			
+			pr.append("false").close();
 		}
 	}
 
