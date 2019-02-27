@@ -114,8 +114,21 @@ export class BoardComponent implements OnInit {
     this.update();
   }
 
-  addBoard() : void {
+  showCreateBoard() : void {
+    
+    if (document.getElementById("createBoard").getAttribute("style") == "display: inline-block") {
+      document.getElementById("createBoard").setAttribute("style", "display: none");
+    }
+    else {
+      console.log("test");
+      document.getElementById("createBoard").setAttribute("style", "display: inline-block");
+    }
+  }
 
+  createBoard() : void {
+    //do database things
+    this.showCreateBoard();
+    this.update();
   }
 
   acceptInvitation(invite : Permission) : void {

@@ -19,14 +19,15 @@
 </div>
 <div class="PostBottomless">
   <div>
-    <button class="Interaction">Add New</button>
-    <div style= "display: none">
+    <button class="Interaction" (click) = "showCreateBoard()">Add New</button>
+    <br/>
+    <div id="createBoard" style= "display: none">
       <div style="display: inline-block">
         <input class="Interaction" [(ngModel)] = "newBoardText" style = "max-width: 500px;
-          min-width: 100px" disabled = "true"/>
+          min-width: 100px"/>
       </div>
       <div style="display: inline-block">
-        <button class="Interaction" (click) = "createBoard()" disabled = "true">Create Post</button>
+        <button class="Interaction" (click) = "createBoard()">Create Post</button>
       </div>
     </div>
   </div>
