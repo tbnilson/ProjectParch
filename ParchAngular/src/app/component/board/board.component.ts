@@ -33,10 +33,17 @@ export class BoardComponent implements OnInit {
      private usern: UsernameService) {
     this.update();
 
-    //get username and user boards
-    
+    //get username
     let cuno : Observable<String> = uServ.currentUsername;
+    cuno.subscribe( (response) => {
+      this.user = response;
+    },
+    (response) => {
+      this.user = response;
+    }
+    );
 
+    //get user boards
 
   }
 
@@ -104,7 +111,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  createInvite() : void {
+  changePermission() : void {
     //create invite
   }
 
