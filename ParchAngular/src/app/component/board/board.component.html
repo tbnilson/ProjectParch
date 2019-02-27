@@ -20,18 +20,18 @@
     </div>
     <!-- Invite Creator -->
     <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
-      <select>
+      <select class="Interaction">
         <option *ngFor = "let selectedUserBoard of selectedUserBoards">
           {{selectedUserBoard.name}}
         </option>
       </select>
-      <select>
+      <select class="Interaction">
           <option *ngFor = "let user of users">
-            {{user.name}}
+            {{user}}
           </option>
       </select>
       <!-- Certain options would only be available to users with certain permissions. -->
-      <select>
+      <select class="Interaction">
           <option>User</option>
           <option>Mod</option>
           <option>Remove Mod</option>
@@ -39,11 +39,11 @@
       </select>
       <br/>
       <span id="permissionError"></span>
-      <button (click) = "changePermission()">Send Invite</button>
+      <button class="Interaction" (click) = "changePermission()">Send</button>
     </div>
   </div>
   <div class = "NavBar">
-    <span>{{selectedUser.name}}</span>
+    <span>{{user}}</span>
     <a routerLink="/login" style = "font-size: 12px" >Log Out</a>
   </div>
 </div>
