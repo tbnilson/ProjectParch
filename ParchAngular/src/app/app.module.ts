@@ -11,13 +11,15 @@ import { LoginServiceService } from './services/login-service.service';
 import { PostingService } from './services/posting.service';
 import { UsernameService } from './services/username.service';
 import { BoardComponent } from './component/board/board.component';
+import { ParchSnackbarComponent } from './component/parch-snackbar/parch-snackbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    BoardComponent
+    BoardComponent,
+    ParchSnackbarComponent
   ],
   imports: [
     BrowserModule,
