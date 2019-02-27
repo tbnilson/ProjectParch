@@ -2,14 +2,37 @@
 <div class="Post">
   <div class = "NavBar">{{selectedBoard.name}}</div>
   <div class = "NavBar">
-    <div (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">Invites</div>
-    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;" 
-      (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">
+    <div >
+      <span>Invites</span>
+      <span (click) = "showInvites()"style="font-size: 12px">
+        Received
+      </span>
+      <span (click) = "showInviteCreator()"style="font-size: 12px">
+        Send
+      </span>
+    </div>
+    <!-- Invitation Viewer -->
+    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;">
       <div *ngFor = "let invite of invites">
         <span>{{invite.board.name}}</span>
         <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
         <button class="Interaction" (click) = rejectInvitation(invite)>Reject</button>
       </div>
+    </div>
+    <!-- Invite Creator -->
+    <div class="InteractionBordered" id = "inviteCreator" style = "z-index: 2; display: none">
+      <select>
+        <option *ngFor = "let selectedUserBoard of selectedUserBoards">
+          {{selectedUserBoard.name}}
+        </option>
+      </select>
+      <select>
+          <option *ngFor = "let user of users">
+            {{user.name}}
+          </option>
+      </select>
+      <br/>
+      <button (click) = "createInvite()">Send Invite</button>
     </div>
   </div>
   <div class = "NavBar">

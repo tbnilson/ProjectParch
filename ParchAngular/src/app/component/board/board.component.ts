@@ -19,6 +19,7 @@ export class BoardComponent implements OnInit {
   selectedUserBoards : Board[] = [];
   selectedUser : User;
   selectedPosts : Post[] = [];
+  users : User[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
   newBoardText : String = "";
@@ -36,6 +37,7 @@ export class BoardComponent implements OnInit {
     else {
       this.confirmUser();
     }
+    this.users = FakeDatabase.users;
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
     this.update();
@@ -135,7 +137,7 @@ export class BoardComponent implements OnInit {
     invite.type = "user";
     this.update();
     if (this.invites.length == 0) {
-      this.hideInvites();
+      this.showInvites();
     }
   }
 
@@ -143,20 +145,33 @@ export class BoardComponent implements OnInit {
     FakeDatabase.deletePermission(invite);
     this.update();
     if (this.invites.length == 0) {
-      this.hideInvites();
+      this.showInvites();
     }
   }
 
   showInvites() : void {
-    if (this.invites.length != 0) {
-      let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
-      inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 40px");
+    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
+    if (inviteDiv.getAttribute("style") == "z-index: 1; display: block; position: absolute; top: 60px") {
+      inviteDiv.setAttribute("style", "z-index: 1; display: none");
+    }
+    else if (this.invites.length != 0) {
+      inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px");
     }
   }
 
-  hideInvites() : void {
-    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("invites");
-    inviteDiv.setAttribute("style", "z-index: 1; display: none");
+  createInvite() : void {
+    
+  }
+
+  showInviteCreator() : void {
+    let inviteDiv : HTMLDivElement = <HTMLDivElement> document.getElementById("inviteCreator");
+    if (inviteDiv.getAttribute("style") == 
+    "z-index: 1; display: block; position: absolute; top: 60px; left: 300px") {
+      inviteDiv.setAttribute("style", "z-index: 1; display: none");
+    }
+    else {
+      inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");
+    }
   }
 
   ngOnInit() {

@@ -32,10 +32,10 @@ div.NavBar {
     font-size: 16px;
     display: block;
     border: solid black;
-    border-width: 5px 5px 5px 5px;
+    border-width: 3px;
     background: rgb(200, 200, 255);
     outline: solid 10px rgba(100, 100, 150, 0.8);
-    padding: 5px;
+    padding: 10px;
     
 }
 
