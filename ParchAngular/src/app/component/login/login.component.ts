@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { UsernameService } from 'src/app/services/username.service';
 
 
 
@@ -13,9 +15,10 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private logserv:LoginServiceService) { }
+  constructor(private logserv:LoginServiceService, private router : Router, private usern: UsernameService) { }
 
   ngOnInit() {
+    this.usern.currentUsername.subscribe(user => this.username = user)
   }
   
   username:string;
@@ -25,6 +28,9 @@ export class LoginComponent implements OnInit {
 
  answer:string;
  
+setUsername(){
+  this.usern.changeUsername(this.username);
+}
  
  
 Login(){
@@ -34,7 +40,9 @@ Login(){
     (response)=>{
       console.log(response);
       if(response){
-        this.answer = "Successful login";
+        this.setUsername();
+        this.answer = "Successful login"
+        this.router.navigateByUrl("board");
       }
       else{
         this.answer = "Invalid login";

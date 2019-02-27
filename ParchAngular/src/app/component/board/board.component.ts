@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FakeDatabase, User, Permission } from '../FakeDatabase/FakeDatabase';
 import { Board } from '../FakeDatabase/FakeDatabase';
 import { Post } from '../FakeDatabase/FakeDatabase';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { UsernameService } from 'src/app/services/username.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -11,23 +15,63 @@ import { Post } from '../FakeDatabase/FakeDatabase';
 
 
 export class BoardComponent implements OnInit {
-
-  
   selectedBoard : Board = null;
   selectedUserBoards : Board[] = [];
   selectedUser : User;
   selectedPosts : Post[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
+  newBoardText : String = "";
   newPostText : String = "";
+  testing : boolean = true;   //set if real database is not attached
 
-  constructor(/*selectedUser : user*/) { 
-    
-    FakeDatabase.generateDatabase();
-    this.selectedUser = FakeDatabase.getUser("User0");
+  username : string;
+  password : string;
+
+  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService, private usern: UsernameService) { 
+    if (this.testing) {
+      FakeDatabase.generateDatabase();
+      this.selectedUser = FakeDatabase.users[0];
+    }
+    else {
+      this.confirmUser();
+    }
     this.selectedBoard = FakeDatabase.getBoard("Select Board");
     this.invites = FakeDatabase.getInvitesOfUser(this.selectedUser);
     this.update();
+  }
+
+  confirmUser() : void {
+    this.username = this.password = null;
+
+    try {
+      this.username = this.router.url.split("?")[1].split("&")[0].split("=")[1];
+      this.password = this.router.url.split("?")[1].split("&")[1].split("=")[1];
+      let loggedIn : Observable<Boolean> = this.logserv.login(this.username, this.password);
+      loggedIn.subscribe(
+        (response)=>{
+          console.log(response);
+          if(!response){
+            this.router.navigateByUrl("login");
+          }
+        }
+        ,
+        (response)=>{
+          console.log(response);
+          this.router.navigateByUrl("login");
+        }
+      );
+      
+    }
+    catch (e) {
+
+    }
+    if (this.username == null) {
+      this.router.navigateByUrl("login");
+    }
+    else {
+      this.selectedUser = new User(this.username, this.password);
+    }
   }
 
   createPost() : void {
@@ -70,6 +114,10 @@ export class BoardComponent implements OnInit {
     this.update();
   }
 
+  addBoard() : void {
+
+  }
+
   acceptInvitation(invite : Permission) : void {
     invite.type = "user";
     this.update();
@@ -99,7 +147,9 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.usern.currentUsername.subscribe(user => this.username = user)
+    console.log(this.username);
+    
   }
 
 }

@@ -1,20 +1,35 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <div class="Post">
+  <div class = "NavBar">{{selectedBoard.name}}</div>
   <div class = "NavBar">
     <div (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">Invites</div>
     <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;" 
       (mouseover) = "showInvites()" (mouseleave) = "hideInvites()">
       <div *ngFor = "let invite of invites">
         <span>{{invite.board.name}}</span>
-        <button (click) = acceptInvitation(invite)>Accept</button>
-        <button (click) = rejectInvitation(invite)>Reject</button>
+        <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
+        <button class="Interaction" (click) = rejectInvitation(invite)>Reject</button>
       </div>
     </div>
   </div>
-  <div class = "NavBar">{{selectedUser.name}}</div>
-  <div class = "NavBar">{{selectedBoard.name}}</div>
+  <div class = "NavBar">
+    <span>{{selectedUser.name}}</span>
+    <a routerLink="/login" style = "font-size: 12px" >Log Out</a>
+  </div>
 </div>
-<div class="NewPost">
+<div class="PostBottomless">
+  <div>
+    <button class="Interaction">Add New</button>
+    <div style= "display: none">
+      <div style="display: inline-block">
+        <input class="Interaction" [(ngModel)] = "newBoardText" style = "max-width: 500px;
+          min-width: 100px" disabled = "true"/>
+      </div>
+      <div style="display: inline-block">
+        <button class="Interaction" (click) = "createBoard()" disabled = "true">Create Post</button>
+      </div>
+    </div>
+  </div>
   <div style="display: inline-block">
     <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
       (click) = selectBoard(selectedUserBoard.name)>
@@ -25,12 +40,12 @@
     <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
       {{post.user.name + " " + post.text}}
     </div>
-    <div>
-      <div style="display: inline">
+    <div class="Post">
+      <div style="display: inline-block">
         <input class="Interaction" id="postText" [(ngModel)] = "newPostText" style = "width: 90%; 
           max-width: 500px; min-width: 100px" disabled = "true"/>
       </div>
-      <div style="display: inline">
+      <div style="display: inline-block">
           <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">Create Post</button>
       </div>
     </div>
