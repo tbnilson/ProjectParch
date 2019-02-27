@@ -5,7 +5,8 @@ import { BoardComponent } from './component/board/board.component';
 
 const routes: Routes = [
   {path : 'login', component : LoginComponent},
-  {path : 'board', component : BoardComponent}
+  {path : 'board', component : BoardComponent},
+  {path : '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({

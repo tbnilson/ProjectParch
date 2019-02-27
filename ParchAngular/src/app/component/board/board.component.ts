@@ -4,6 +4,7 @@ import { Board } from '../FakeDatabase/FakeDatabase';
 import { Post } from '../FakeDatabase/FakeDatabase';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
+import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -27,7 +28,7 @@ export class BoardComponent implements OnInit {
   username : string;
   password : string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService, private usern: UsernameService) { 
     if (this.testing) {
       FakeDatabase.generateDatabase();
       this.selectedUser = FakeDatabase.users[0];
@@ -146,6 +147,8 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.usern.currentUsername.subscribe(user => this.username = user)
+    console.log(this.username);
     
   }
 
