@@ -18,7 +18,7 @@ import { Permission } from 'src/app/models/Permission';
 export class BoardComponent implements OnInit {
   selectedBoard : Board = null;
   selectedUserBoards : Board[] = [];
-  selectedUser : User;
+  user : String;
   selectedPosts : Post[] = [];
   users : User[] = [];
   posts : Post[] = [];
@@ -29,58 +29,35 @@ export class BoardComponent implements OnInit {
   username : string;
   password : string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService,
+  constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
      private usern: UsernameService) {
     this.update();
-  }
 
-  confirmUser() : void {
-    this.username = this.password = null;
+    //get username and user boards
+    
+    let cuno : Observable<String> = uServ.currentUsername;
 
-    try {
-      this.username = this.router.url.split("?")[1].split("&")[0].split("=")[1];
-      this.password = this.router.url.split("?")[1].split("&")[1].split("=")[1];
-      let loggedIn : Observable<Boolean> = this.logserv.login(this.username, this.password);
-      loggedIn.subscribe(
-        (response)=>{
-          console.log(response);
-          if(!response){
-            this.router.navigateByUrl("login");
-          }
-        }
-        ,
-        (response)=>{
-          console.log(response);
-          this.router.navigateByUrl("login");
-        }
-      );
-      
-    }
-    catch (e) {
 
-    }
-    if (this.username == null) {
-      this.router.navigateByUrl("login");
-    }
-    else {
-      this.selectedUser = new User(this.username, this.password);
-    }
   }
 
   createPost() : void {
+    
+    //create post
+
     this.update();
   }
 
   deletePost(id : Number) : void {
+    //delete post
     this.update();
   }
 
   update() : void{
-
+    //update boardlist, invites, posts
   }
 
   selectBoard(boardText : String) {
-    
+    //change selected board
     this.update();
   }
 
@@ -96,7 +73,7 @@ export class BoardComponent implements OnInit {
   }
 
   createBoard() : void {
-    //do database things
+    //create board
     this.showCreateBoard();
     this.update();
   }
@@ -128,7 +105,7 @@ export class BoardComponent implements OnInit {
   }
 
   createInvite() : void {
-    
+    //create invite
   }
 
   showInviteCreator() : void {
