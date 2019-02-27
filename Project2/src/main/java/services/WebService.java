@@ -76,9 +76,27 @@ public class WebService {
 			return;
 		}
 		
+		//This is where we'll verify that the inputs are valid, and able to be put in the database
+		if (username==null) {
+			pr.append( "Cannot Have Empty Username").close();
+			return;
+		}
+		if (!username.matches("\\A[A-Za-z0-9]{6,}\\Z")) {
+			pr.append( "Username must be at least 6 characters, and contain only letters and numbers").close();
+			return;
+		}
+		if (password==null) {
+			pr.append( "Cannot Have Empty Password").close();
+			return;
+		}
+		if (!password.matches("\\A[A-Za-z0-9]{6,}\\Z")) {
+			pr.append( "Password must be at least 6 characters, and contain only letters and numbers").close();
+			return;
+		}
+		
 		boolean b = MainService.addUser(username, password, email);
 		
-		pr.append(b ? "true" : "false").close();
+		pr.append(b ? "true" : "Error registering new user").close();
 	}
 
 	/**
