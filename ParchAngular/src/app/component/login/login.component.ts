@@ -18,7 +18,7 @@ import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.compone
 export class LoginComponent implements OnInit {
 
   constructor(private logserv: LoginServiceService, private router: Router, private usern: UsernameService, private snackBar: MatSnackBar ) {
-    console.log("here");
+
   }
 
   ngOnInit() {
@@ -50,6 +50,12 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.answer = "Invalid login";
+          this.snackBar.openFromComponent( ParchSnackbarComponent, {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            data: {message: "That was not a valid login"}
+          })
         }
 
       }
@@ -58,7 +64,13 @@ export class LoginComponent implements OnInit {
       (response) => {
         console.log(response);
         this.answer = "Fail";
-
+        this.answer = "Invalid login";
+          this.snackBar.openFromComponent( ParchSnackbarComponent, {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            data: {message: "Something went wrong with the login feature"}
+          })
       }
 
     );
@@ -76,21 +88,34 @@ export class LoginComponent implements OnInit {
       (response) => {
         console.log(response);
         if (response) {
-          this.answer = "You successfully registered";
+          // this.answer = "You successfully registered";
           this.snackBar.openFromComponent( ParchSnackbarComponent, {
             duration: 3000,
             verticalPosition: 'top',
+            horizontalPosition: 'center',
             data: {message: "You successfully registered your account!"}
           })
         }
         else {
-          this.answer = "Unsuccessful login";
+          this.snackBar.openFromComponent( ParchSnackbarComponent, {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            data: {message: "Something went wrong with registration"}
+          })
         }
       }
       ,
       (response) => {
-        console.log(response);
-        this.answer = "Fail";
+        console.log(response.error.text);
+        
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
+          data: {message: response.error.text},
+          panelClass: 'parch-snackbar-container'
+        })
       }
     );
 
