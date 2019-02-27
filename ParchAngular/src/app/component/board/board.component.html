@@ -3,12 +3,12 @@
   <div class = "NavBar">{{selectedBoard.name}}</div>
   <div class = "NavBar">
     <div >
-      <span>Invites</span>
+      <span>Permissions</span>
       <span (click) = "showInvites()"style="font-size: 12px">
-        Received
+        Invitations
       </span>
       <span (click) = "showInviteCreator()"style="font-size: 12px">
-        Send
+        Change
       </span>
     </div>
     <!-- Invitation Viewer -->
@@ -31,8 +31,16 @@
             {{user.name}}
           </option>
       </select>
+      <!-- Certain options would only be available to users with certain permissions. -->
+      <select>
+          <option>User</option>
+          <option>Mod</option>
+          <option>Remove Mod</option>
+          <option>Ban</option>
+      </select>
       <br/>
-      <button (click) = "createInvite()">Send Invite</button>
+      <span id="permissionError"></span>
+      <button (click) = "changePermission()">Send Invite</button>
     </div>
   </div>
   <div class = "NavBar">
@@ -62,7 +70,8 @@
   </div>
   <div style="display: inline-block">
     <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
-      {{post.user.name + " " + post.text}}
+      <span>{{post.user.name + " " + post.text}}</span>
+      <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.id)"></button>
     </div>
     <div class="Post">
       <div style="display: inline-block">
