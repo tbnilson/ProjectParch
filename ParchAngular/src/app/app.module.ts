@@ -12,6 +12,8 @@ import { PostingService } from './services/posting.service';
 import { UsernameService } from './services/username.service';
 import { BoardComponent } from './component/board/board.component';
 import { ParchSnackbarComponent } from './component/parch-snackbar/parch-snackbar.component';
+import { MatSnackBarModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -23,11 +25,14 @@ import { ParchSnackbarComponent } from './component/parch-snackbar/parch-snackba
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [LoginServiceService, UsernameService, PostingService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ParchSnackbarComponent]
 })
 export class AppModule { }
