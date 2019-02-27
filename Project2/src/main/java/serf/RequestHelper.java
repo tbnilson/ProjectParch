@@ -76,6 +76,14 @@ public class RequestHelper {
 			WebService.acceptInvite(request, response);
 			break;
 		}
+		case "/Project2/makeModerator.do":{
+			WebService.makeModerator(request, response);
+			break;
+		}
+		case "/Project2/deleteRoom.do":{
+			WebService.deleteRoom(request, response);
+			break;
+		}
 		case "/Project2/populate.do":{
 			Playground.populateTestDB();
 			Playground.postMessages();

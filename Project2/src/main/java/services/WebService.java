@@ -51,7 +51,7 @@ public class WebService {
 		if (room!=null) {
 			pr.append(room.toJsonString()).close();
 		} else {
-			
+			pr.append("false").close();
 		}
 	}
 
@@ -465,6 +465,58 @@ public class WebService {
 		} else {
 			pr.append("Error: roomID is invalid, start is too high, or something went wrong");
 		}
+	}
+
+	public static void makeModerator(HttpServletRequest request, HttpServletResponse response) {
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		String adminname = request.getParameter("admin");
+		String username = request.getParameter("user");
+		boolean b = MainService.makeModerator(roomID, adminname, username);
+		pr.append(b ? "true" : "false").close();
+	}
+
+	public static void deleteRoom(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		String adminname = request.getParameter("admin");
+		boolean b = MainService.deleteRoom(roomID,adminname);
+		pr.append(b ? "true" : "false").close();
 	}
 
 }

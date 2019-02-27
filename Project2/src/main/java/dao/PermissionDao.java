@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import model.ParchUser;
@@ -147,6 +148,39 @@ public class PermissionDao implements IPermission {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean deleteRoomPerms(int roomID) {
+
+		try {
+			Session sess = sf.openSession();
+			Transaction transaction = sess.beginTransaction();
+			try {
+				
+				
+				// your code
+				String hql = "delete from Permission where roomID=?";
+				Query query = sess.createQuery(hql);
+				query.setParameter(0, roomID);
+				System.out.println(query.executeUpdate());
+				// your code end
+
+				transaction.commit();
+				sess.close();
+				return true;
+			} catch (Throwable t) {
+				transaction.rollback();
+				throw t;
+			}
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

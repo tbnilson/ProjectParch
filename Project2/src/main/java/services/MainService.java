@@ -103,7 +103,7 @@ public class MainService {
 		Permission perm = permd.getPermission(username, roomID);
 		
 		//Check if the editor is the one who made the post, or an admin:
-		if (postowner.equals(username) || perm.getPermissions().equals("admin")) {
+		if (postowner.equals(username) || perm.getPermissions().equals("admin") || perm.getPermissions().equals("moderator")) {
 			return postd.editPost(postID, message);
 		} else {
 			return false;
@@ -118,7 +118,7 @@ public class MainService {
 		Permission perm = permd.getPermission(username, roomID);
 		
 		//Check if the editor is the one who made the post, or an admin:
-		if (postowner.equals(username) || perm.getPermissions().equals("admin")) {
+		if (postowner.equals(username) || perm.getPermissions().equals("admin") || perm.getPermissions().equals("moderator")) {
 			return postd.deletePost(postID);
 		} else {
 			return false;
@@ -133,7 +133,7 @@ public class MainService {
 		if (ud.userExists(invitee) && 
 				ud.userExists(inviter) && 
 				perm!=null && 
-				perm.getPermissions().equals("admin")) {
+				(perm.getPermissions().equals("admin") || perm.getPermissions().equals("moderator"))) {
 			return permd.inviteUser(roomID, invitee);
 		} else {
 			return false;
@@ -151,6 +151,28 @@ public class MainService {
 
 	public static List<Post> getRoomMessages(int roomID, int startnum, int endnum) {
 		return postd.getRoomPosts(roomID,startnum,endnum);
+	}
+
+	public static boolean makeModerator(int roomID, String adminname, String username) {
+		Permission adminperm = permd.getPermission(adminname, roomID);
+		Permission userperm = permd.getPermission(username, roomID);
+		
+		if (userperm==null) {return false;}
+		if (adminperm == null) {return false;}
+		if (!adminperm.getPermissions().equals("admin")) {return false;}
+		if (!userperm.getPermissions().equals("user")) {return false;}
+		
+		return permd.setPermission(username, roomID, "moderator")!=null;
+		
+	}
+
+	public static boolean deleteRoom(int roomID, String adminname) {
+		Permission adminperm = permd.getPermission(adminname, roomID);
+		if (adminperm!=null && adminperm.getPermissions().equals("admin")) {
+			return rd.deleteRoom(roomID);
+		} else {
+			return false;
+		}
 	}
 	
 
