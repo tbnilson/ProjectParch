@@ -149,6 +149,9 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.usern.currentUsername.subscribe(user => this.username = user)
     console.log(this.username);
+    if(this.username == ""){
+      this.router.navigateByUrl("login");
+    }
     
   }
 
