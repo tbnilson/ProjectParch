@@ -18,10 +18,24 @@ export class PostingService {
     })
   };
 
+  //gets an array of the lates posts in a room, starting at "start" (which is zero indexed at the most recent post)
   getRecentMessages(roomID:number, start:number, numposts:number):Observable<Array<Post>>{
     return this.http.get<Array<Post>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getMessagesBefore.do?" + 
     "roomID=" + roomID +
-    "")
+    "&start=" + start + 
+    "&num=" + numposts);
+  }
+
+  getUserMessages(username:string):Observable<Array<Post>> {
+    return null;
+  }
+
+  editMessage(postID:number, editor:string, newmessage:string):Observable<boolean>{
+    return null;
+  }
+
+  deleteMessage(postID:number, editor:string):Observable<boolean>{
+    return null;
   }
 
 }
