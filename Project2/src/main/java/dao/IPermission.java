@@ -39,4 +39,5 @@ public interface IPermission {
 	 * the two, then will return false. 
 	 */
 	public boolean inviteUser(int roomID, String username);
+	public boolean deleteRoomPerms(int roomID);
 }

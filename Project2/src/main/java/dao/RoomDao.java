@@ -18,6 +18,7 @@ public class RoomDao implements IRoom {
 	
 	private static SessionFactory sf = HibernateUtil.getSessionFactory();
 	private static UserDao ud = new UserDao();
+	private static IPermission permd = new PermissionDao();
 
 	@Override
 	public Room makeRoom(String roomname, String username) {
@@ -96,5 +97,12 @@ public class RoomDao implements IRoom {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public boolean deleteRoom(int roomID) {
+		// THis won't actually delete the room from the database, just delete the permissions related to that room.
+		if (getRoom(roomID)==null) {return false;}
+		return permd.deleteRoomPerms(roomID);
 	}
 }

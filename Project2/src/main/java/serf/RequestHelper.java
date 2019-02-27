@@ -80,6 +80,10 @@ public class RequestHelper {
 			WebService.makeModerator(request, response);
 			break;
 		}
+		case "/Project2/deleteRoom.do":{
+			WebService.deleteRoom(request, response);
+			break;
+		}
 		case "/Project2/populate.do":{
 			Playground.populateTestDB();
 			Playground.postMessages();
