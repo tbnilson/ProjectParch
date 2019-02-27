@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { LoginServiceService } from './services/login-service.service';
+import { UsernameService } from './services/username.service';
 import { BoardComponent } from './component/board/board.component';
 
 
@@ -22,7 +24,7 @@ import { BoardComponent } from './component/board/board.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [LoginServiceService],
+  providers: [LoginServiceService, UsernameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
