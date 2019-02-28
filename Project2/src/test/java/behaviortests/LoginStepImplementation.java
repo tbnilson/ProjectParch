@@ -3,11 +3,13 @@ package behaviortests;
 import java.io.File;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.BoardMain;
 import pages.ParchMain;
 
 
@@ -53,6 +55,7 @@ public class LoginStepImplementation {
 	@Then("^: The User \"([^\"]*)\" logs in$")
 	public void the_User_logs_in(String arg1) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
+		WebElement usernamedisplay = BoardMain.getUserDisplay();
 	}
 
 	@Given("^: The User types in \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" in register field$")
