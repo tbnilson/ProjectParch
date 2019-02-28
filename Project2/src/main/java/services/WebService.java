@@ -653,5 +653,26 @@ public class WebService {
 		pr.append(jsonarray).close();
 	}
 
+	public static void getInvites(HttpServletRequest request, HttpServletResponse response) {
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		String username = request.getParameter("username");
+		List<Permission> perms = MainService.getUserPerms(username);
+		for (int i = 0; i < perms.size(); i++) {
+			if (!perms.get(i).getPermissions().equals("invited")) {
+				perms.remove(i);
+			}
+		}
+		String jsonarray = MainService.toJsonArray(perms);
+		pr.append(jsonarray).close();
+	}
+
 	
 }

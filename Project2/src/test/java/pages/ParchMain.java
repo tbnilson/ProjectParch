@@ -39,5 +39,9 @@ public class ParchMain {
 	public WebElement getRegisterEmail() {
 		return driver.findElement(By.name("Email"));
 	}
+	
+	public WebElement getSnackbar() {
+		return driver.findElement(By.id("parchSnackbarElem"));
+	}
 
 }

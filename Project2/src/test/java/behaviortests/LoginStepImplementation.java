@@ -84,6 +84,8 @@ public class LoginStepImplementation {
 	public void the_User_registers(String username, String successString) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 		System.out.println("Register: " + username + " : " + successString);
+		WebElement snackbar = parchmain.getSnackbar();
+		System.out.println(snackbar.getText());
 	}
 
 }

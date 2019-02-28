@@ -80,6 +80,10 @@ public class RequestHelper {
 			WebService.rejectInvite(request, response);
 			break;
 		}
+		case "/Project2/getInvites.do":{
+			WebService.getInvites(request, response);
+			break;
+		}
 		case "/Project2/makeModerator.do":{
 			WebService.makeModerator(request, response);
 			break;

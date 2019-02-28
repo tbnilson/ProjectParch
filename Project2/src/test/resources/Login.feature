@@ -25,3 +25,5 @@ Feature: User Login
       | username | password | action          | status         | email              |
       | Admin    | admin    | clicks register | unsuccessfully |            1231231 |
       | name2    | test     | presses enter   | successfully   | asdadsad@gmail.com |
+      | test2    | testpass | clicks register | unsuccessfully |            1231231 |
+      | name2    | test     | presses enter   | successfully   | asdadsad@gmail.com |
