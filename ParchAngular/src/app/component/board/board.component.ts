@@ -170,12 +170,42 @@ export class BoardComponent implements OnInit {
 
   }
 
-  acceptInvitation(invite : Permission) : void {
+  acceptInvitation(roomID:number, username:string){
+    this.rServ.acceptInvite(roomID, username).subscribe(
+      (response)=>{
+        if(response){
+          this.update();
+        }
+        else{
+          //user is banned
+          
+        }
+      }
+      ,
+      (response)=>{
+        console.log(response);
+
+      }
+    )
     
-    this.update();
-    if (this.invites.length == 0) {
-      this.showInvites();
-    }
+  }
+
+  inviteUser(roomID:number, inviter:string, invitee:string){
+    this.rServ.inviteUser(roomID,inviter,invitee).subscribe(
+      (response)=>{
+        if(response){
+          //true when invite sent successfully
+        }
+        else{
+          //false if the user is already in the room or banned
+        }
+
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
   }
 
   rejectInvitation(invite : Permission) : void {

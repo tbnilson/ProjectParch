@@ -18,6 +18,13 @@ export class PostingService {
     })
   };
 
+  postMessage(username:string, roomID:number, message:string):Observable<Post>{
+    return this.http.post<Post>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/postMessage.do",
+    "username="+username+
+    "&roomID="+roomID+
+    "&message="+message,
+    this.httpOptions);
+  }
   //gets an array of the lates posts in a room, starting at "start" (which is zero indexed at the most recent post)
   getRecentMessages(roomID:number, start:number, numposts:number):Observable<Array<Post>>{
     return this.http.get<Array<Post>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getMessagesBefore.do?" + 
