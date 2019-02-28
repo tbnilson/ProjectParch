@@ -19,11 +19,11 @@ export class RoomServiceService {
     })
 }
 //http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/.do?
-getRoomUsers(roomID:number):Observable<User>{
-  return this.http.get<User>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getRoomUsers.do?roomID=" + roomID);
+getRoomUsers(roomID:number):Observable<Array<User>>{
+  return this.http.get<Array<User>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getRoomUsers.do?roomID=" + roomID);
 }
-getUserRooms(username:string):Observable<Board>{
-  return this.http.get<Board>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getUserRooms.do?username=" + username);
+getUserRooms(username:string):Observable<Array<Board>>{
+  return this.http.get<Array<Board>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getUserRooms.do?username=" + username);
 }
 createRoom(username:string,roomname:string):Observable<Board>{
   return this.http.post<Board>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/createRoom.do","username=" + username + "&roomname=" + roomname,this.httpOptions);
