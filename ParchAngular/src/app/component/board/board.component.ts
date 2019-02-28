@@ -34,10 +34,8 @@ export class BoardComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
-     private usern: UsernameService) {
+    private rServ : RoomServiceService) {
     this.update();
-    this.selectedBoard = new Board("Select Board");
-    this.user = "User";
 
     //get username
     let cuno : Observable<String> = uServ.currentUsername;
@@ -50,7 +48,13 @@ export class BoardComponent implements OnInit {
     );
 
     //get user boards
-
+    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
+      this.selectedUserBoards = response;
+    },
+    (response) => {
+      this.selectedUserBoards = response;
+    }
+    );
   }
 
   createPost() : void {
@@ -67,10 +71,22 @@ export class BoardComponent implements OnInit {
 
   update() : void{
     //update boardlist, invites, posts
+    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
+      this.selectedUserBoards = response;
+    },
+    (response) => {
+      this.selectedUserBoards = response;
+    }
+    );
   }
 
   selectBoard(boardText : String) {
-    //change selected board
+    //select board
+    for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
+      if (this.selectedUserBoards[i].roomname == boardText) {
+        this.selectedBoard = this.selectedUserBoards[i];
+      }
+    }
     this.update();
   }
 
@@ -80,7 +96,6 @@ export class BoardComponent implements OnInit {
       document.getElementById("createBoard").setAttribute("style", "display: none");
     }
     else {
-      console.log("test");
       document.getElementById("createBoard").setAttribute("style", "display: inline-block");
     }
   }
@@ -88,6 +103,14 @@ export class BoardComponent implements OnInit {
 
   createBoard() : void {
     //create board
+    this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
+      this.selectedBoard = response;
+    },
+    (response) => {
+      this.selectedBoard = response;
+    }
+    );
+
     this.showCreateBoard();
     this.update();
 
