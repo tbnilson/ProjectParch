@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
+import { RoomServiceService } from 'src/app/services/room-service.service';
+import { Room } from 'src/app/models/Room';
 
 @Component({
   selector: 'app-board',
@@ -27,8 +29,9 @@ export class BoardComponent implements OnInit {
 
   username : string;
   password : string;
+  roomname : string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService, private usern: UsernameService) { 
+  constructor(private router: Router, private route: ActivatedRoute, private logserv:LoginServiceService, private usern: UsernameService,private roomserv:RoomServiceService) { 
     if (this.testing) {
       FakeDatabase.generateDatabase();
       this.selectedUser = FakeDatabase.users[0];
@@ -115,7 +118,22 @@ export class BoardComponent implements OnInit {
   }
 
   addBoard() : void {
+    let verify:Observable<Room> = this.roomserv.createRoom(this.username, this.roomname);
+  verify.subscribe(
+    (response)=>{
+      console.log(response);
+      if(response){
+        
+      }
+      else{
+        
+      }
+    }
+    ,
+    (response)=>{
 
+    }
+  );
   }
 
   acceptInvitation(invite : Permission) : void {
