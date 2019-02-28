@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
 import { PostingService } from 'src/app/services/posting.service';
+import { RoomServiceService } from 'src/app/services/room-service.service'
 
 
 import { Board } from 'src/app/models/Board';
