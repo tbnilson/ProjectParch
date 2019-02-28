@@ -6,8 +6,8 @@
       <span (click) = "showInvites()">
         Invitations
       </span>
-      <span (click) = "showInviteCreator()">
-        Change
+      <span id = "permissionsShow" (click) = "showInviteCreator()">
+        Permissions
       </span>
     </div>
     <!-- Invitation Viewer -->
@@ -32,10 +32,10 @@
       </select>
       <!-- Certain options would only be available to users with certain permissions. -->
       <select class="Interaction">
-          <option>User</option>
-          <option>Mod</option>
-          <option>Remove Mod</option>
-          <option>Ban</option>
+          <option id = "userOption">User</option>
+          <option id = "modOption">Mod</option>
+          <option id = "removeModOption">Remove Mod</option>
+          <option id = "banOption">Ban</option>
       </select>
       <br/>
       <span id="permissionError"></span>
@@ -59,7 +59,7 @@
           min-width: 100px"/>
       </div>
       <div style="display: inline-block">
-        <button class="Interaction" (click) = "createBoard()">Create Post</button>
+        <button class="Interaction" (click) = "createBoard()">Create Board</button>
       </div>
     </div>
   </div>

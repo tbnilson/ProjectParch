@@ -53,7 +53,7 @@ export class BoardComponent implements OnInit {
     let cuno : Observable<String> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
-      this.update();
+      this.completeSetup();
     },
     (response) => {
       this.router.navigateByUrl("login");
@@ -63,17 +63,39 @@ export class BoardComponent implements OnInit {
     
   }
 
+  completeSetup() : void {
+    let userAdmin : boolean = false;
+    let userMod : boolean = false;
+    let targetAdmin : boolean = false;
+    let targetMod : boolean = false;
+    let targetUser : boolean = false;
+
+    if (!userMod) {
+      document.getElementById("permissionShow").setAttribute("style", "display: none");
+    }
+    // else if (!userAdmin) {
+    //   document.getElementById("modOption").setAttribute("style", "display: none");
+    //   document.getElementById("removeModOption").setAttribute("style", "display: none");
+    // } 
+    
+
+    this.update();
+  }
+
   
   getRecentMessages(roomID:number, start:number, numposts:number){
+    //console.log(roomID, start, numposts);
     let recentMessages: Observable<Array<Post>> = this.pServ.getRecentMessages(roomID,start,numposts);
     recentMessages.subscribe(
       (response)=>{
+        //console.log(response);
         this.posts = response;
 
       }
       ,
       (response)=>{
-        console.log(response);
+        //console.log(response);
+        this.posts = [];
 
       }
     )
@@ -81,7 +103,7 @@ export class BoardComponent implements OnInit {
 
   createPost() : void {
     
-    //create post
+    
 
     this.update();
   }
@@ -130,6 +152,13 @@ export class BoardComponent implements OnInit {
     (response) => {
     }
     );
+
+    if (this.selectedBoard.roomID != -1) {
+      this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
+    }
+
+    
+    
   }
 
   selectBoard(boardText : String) {
@@ -140,6 +169,8 @@ export class BoardComponent implements OnInit {
       }
     }
     this.update();
+    document.getElementById("postText").removeAttribute("disabled");
+    document.getElementById("newPostButton").removeAttribute("disabled");
   }
 
   showCreateBoard() : void {
