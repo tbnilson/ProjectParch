@@ -152,6 +152,18 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  postMessage(username:string,roomID:number,message:string){
+    this.pServ.postMessage(username,roomID,message).subscribe(
+      (response)=>{
+        //response is the post they added to the DB
+        //so you can probably just update the
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
 
   createBoard() : void {
     //create board
