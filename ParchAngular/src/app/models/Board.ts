@@ -1,7 +1,10 @@
 export class Board {
-    name : String;
+    roomID : number;
+    roomname : String;
 
-    constructor(name : String) {
-        this.name = name;
+
+    constructor(roomID:number, roomname:String) {
+        this.roomID = roomID;
+        this.roomname = roomname;
     }
 }
