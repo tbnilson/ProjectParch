@@ -56,8 +56,7 @@ export class BoardComponent implements OnInit {
       this.update();
     },
     (response) => {
-      this.user = response;
-      this.update();
+      this.router.navigateByUrl("login");
     }
     );
 
@@ -87,7 +86,7 @@ export class BoardComponent implements OnInit {
     this.update();
   }
   editPost(id:number,newmessage:string) : void {
-    let editPost: Observable<boolean>=this.pserv.editMessage(id,this.username,newmessage);
+    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.username,newmessage);
     editPost.subscribe(
       (response)=>{
         console.log(response)
@@ -104,7 +103,7 @@ export class BoardComponent implements OnInit {
 }
   deletePost(id : number) : void {
     //delete post
-    let deletePost: Observable<boolean>=this.pserv.deleteMessage(id,this.username);
+    let deletePost: Observable<boolean>=this.pServ.deleteMessage(id,this.username);
     deletePost.subscribe(
       (response)=>{
         console.log(response)
@@ -129,7 +128,6 @@ export class BoardComponent implements OnInit {
       this.selectedUserBoards = response;
     },
     (response) => {
-      console.log("failure");
     }
     );
   }
@@ -159,14 +157,16 @@ export class BoardComponent implements OnInit {
     //create board
     this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
       this.selectedBoard = response;
+      this.update();
     },
     (response) => {
       this.selectedBoard = response;
+      this.update();
     }
     );
 
     this.showCreateBoard();
-    this.update();
+    
 
   }
 
