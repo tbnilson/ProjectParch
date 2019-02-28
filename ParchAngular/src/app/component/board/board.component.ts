@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
+import { RoomServiceService } from 'src/app/services/room-service.service';
+
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
@@ -28,6 +30,8 @@ export class BoardComponent implements OnInit {
 
   username : string;
   password : string;
+  roomname : string;
+
 
   constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
      private usern: UsernameService) {
@@ -79,10 +83,12 @@ export class BoardComponent implements OnInit {
     }
   }
 
+
   createBoard() : void {
     //create board
     this.showCreateBoard();
     this.update();
+
   }
 
   acceptInvitation(invite : Permission) : void {
