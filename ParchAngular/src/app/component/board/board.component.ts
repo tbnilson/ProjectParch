@@ -4,11 +4,14 @@ import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
 import { RoomServiceService } from 'src/app/services/room-service.service';
+import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.component';
+import {MatSnackBar} from '@angular/material';
 
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
 import { Permission } from 'src/app/models/Permission';
+import { PostingService } from 'src/app/services/posting.service';
 
 @Component({
   selector: 'app-board',
@@ -34,9 +37,9 @@ export class BoardComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
-     private usern: UsernameService) {
+     private usern: UsernameService, private pserv:PostingService, private snackBar: MatSnackBar) {
     this.update();
-    this.selectedBoard = new Board("Select Board");
+    
     this.user = "User";
 
     //get username
@@ -59,10 +62,41 @@ export class BoardComponent implements OnInit {
 
     this.update();
   }
-
-  deletePost(id : Number) : void {
+  editPost(id:number,newmessage:string) : void {
+    let editPost: Observable<boolean>=this.pserv.editMessage(id,this.username,newmessage);
+    editPost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          data: {message: "The post could not be edited"}
+      })
+  })
+}
+  deletePost(id : number) : void {
     //delete post
-    this.update();
+    let deletePost: Observable<boolean>=this.pserv.deleteMessage(id,this.username);
+    deletePost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          data: {message: "The post could not be deleted"}
+        })
+      }
+      
+    )
+    
   }
 
   update() : void{
