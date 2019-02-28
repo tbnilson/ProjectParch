@@ -56,8 +56,7 @@ export class BoardComponent implements OnInit {
       this.update();
     },
     (response) => {
-      this.user = response;
-      this.update();
+      this.router.navigateByUrl("login");
     }
     );
 
@@ -129,7 +128,6 @@ export class BoardComponent implements OnInit {
       this.selectedUserBoards = response;
     },
     (response) => {
-      console.log("failure");
     }
     );
   }
@@ -159,14 +157,16 @@ export class BoardComponent implements OnInit {
     //create board
     this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
       this.selectedBoard = response;
+      this.update();
     },
     (response) => {
       this.selectedBoard = response;
+      this.update();
     }
     );
 
     this.showCreateBoard();
-    this.update();
+    
 
   }
 
