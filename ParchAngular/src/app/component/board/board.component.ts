@@ -63,6 +63,25 @@ export class BoardComponent implements OnInit {
     
   }
 
+  completeSetup() : void {
+    let userAdmin : boolean = false;
+    let userMod : boolean = false;
+    let targetAdmin : boolean = false;
+    let targetMod : boolean = false;
+    let targetUser : boolean = false;
+
+    if (!userMod) {
+      document.getElementById("permissionShow").setAttribute("style", "display: none");
+    }
+    // else if (!userAdmin) {
+    //   document.getElementById("modOption").setAttribute("style", "display: none");
+    //   document.getElementById("removeModOption").setAttribute("style", "display: none");
+    // } 
+    
+
+    this.update();
+  }
+
   
   getRecentMessages(roomID:number, start:number, numposts:number){
     let recentMessages: Observable<Array<Post>> = this.pServ.getRecentMessages(roomID,start,numposts);
@@ -73,7 +92,8 @@ export class BoardComponent implements OnInit {
       }
       ,
       (response)=>{
-        console.log(response);
+        this.posts = [];
+        //console.log(response);
 
       }
     )
@@ -82,6 +102,8 @@ export class BoardComponent implements OnInit {
   createPost() : void {
     
     //create post
+
+    
 
     this.update();
   }
@@ -130,6 +152,10 @@ export class BoardComponent implements OnInit {
     (response) => {
     }
     );
+
+    // if (this.selectedBoard.roomID != -1) {
+    //   this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
+    // }
   }
 
   selectBoard(boardText : String) {
@@ -140,6 +166,8 @@ export class BoardComponent implements OnInit {
       }
     }
     this.update();
+    document.getElementById("postText").removeAttribute("disabled");
+    document.getElementById("newPostButton").removeAttribute("disabled");
   }
 
   showCreateBoard() : void {
