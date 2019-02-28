@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
-import { RoomServiceService } from 'src/app/services/room-service.service';
+import { PostingService } from 'src/app/services/posting.service';
+
 
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
@@ -34,9 +34,8 @@ export class BoardComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
-     private usern: UsernameService) {
+    private pServ : PostingService) {
     this.update();
-    this.selectedBoard = new Board("Select Board");
     this.user = "User";
 
     //get username
@@ -51,6 +50,22 @@ export class BoardComponent implements OnInit {
 
     //get user boards
 
+  }
+
+  
+  getRecentMessages(roomID:number, start:number, numposts:number){
+    let recentMessages: Observable<Array<Post>> = this.pServ.getRecentMessages(roomID,start,numposts);
+    recentMessages.subscribe(
+      (response)=>{
+        this.posts = response;
+
+      }
+      ,
+      (response)=>{
+        console.log(response);
+
+      }
+    )
   }
 
   createPost() : void {
