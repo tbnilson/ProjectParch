@@ -14,7 +14,7 @@ describe("Parch Login and Registration test suite",function(){
         element(by.name("NewPassword")).sendKeys("elmo")
         magnifiyingglass = element(by.id("reg"))
         magnifiyingglass.click()
-        expect(element(by.id("update"))).toBe("You successfully registered your account!")
+        expect(element(by.id("parchSnackbarElem"))).toBe("You successfully registered your account!")
     });
     it("Should login as the newly created user",function(){
         element(by.name("Username")).sendKeys("flaming")
@@ -36,14 +36,14 @@ describe("Parch Login and Registration test suite",function(){
         element(by.name("NewPassword")).sendKeys("elmo")
         magnifiyingglass = element(by.id("reg"))
         magnifiyingglass.click()
-        expect(element(by.id("update"))).toBe("Something went wrong with registration") 
+        expect(element(by.id("parchSnackbarElem"))).toBe("Something went wrong with registration") 
     })
     it("Should fail to login",function(){
         element(by.name("Username")).sendKeys("flaming")
         element(by.name("Password")).sendKeys("grover")
         magnifiyingglass = element(by.id("log"))
         magnifiyingglass.click()
-        expect(element(by.id("update"))).toBe("That was not a valid login") 
+        expect(element(by.id("parchSnackbarElem"))).toBe("That was not a valid login") 
     })
 })
 
