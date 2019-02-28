@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Room } from '../models/Room';
 import { User } from '../models/User';
+import { Board } from '../models/Board';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -22,11 +22,11 @@ export class RoomServiceService {
 getRoomUsers(roomID:number):Observable<User>{
   return this.http.get<User>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getRoomUsers.do?roomID=" + roomID);
 }
-getUserRooms(username:string):Observable<Room>{
-  return this.http.get<Room>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getUserRooms.do?username=" + username);
+getUserRooms(username:string):Observable<Board>{
+  return this.http.get<Board>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getUserRooms.do?username=" + username);
 }
-createRoom(username:string,roomname:string):Observable<Room>{
-  return this.http.post<Room>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/createRoom.do","username=" + username + "&roomname=" + roomname,this.httpOptions);
+createRoom(username:string,roomname:string):Observable<Board>{
+  return this.http.post<Board>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/createRoom.do","username=" + username + "&roomname=" + roomname,this.httpOptions);
 }
 inviteUser(roomID:number,inviter:string,invitee:string):Observable<boolean>{
   return this.http.post<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/inviteUser.do","roomID=" + roomID + "&inviter=" + inviter + "&invitee" + invitee,this.httpOptions);
