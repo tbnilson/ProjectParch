@@ -63,7 +63,12 @@ public class LoginStepImplementation {
 			success=false;
 		}
 		WebElement usernamedisplay = boardmain.getUserDisplay();
-		Assert.assertEquals(usernamedisplay.getText().equals(username), success);
+		System.out.println("Login: " + username + " : " + successString);
+		if (success==true) {
+			Assert.assertEquals(usernamedisplay.getText(), username);
+		} else {
+			Assert.assertNull(usernamedisplay);
+		}
 	}
 
 	@Given("^: The User types in \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" in register field$")
@@ -78,7 +83,7 @@ public class LoginStepImplementation {
 	@Then("^: The User \"([^\"]*)\" \"([^\"]*)\" registers$")
 	public void the_User_registers(String username, String successString) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-		System.out.println(username + " : " + successString);
+		System.out.println("Register: " + username + " : " + successString);
 	}
 
 }
