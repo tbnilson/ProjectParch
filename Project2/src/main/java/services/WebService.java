@@ -441,6 +441,30 @@ public class WebService {
 		}
 	}
 
+	public static void rejectInvite(HttpServletRequest request, HttpServletResponse response) {
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		String username = request.getParameter("username");//Maybe get from session
+		Permission newperm = MainService.rejectInvite(roomID,username);
+	}
+
 	/**
 	 * @param request
 	 * @param response

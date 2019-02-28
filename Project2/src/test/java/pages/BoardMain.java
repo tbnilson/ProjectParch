@@ -12,9 +12,10 @@ public class BoardMain {
 		driver = _driver;
 	}
 
-	public static WebElement getUserDisplay() {
+	public WebElement getUserDisplay() {
 		// TODO Auto-generated method stub
-		return driver.findElement(By.id(id))
+		System.out.println("BoardMain title: " + driver.getTitle());
+		return driver.findElement(By.id("currentUsernameDisplay"));
 	}
 	
 }
