@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginServiceService } from 'src/app/services/login-service.service';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
+
 import { RoomServiceService } from 'src/app/services/room-service.service';
 import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+import { PostingService } from 'src/app/services/posting.service';
+
+
 
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
 import { Permission } from 'src/app/models/Permission';
-import { PostingService } from 'src/app/services/posting.service';
+
 
 @Component({
   selector: 'app-board',
@@ -21,9 +24,9 @@ import { PostingService } from 'src/app/services/posting.service';
 
 
 export class BoardComponent implements OnInit {
-  selectedBoard : Board = null;
+  selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
-  user : String;
+  user : String = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
   posts : Post[] = [];
@@ -36,24 +39,45 @@ export class BoardComponent implements OnInit {
   roomname : string;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
-     private usern: UsernameService, private pserv:PostingService, private snackBar: MatSnackBar) {
-    this.update();
+
+  constructor(private router: Router, 
+               private route: ActivatedRoute, 
+               private uServ : UsernameService, 
+               private pServ : PostingService, 
+               private rServ : RoomServiceService,
+               private snackBar: MatSnackBar) {
     
-    this.user = "User";
+                
 
     //get username
-    let cuno : Observable<String> = uServ.currentUsername;
+    let cuno : Observable<String> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
+      this.update();
     },
     (response) => {
       this.user = response;
+      this.update();
     }
     );
 
-    //get user boards
+    
+  }
 
+  
+  getRecentMessages(roomID:number, start:number, numposts:number){
+    let recentMessages: Observable<Array<Post>> = this.pServ.getRecentMessages(roomID,start,numposts);
+    recentMessages.subscribe(
+      (response)=>{
+        this.posts = response;
+
+      }
+      ,
+      (response)=>{
+        console.log(response);
+
+      }
+    )
   }
 
   createPost() : void {
@@ -101,10 +125,22 @@ export class BoardComponent implements OnInit {
 
   update() : void{
     //update boardlist, invites, posts
+    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
+      this.selectedUserBoards = response;
+    },
+    (response) => {
+      console.log("failure");
+    }
+    );
   }
 
   selectBoard(boardText : String) {
-    //change selected board
+    //select board
+    for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
+      if (this.selectedUserBoards[i].roomname == boardText) {
+        this.selectedBoard = this.selectedUserBoards[i];
+      }
+    }
     this.update();
   }
 
@@ -114,7 +150,6 @@ export class BoardComponent implements OnInit {
       document.getElementById("createBoard").setAttribute("style", "display: none");
     }
     else {
-      console.log("test");
       document.getElementById("createBoard").setAttribute("style", "display: inline-block");
     }
   }
@@ -122,6 +157,14 @@ export class BoardComponent implements OnInit {
 
   createBoard() : void {
     //create board
+    this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
+      this.selectedBoard = response;
+    },
+    (response) => {
+      this.selectedBoard = response;
+    }
+    );
+
     this.showCreateBoard();
     this.update();
 
