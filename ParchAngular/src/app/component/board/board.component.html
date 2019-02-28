@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <div style="background: rgb(15, 15, 15)">
-  <div class = "NavBar">{{selectedBoard.name}}</div>
+  <div class = "NavBar">{{selectedBoard.roomname}}</div>
   <div class = "NavBar">
     <div >
       <span (click) = "showInvites()">
@@ -13,7 +13,7 @@
     <!-- Invitation Viewer -->
     <div class="InteractionFree" id = "invites" style = "z-index: 1; display: none;">
       <div *ngFor = "let invite of invites">
-        <span>{{invite.board.name}}</span>
+        <span>{{invite.board.roomname}}</span>
         <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
         <button class="Interaction" (click) = rejectInvitation(invite)>Reject</button>
       </div>
@@ -22,7 +22,7 @@
     <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
       <select class="Interaction">
         <option *ngFor = "let selectedUserBoard of selectedUserBoards">
-          {{selectedUserBoard.name}}
+          {{selectedUserBoard.roomname}}
         </option>
       </select>
       <select class="Interaction">
@@ -66,8 +66,8 @@
   <!-- Selected Board List Display -->
   <div style="display: inline-block">
     <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
-      (click) = selectBoard(selectedUserBoard.name)>
-      {{selectedUserBoard.name}}
+      (click) = selectBoard(selectedUserBoard.roomname)>
+      {{selectedUserBoard.roomname}}
     </div>
   </div>
   <!-- Post View -->

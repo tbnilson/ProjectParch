@@ -10,6 +10,7 @@ import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
 import { Permission } from 'src/app/models/Permission';
+import { RoomServiceService } from 'src/app/services/room-service.service';
 
 @Component({
   selector: 'app-board',
@@ -19,9 +20,9 @@ import { Permission } from 'src/app/models/Permission';
 
 
 export class BoardComponent implements OnInit {
-  selectedBoard : Board = null;
+  selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
-  user : String;
+  user : String = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
   posts : Post[] = [];
@@ -39,26 +40,21 @@ export class BoardComponent implements OnInit {
                private uServ : UsernameService, 
                private pServ : PostingService, 
                private rServ : RoomServiceService) {
-    this.update();
-
+    
+                
     //get username
-    let cuno : Observable<String> = uServ.currentUsername;
+    let cuno : Observable<String> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
+      this.update();
     },
     (response) => {
       this.user = response;
+      this.update();
     }
     );
 
-    //get user boards
-    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
-      this.selectedUserBoards = response;
-    },
-    (response) => {
-      this.selectedUserBoards = response;
-    }
-    );
+    
   }
 
   
@@ -95,7 +91,7 @@ export class BoardComponent implements OnInit {
       this.selectedUserBoards = response;
     },
     (response) => {
-      this.selectedUserBoards = response;
+      console.log("failure");
     }
     );
   }
