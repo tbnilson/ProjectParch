@@ -1,18 +1,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<div class="Post">
+<div style="background: rgb(15, 15, 15)">
   <div class = "NavBar">{{selectedBoard.name}}</div>
   <div class = "NavBar">
     <div >
-      <span>Permissions</span>
-      <span (click) = "showInvites()"style="font-size: 12px">
+      <span (click) = "showInvites()">
         Invitations
       </span>
-      <span (click) = "showInviteCreator()"style="font-size: 12px">
+      <span (click) = "showInviteCreator()">
         Change
       </span>
     </div>
     <!-- Invitation Viewer -->
-    <div class="InteractionBordered" id = "invites" style = "z-index: 1; display: none;">
+    <div class="InteractionFree" id = "invites" style = "z-index: 1; display: none;">
       <div *ngFor = "let invite of invites">
         <span>{{invite.board.name}}</span>
         <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
@@ -20,19 +19,19 @@
       </div>
     </div>
     <!-- Invite Creator -->
-    <div class="InteractionBordered" id = "inviteCreator" style = "z-index: 2; display: none">
-      <select>
+    <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
+      <select class="Interaction">
         <option *ngFor = "let selectedUserBoard of selectedUserBoards">
           {{selectedUserBoard.name}}
         </option>
       </select>
-      <select>
+      <select class="Interaction">
           <option *ngFor = "let user of users">
-            {{user.name}}
+            {{user}}
           </option>
       </select>
       <!-- Certain options would only be available to users with certain permissions. -->
-      <select>
+      <select class="Interaction">
           <option>User</option>
           <option>Mod</option>
           <option>Remove Mod</option>
@@ -40,15 +39,15 @@
       </select>
       <br/>
       <span id="permissionError"></span>
-      <button (click) = "changePermission()">Send Invite</button>
+      <button class="Interaction" (click) = "changePermission()">Send</button>
     </div>
   </div>
   <div class = "NavBar">
-    <span>{{selectedUser.name}}</span>
+    <span>{{user}}</span>
     <a routerLink="/login" style = "font-size: 12px" >Log Out</a>
   </div>
 </div>
-<div class="PostBottomless">
+<div class="PostBottomless" style = "border-radius: 0px">
   <div>
     <button class="Interaction" (click) = "showCreateBoard()">Add New</button>
     <br/>
@@ -79,7 +78,9 @@
           max-width: 500px; min-width: 100px" disabled = "true"/>
       </div>
       <div style="display: inline-block">
-          <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">Create Post</button>
+          <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">
+            Create Post
+          </button>
       </div>
     </div>
   </div>

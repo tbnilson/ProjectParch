@@ -36,6 +36,8 @@ export class BoardComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private uServ : UsernameService,
      private usern: UsernameService) {
     this.update();
+    this.selectedBoard = new Board("Select Board");
+    this.user = "User";
 
     //get username
     let cuno : Observable<String> = uServ.currentUsername;
@@ -133,11 +135,6 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usern.currentUsername.subscribe(user => this.username = user)
-    console.log(this.username);
-    if(this.username == ""){
-      this.router.navigateByUrl("login");
-    }
     
   }
 
