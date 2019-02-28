@@ -1,19 +1,16 @@
-import { User } from './User';
-import { Board } from './Board';
-
 export class Permission {
-    static idGenerator : number = 0;
 
-    id : number;
-    user : User;
-    board : Board;
-    type : string;
+    perm_id:number;
+    permissions:string;
+    parchuser_username:string;
+    room_id:number;
 
-    constructor(user : User, board : Board, type : string) {
-        this.id = Permission.idGenerator++;
-        this.user = user;
-        this.board = board;
-        this.type = type;
+    constructor(perm_id:number, permissions:string, parchuser_username:string, room_id:number) {
+        this.perm_id = perm_id;
+        this.permissions = permissions;
+        this.parchuser_username = parchuser_username;
+        this.room_id = room_id;
+        
     }
 
 
