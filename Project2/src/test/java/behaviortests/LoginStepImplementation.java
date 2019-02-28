@@ -3,11 +3,14 @@ package behaviortests;
 import java.io.File;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.BoardMain;
 import pages.ParchMain;
 
 
@@ -21,6 +24,7 @@ public class LoginStepImplementation {
 	
 	static ChromeDriver driver = new ChromeDriver();
 	static ParchMain parchmain = new ParchMain(driver);
+	static BoardMain boardmain = new BoardMain(driver);
 	
 	@Given("^: The User is on the Parch Home Page$")
 	public void the_User_is_on_the_Parch_Home_Page() throws Throwable {
@@ -49,10 +53,22 @@ public class LoginStepImplementation {
 		}
 
 	}
-
-	@Then("^: The User \"([^\"]*)\" logs in$")
-	public void the_User_logs_in(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+	
+	@Then("^: The User \"([^\"]*)\" \"([^\"]*)\" logs in$")
+	public void the_User_logs_in(String username, String successString) throws Throwable {
+		boolean success=false;
+		if (successString.equals("successfully")) {
+			success=true;
+		} else if (successString.equals("unsuccessfully")) {
+			success=false;
+		}
+		WebElement usernamedisplay = boardmain.getUserDisplay();
+		System.out.println("Login: " + username + " : " + successString);
+		if (success==true) {
+			Assert.assertEquals(usernamedisplay.getText(), username);
+		} else {
+			Assert.assertNull(usernamedisplay);
+		}
 	}
 
 	@Given("^: The User types in \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" in register field$")
@@ -64,9 +80,12 @@ public class LoginStepImplementation {
 		
 	}
 
-	@Then("^: The User \"([^\"]*)\" registers$")
-	public void the_User_registers(String arg1) throws Throwable {
+	@Then("^: The User \"([^\"]*)\" \"([^\"]*)\" registers$")
+	public void the_User_registers(String username, String successString) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
+		System.out.println("Register: " + username + " : " + successString);
+		WebElement snackbar = parchmain.getSnackbar();
+		System.out.println(snackbar.getText());
 	}
 
 }
