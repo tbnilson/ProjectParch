@@ -66,8 +66,8 @@
   <!-- Selected Board List Display -->
   <div style="display: inline-block">
     <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
-      (click) = selectBoard(selectedUserBoard.name)>
-      {{selectedUserBoard.name}}
+      (click) = selectBoard(selectedUserBoard.roomname)>
+      {{selectedUserBoard.roomname}}
     </div>
   </div>
   <!-- Post View -->
