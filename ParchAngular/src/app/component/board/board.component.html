@@ -42,12 +42,14 @@
       <button class="Interaction" (click) = "changePermission()">Send</button>
     </div>
   </div>
+  <!-- Log in section. -->
   <div class = "NavBar">
     <span>{{user}}</span>
     <a routerLink="/login" style = "font-size: 12px" >Log Out</a>
   </div>
 </div>
 <div class="PostBottomless" style = "border-radius: 0px">
+  <!-- Board Creator -->
   <div>
     <button class="Interaction" (click) = "showCreateBoard()">Add New</button>
     <br/>
@@ -61,12 +63,14 @@
       </div>
     </div>
   </div>
+  <!-- Selected Board List Display -->
   <div style="display: inline-block">
     <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
       (click) = selectBoard(selectedUserBoard.name)>
       {{selectedUserBoard.name}}
     </div>
   </div>
+  <!-- Post View -->
   <div style="display: inline-block">
     <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
       <span>{{post.user.name + " " + post.text}}</span>
