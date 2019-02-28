@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { UsernameService } from 'src/app/services/username.service';
 import {MatSnackBar} from '@angular/material';
 import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.component';
+import { PostingService } from 'src/app/services/posting.service';
 
 
 
@@ -17,7 +18,7 @@ import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.compone
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private logserv: LoginServiceService, private router: Router, private usern: UsernameService, private snackBar: MatSnackBar ) {
+  constructor(private logserv: LoginServiceService, private router: Router, private usern: UsernameService, private snackBar: MatSnackBar) {
 
   }
 

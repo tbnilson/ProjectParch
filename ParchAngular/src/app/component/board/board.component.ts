@@ -2,15 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsernameService } from 'src/app/services/username.service';
 import { Observable } from 'rxjs';
+
+import { RoomServiceService } from 'src/app/services/room-service.service';
+import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.component';
+import { MatSnackBar } from '@angular/material';
 import { PostingService } from 'src/app/services/posting.service';
-import { RoomServiceService } from 'src/app/services/room-service.service'
+
 
 
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
 import { Permission } from 'src/app/models/Permission';
-import { RoomServiceService } from 'src/app/services/room-service.service';
+
 
 @Component({
   selector: 'app-board',
@@ -35,13 +39,16 @@ export class BoardComponent implements OnInit {
   roomname : string;
 
 
+
   constructor(private router: Router, 
                private route: ActivatedRoute, 
                private uServ : UsernameService, 
                private pServ : PostingService, 
-               private rServ : RoomServiceService) {
+               private rServ : RoomServiceService,
+               private snackBar: MatSnackBar) {
     
                 
+
     //get username
     let cuno : Observable<String> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
@@ -79,10 +86,41 @@ export class BoardComponent implements OnInit {
 
     this.update();
   }
-
-  deletePost(id : Number) : void {
+  editPost(id:number,newmessage:string) : void {
+    let editPost: Observable<boolean>=this.pserv.editMessage(id,this.username,newmessage);
+    editPost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          data: {message: "The post could not be edited"}
+      })
+  })
+}
+  deletePost(id : number) : void {
     //delete post
-    this.update();
+    let deletePost: Observable<boolean>=this.pserv.deleteMessage(id,this.username);
+    deletePost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          data: {message: "The post could not be deleted"}
+        })
+      }
+      
+    )
+    
   }
 
   update() : void{
