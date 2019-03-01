@@ -1,6 +1,6 @@
-import { browser, element } from "protractor";
+//import { browser, element } from "protractor";
 
-browser.ignoreSynchronization = true;
+browser.ignoreSynchronization = false;
 
 describe("Parch Login and Registration test suite",function(){
 
@@ -22,7 +22,7 @@ describe("Parch Login and Registration test suite",function(){
         magnifiyingglass = element(by.id("log"))
         magnifiyingglass.click()
         browser.sleep(2000)
-        expect(element(by.id("CurrentUsernameDisplay"))).toBe("ChrisPrime")
+        expect(element(by.id("currentUsernameDisplay")).getText()).toBe("ChrisPrime")
     });
     it("Should logout of Parch",function(){
         element(by.name("logout"))
@@ -36,14 +36,14 @@ describe("Parch Login and Registration test suite",function(){
         element(by.name("NewPassword")).sendKeys("Prime1")
         magnifiyingglass = element(by.id("reg"))
         magnifiyingglass.click()
-        expect(element(by.id("parchSnackbarElem"))).toBe("Something went wrong with registration") 
+        expect(element(by.id("parchSnackbarElem")).getText()).toBe("Error registering new user") 
     })
     it("Should fail to login",function(){
         element(by.name("Username")).sendKeys("ChrisPrime")
         element(by.name("Password")).sendKeys("Prime10")
         magnifiyingglass = element(by.id("log"))
         magnifiyingglass.click()
-        expect(element(by.id("parchSnackbarElem"))).toBe("That was not a valid login") 
+        expect(element(by.id("parchSnackbarElem")).getText()).toBe("That was not a valid login") 
     })
 })
 
