@@ -77,15 +77,104 @@ export class BoardComponent implements OnInit {
     //   document.getElementById("modOption").setAttribute("style", "display: none");
     //   document.getElementById("removeModOption").setAttribute("style", "display: none");
     // } 
-    
-
     this.update();
   }
 
+  update() : void{
+    //update boardlist, invites, posts
+    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
+      this.selectedUserBoards = response;
+    },
+    (response) => {
+    }
+    );
+
+    // if (this.selectedBoard.roomID != -1) {
+    //   this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
+    // }
+  }
+
+  //----------------------------User Operations
+  getRoomUsers(roomID:number){
+    this.rServ.getRoomUsers(roomID).subscribe(
+      (response)=>{
+        //response is A json array of all users that are admins, moderators, or users of a room.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  //----------------------------Board Operations
+  selectBoard(boardText : String) {
+    //select board
+    for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
+      if (this.selectedUserBoards[i].roomname == boardText) {
+        this.selectedBoard = this.selectedUserBoards[i];
+      }
+    }
+    this.update();
+    document.getElementById("postText").removeAttribute("disabled");
+    document.getElementById("newPostButton").removeAttribute("disabled");
+  }
+
+  showCreateBoard() : void {
+    
+    if (document.getElementById("createBoard").getAttribute("style") == "display: inline-block") {
+      document.getElementById("createBoard").setAttribute("style", "display: none");
+    }
+    else {
+      document.getElementById("createBoard").setAttribute("style", "display: inline-block");
+    }
+  }
+
+  createBoard() : void {
+    //create board
+    this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
+      this.selectedBoard = response;
+      this.update();
+    },
+    (response) => {
+      this.selectedBoard = response;
+      this.update();
+    }
+    );
+
+    this.showCreateBoard();
+  }
+
+  deleteRoom(admin:string,roomID:number){
+    this.rServ.deleteRoom(admin,roomID).subscribe(
+      (response)=>{
+        //response is "true" if the room was successfully deleted, "false" otherwise.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+  
+  //----------------------------Post Operations
   getNewMessages(postID:number){
     this.pServ.getNewMessages(postID).subscribe(
       (response)=>{
         //response is a json array representing all posts created after postID in the same room
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  postMessage(){
+    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, this.newPostText + "").subscribe(
+      (response)=>{
+        //response is the post they added to the DB
+        //so you can probably just update 
       }
       ,
       (response)=>{
@@ -110,7 +199,6 @@ export class BoardComponent implements OnInit {
     )
   }
 
-
   editPost(id:number,newmessage:string) : void {
     let editPost: Observable<boolean>=this.pServ.editMessage(id,this.username,newmessage);
     editPost.subscribe(
@@ -124,9 +212,10 @@ export class BoardComponent implements OnInit {
           verticalPosition: 'top',
           horizontalPosition: 'center',
           data: {message: "The post could not be edited"}
+        })
       })
-  })
-}
+  }
+
   deletePost(id : number) : void {
     //delete post
     let deletePost: Observable<boolean>=this.pServ.deleteMessage(id,this.username);
@@ -143,101 +232,10 @@ export class BoardComponent implements OnInit {
           data: {message: "The post could not be deleted"}
         })
       }
-      
-    )
-    
-  }
-
-  update() : void{
-    //update boardlist, invites, posts
-    this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
-      this.selectedUserBoards = response;
-    },
-    (response) => {
-    }
-    );
-
-    // if (this.selectedBoard.roomID != -1) {
-    //   this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
-    // }
-  }
-
-  getRoomUsers(roomID:number){
-    this.rServ.getRoomUsers(roomID).subscribe(
-      (response)=>{
-        //response is A json array of all users that are admins, moderators, or users of a room.
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
     )
   }
 
-  selectBoard(boardText : String) {
-    //select board
-    for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
-      if (this.selectedUserBoards[i].roomname == boardText) {
-        this.selectedBoard = this.selectedUserBoards[i];
-      }
-    }
-    this.update();
-    document.getElementById("postText").removeAttribute("disabled");
-    document.getElementById("newPostButton").removeAttribute("disabled");
-  }
-
-  showCreateBoard() : void {
-    
-    if (document.getElementById("createBoard").getAttribute("style") == "display: inline-block") {
-      document.getElementById("createBoard").setAttribute("style", "display: none");
-    }
-    else {
-      document.getElementById("createBoard").setAttribute("style", "display: inline-block");
-    }
-  }
-
-  postMessage(username:string,roomID:number,message:string){
-    this.pServ.postMessage(username,roomID,message).subscribe(
-      (response)=>{
-        //response is the post they added to the DB
-        //so you can probably just update 
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
-    )
-  }
-
-  createBoard() : void {
-    //create board
-    this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
-      this.selectedBoard = response;
-      this.update();
-    },
-    (response) => {
-      this.selectedBoard = response;
-      this.update();
-    }
-    );
-
-    this.showCreateBoard();
-    
-
-  }
-
-  deleteRoom(admin:string,roomID:number){
-    this.rServ.deleteRoom(admin,roomID).subscribe(
-      (response)=>{
-        //response is "true" if the room was successfully deleted, "false" otherwise.
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
-    )
-  }
-
+  //----------------------------Permission Operations
   banUser(roomID:number,admin:string,banneduser:string){
     this.rServ.banUser(roomID,admin,banneduser).subscribe(
       (response)=>{
@@ -277,7 +275,8 @@ export class BoardComponent implements OnInit {
   getInvites(username:string){
     this.rServ.getInvites(username).subscribe(
       (response)=>{
-        //response is a list of Permission object for the specified user where their permissions are set as "invited". Can return an empty list.
+        //response is a list of Permission object for the specified user 
+        //where their permissions are set as "invited". Can return an empty list.
       }
       ,
       (response)=>{
@@ -372,7 +371,7 @@ export class BoardComponent implements OnInit {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");
     }
   }
-
+  
   ngOnInit() {
     if(this.user == ""){
       this.router.navigateByUrl("login");
