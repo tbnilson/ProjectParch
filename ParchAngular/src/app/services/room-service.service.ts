@@ -19,6 +19,12 @@ export class RoomServiceService {
       'X-Requested-With': 'XMLHttpRequest'
     })
 }
+
+//A json array representing all users in the database.
+getAllUsers():Observable<Array<User>>{
+  return this.http.get<Array<User>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getAllUsers.do");
+}
+
 //A json array of all users that are admins, moderators, or users of a room.
 getRoomUsers(roomID:number):Observable<Array<User>>{
   return this.http.get<Array<User>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getRoomUsers.do?roomID=" + roomID);
@@ -37,10 +43,10 @@ createRoom(username:string,roomname:string):Observable<Board>{
   this.httpOptions);
 }
 
-//Retrieves permissions for a given board.
-// getRoomPermissions(roomID:number) : Observable<Permission[]> {
-
-// }
+//A json array of Parameter objects for the room.
+getRoomPerms(roomID:number):Observable<Array<Permission>>{
+  return this.http.get<Array<Permission>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getRoomPerms.do?roomID=" + roomID)
+}
 
 //"true" if the invitee was successfully given "invited" permissions to roomID, "false otherwise. Will return "false" if invitee already has permissions in roomID.
 inviteUser(roomID:number,inviter:string,invitee:string):Observable<boolean>{

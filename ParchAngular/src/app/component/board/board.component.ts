@@ -79,6 +79,30 @@ export class BoardComponent implements OnInit {
     
   }
 
+  getAllUsers(){
+    this.rServ.getAllUsers().subscribe(
+      (response)=>{
+        //A json array representing all users in the database.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  getRoomPerms(roomID:number){
+    this.rServ.getRoomPerms(roomID).subscribe(
+      (response)=>{
+        //A json array of Parameter objects for the room.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+  
   //----------------------------User Operations
   getRoomUsers(roomID:number){
     this.rServ.getRoomUsers(roomID).subscribe(
