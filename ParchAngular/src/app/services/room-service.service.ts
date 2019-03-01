@@ -37,6 +37,11 @@ createRoom(username:string,roomname:string):Observable<Board>{
   this.httpOptions);
 }
 
+//Retrieves permissions for a given board.
+// getRoomPermissions(roomID:number) : Observable<Permission[]> {
+
+// }
+
 //"true" if the invitee was successfully given "invited" permissions to roomID, "false otherwise. Will return "false" if invitee already has permissions in roomID.
 inviteUser(roomID:number,inviter:string,invitee:string):Observable<boolean>{
   return this.http.post<boolean>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/inviteUser.do",
