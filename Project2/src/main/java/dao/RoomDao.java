@@ -23,11 +23,14 @@ public class RoomDao implements IRoom {
 	@Override
 	public Room makeRoom(String roomname, String username) {
 		if (!ud.userExists(username)) {return null;}
+		
+		Session sess = sf.openSession();
+		Room room = new Room();
 		try {
-			Session sess = sf.openSession();
+			
 			sess.beginTransaction();
 			
-			Room room = new Room();
+			
 			room.setRoomName(roomname);
 			
 			ParchUser owner = ud.getUser(username);
@@ -40,45 +43,50 @@ public class RoomDao implements IRoom {
 			sess.persist(room);
 			
 			sess.getTransaction().commit();
-			sess.close();
-			return room;
 		} catch (HibernateException e) {
 				e.printStackTrace();
-				return null;
+				room = null;
+		} finally {
+			sess.close();
 		}
+		return room;
 	}
 
 	@Override
 	public Room getRoom(int roomID) {
 		// TODO Auto-generated method stub
+		Session sess = sf.openSession();
+		Room room=null;
 		try {
-			Session sess = sf.openSession();
-			Room room = sess.get(Room.class, roomID);
-			sess.close();
-			return room;
+			room = sess.get(Room.class, roomID);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			sess.close();
 		}
+		return room;
 	}
 
 	@Override
 	public List<ParchUser> getUsers(int roomID) {
 		// TODO Auto-generated method stub
+		Session sess = sf.openSession();
+		List<ParchUser> users = new ArrayList<ParchUser>();
 		try {
-			List<ParchUser> users = new ArrayList<ParchUser>();
-			Session sess = sf.openSession();
 			Room room = sess.get(Room.class, roomID);
 			if (room==null) {return null;}
 			for (Permission p : room.getPermissions()) {
 				users.add(p.getUser());
 			}
-			sess.close();
-			return users;
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			users= null;
+		} finally {
+			sess.close();
 		}
+		return users;
 	}
 
 	@Override
