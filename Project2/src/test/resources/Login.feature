@@ -22,8 +22,9 @@ Feature: User Login
     Then : The User "<username>" "<status>" registers
 
     Examples: 
-      | username | password | action          | status         | email              |
-      | Admin    | admin    | clicks register | unsuccessfully |            1231231 |
-      | name2    | test     | clicks register | successfully   | asdadsad@gmail.com |
-      | test2    | testpass | clicks register | unsuccessfully |            1231231 |
-      | name2    | test     | clicks register | successfully   | asdadsad@gmail.com |
+      | username  | password  | action          | status         | email              |
+      | testname2 | test1111  | clicks register | successfully   | asdadsad@gmail.com |
+      | Admin     | admin     | clicks register | unsuccessfully |            1231231 |
+      | testname2 | test      | clicks register | unsuccessfully | asdadsad@gmail.com |
+      | test2     | testpass  | clicks register | unsuccessfully |            1231231 |
+      | testname2 | testa1111 | clicks register | unsuccessfully | asdadsad@gmail.com |
