@@ -76,3 +76,46 @@ acceptInvite.do
         roomID:
         username:
     Response: "true" if the user's permissions in roomID were successfully changed to "user", "false" otherwise.
+
+rejectInvite.do
+	Parameters
+		roomID:
+		username:
+	Response: "true" if the user's invitation was successfuly rejected, "false" otherwise.
+	
+getInvites.do	
+	Parameters
+		username:
+	Response: a list of Permission object for the specified user where their permissions are set as "invited". Can return an empty list.
+	
+makeModerator.do	
+	Parameters
+		roomID:
+		admin: the username of the room's admin
+		user: the name of the user that would become a moderator
+	Response: "true" if the user was successfully made into a mod, "false" otherwise.
+	
+deleteRoom.do
+	Parameters
+		admin: the username of the admin for the room
+		roomID: 
+	Response: "true" if the room was successfully deleted, "false" otherwise.
+	
+banUser.do
+	Parameters
+		roomID:
+		admin:
+		banneduser:
+	Response: "true" if the user was successfully banned, "false" otherwise.
+	
+unBanUser.do
+	Parameters
+		roomID:
+		admin:
+		banneduser:
+	Response: "true" if the user was given "invited" permissions, "false" otherwise
+	
+getBannedUsers.do
+	Parameters
+		roomID:
+	Response: returns a list of User objects which have been banned from the specified room.
