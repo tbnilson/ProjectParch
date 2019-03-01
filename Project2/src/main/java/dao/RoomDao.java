@@ -44,8 +44,9 @@ public class RoomDao implements IRoom {
 			
 			sess.getTransaction().commit();
 		} catch (HibernateException e) {
-				e.printStackTrace();
-				room = null;
+			e.printStackTrace();
+			sess.getTransaction().rollback();
+			room = null;
 		} finally {
 			sess.close();
 		}
@@ -91,20 +92,22 @@ public class RoomDao implements IRoom {
 
 	@Override
 	public List<ParchUser> getAdmins(int roomID) {
+		List<ParchUser> users=null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
 			
 			Criteria crit = sess.createCriteria(Permission.class);
 			crit.add(Restrictions.like("room_id", roomID));
 			crit.add(Restrictions.like("permissions", "admin"));
-			List<ParchUser> users = crit.list();
+			users = crit.list();
 			
-			sess.close();
-			return users;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			users = null;
+		} finally {
+			sess.close();
 		}
+		return users;
 	}
 
 	@Override
