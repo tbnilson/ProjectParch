@@ -26,17 +26,15 @@ import { Permission } from 'src/app/models/Permission';
 export class BoardComponent implements OnInit {
   selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
-  user : String = "";
+  user : string = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
-  newBoardText : String = "";
-  newPostText : String = "";
+  newBoardText : string = "";
+  newPostText : string = "";
 
-  username : string;
-  password : string;
-  roomname : string;
+  
 
 
 
@@ -50,7 +48,7 @@ export class BoardComponent implements OnInit {
                 
 
     //get username
-    let cuno : Observable<String> = this.uServ.currentUsername;
+    let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
       this.update();
@@ -89,9 +87,10 @@ export class BoardComponent implements OnInit {
     }
     );
 
-    // if (this.selectedBoard.roomID != -1) {
-    //   this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
-    // }
+    if (this.selectedBoard.roomID != -1) {
+      this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+    }
+
   }
 
   //----------------------------User Operations
@@ -188,19 +187,17 @@ export class BoardComponent implements OnInit {
     recentMessages.subscribe(
       (response)=>{
         this.posts = response;
-
       }
       ,
       (response)=>{
         this.posts = [];
-        //console.log(response);
 
       }
     )
   }
 
   editPost(id:number,newmessage:string) : void {
-    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.username,newmessage);
+    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
     editPost.subscribe(
       (response)=>{
         console.log(response)
@@ -217,22 +214,25 @@ export class BoardComponent implements OnInit {
   }
 
   deletePost(id : number) : void {
+    console.log(id);
     //delete post
-    let deletePost: Observable<boolean>=this.pServ.deleteMessage(id,this.username);
+    let deletePost: Observable<boolean>=this.pServ.deleteMessage(id, this.user + "");
     deletePost.subscribe(
       (response)=>{
         console.log(response)
         this.update();
       },
       (response)=>{
-        this.snackBar.openFromComponent( ParchSnackbarComponent, {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          data: {message: "The post could not be deleted"}
-        })
+        console.log(response);
+        // this.snackBar.openFromComponent( ParchSnackbarComponent, {
+        //   duration: 3000,
+        //   verticalPosition: 'top',
+        //   horizontalPosition: 'center',
+        //   data: {message: "The post could not be deleted"}
+        // })
       }
     )
+    this.update();
   }
 
   //----------------------------Permission Operations
@@ -371,7 +371,7 @@ export class BoardComponent implements OnInit {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");
     }
   }
-  
+
   ngOnInit() {
     if(this.user == ""){
       this.router.navigateByUrl("login");
