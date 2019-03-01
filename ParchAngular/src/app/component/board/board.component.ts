@@ -83,6 +83,9 @@ export class BoardComponent implements OnInit {
       }
     );
 
+
+    this.getInvites(this.user);
+
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
       if (document.getElementById("permissionButton") != null) {
