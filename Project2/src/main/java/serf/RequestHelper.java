@@ -104,6 +104,10 @@ public class RequestHelper {
 			WebService.getBannedUsers(request, response);
 			break;
 		}
+		case "/Project2/getRoomPerms.do":{
+			WebService.getRoomPerms(request, response);
+			break;
+		}
 		case "/Project2/populate.do":{
 			Playground.populateTestDB();
 			Playground.postMessages();

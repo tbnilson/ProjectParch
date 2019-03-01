@@ -21,6 +21,20 @@ public class WebService {
 	public static void getAllUsers(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		List<ParchUser> users = MainService.getAllUsers();
+		
+		pr.append(MainService.toJsonArray(users)).close();
+		
 	}
 
 	public static void getAllRooms(HttpServletRequest request, HttpServletResponse response) {
@@ -675,6 +689,33 @@ public class WebService {
 				perms.remove(i);
 			}
 		}
+		String jsonarray = MainService.toJsonArray(perms);
+		pr.append(jsonarray).close();
+	}
+
+	public static void getRoomPerms(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		int roomID;
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
+		try {
+			roomID = Integer.parseInt(request.getParameter("roomID"));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			pr.append("roomID is not an integer");
+			return;
+		}
+		
+		List<Permission> perms = MainService.getRoomPerms(roomID);
 		String jsonarray = MainService.toJsonArray(perms);
 		pr.append(jsonarray).close();
 	}
