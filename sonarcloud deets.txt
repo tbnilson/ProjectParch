@@ -1,4 +1,4 @@
 Sonarcloud auth token: 351fa9ef985961e7e51c4fe1f342c6f6ddf84907
 
 Maven command to run in project folder:
-mvn sonar:sonar \ -Dsonar.projectKey=tbnilson_ProjectParch \ -Dsonar.organization=tbnilson-github \ -Dsonar.host.url=https://sonarcloud.io \ -Dsonar.login=351fa9ef985961e7e51c4fe1f342c6f6ddf84907
+mvn sonar:sonar -Dsonar.projectKey=tbnilson_ProjectParch  -Dsonar.organization=tbnilson-github  -Dsonar.host.url=https://sonarcloud.io  -Dsonar.login=351fa9ef985961e7e51c4fe1f342c6f6ddf84907
