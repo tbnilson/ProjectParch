@@ -59,13 +59,13 @@
           min-width: 100px"/>
       </div>
       <div style="display: inline-block">
-        <button class="Interaction" (click) = "createBoard()">Create Board</button>
+        <button id="createBoardButton" class="Interaction" (click) = "createBoard()">Create Board</button>
       </div>
     </div>
   </div>
   <!-- Selected Board List Display -->
   <div style="display: inline-block">
-    <div class="Interaction" *ngFor = "let selectedUserBoard of selectedUserBoards" 
+    <div class="Interaction boardSelectionButton" *ngFor = "let selectedUserBoard of selectedUserBoards" 
       (click) = selectBoard(selectedUserBoard.roomname)>
       {{selectedUserBoard.roomname}}
     </div>
