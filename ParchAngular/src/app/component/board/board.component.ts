@@ -33,11 +33,10 @@ export class BoardComponent implements OnInit {
   invites : Permission[] = [];
   newBoardText : string = "";
   newPostText : string = "";
+  permType : string = "";
+  targetUser : User = null;
 
   
-
-
-
   constructor(private router: Router, 
                private route: ActivatedRoute, 
                private uServ : UsernameService, 
@@ -45,7 +44,7 @@ export class BoardComponent implements OnInit {
                private rServ : RoomServiceService,
                private snackBar: MatSnackBar) {
     
-                
+    
 
     //get username
     let cuno : Observable<string> = this.uServ.currentUsername;
@@ -71,6 +70,12 @@ export class BoardComponent implements OnInit {
 
     this.rServ.getAllUsers().subscribe( (response) => {
         this.users = response;
+        for (let i = 0 ; i < this.users.length; i++) {
+          if (this.users[i].username == this.user) {
+            this.users.splice(i, 1);
+            break;
+          }
+        }
         //console.log(response);
       }, 
       (response) => {
@@ -80,11 +85,13 @@ export class BoardComponent implements OnInit {
 
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+      document.getElementById("permissionButton").removeAttribute("disabled");
     }
 
     
   }
 
+  //----------------------------User Operations
   getAllUsers(){
     this.rServ.getAllUsers().subscribe(
       (response)=>{
@@ -97,19 +104,6 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  getRoomPerms(roomID:number){
-    this.rServ.getRoomPerms(roomID).subscribe(
-      (response)=>{
-        //A json array of Parameter objects for the room.
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
-    )
-  }
-  
-  //----------------------------User Operations
   getRoomUsers(roomID:number){
     this.rServ.getRoomUsers(roomID).subscribe(
       (response)=>{
@@ -306,8 +300,18 @@ export class BoardComponent implements OnInit {
     this.update();
   }
 
+  //
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //###################################################################################################
+  //
   inviteUser(roomID:number, inviter:string, invitee:string){
-    this.rServ.inviteUser(roomID,inviter,invitee).subscribe(
+    this.rServ.inviteUser(this.selectedBoard.roomID, this.user, invitee).subscribe(
       (response)=>{
         if(response){
           //true when invite sent successfully
@@ -383,7 +387,13 @@ export class BoardComponent implements OnInit {
   }
 
   changePermission() : void {
-    //create invite
+    if (this.permType == "" || this.targetUser == null || this.selectedBoard.roomID == -1) {
+      return;
+    }
+    if (this.permType == "user") {
+      console.log("user");
+      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser.username);
+    }
   }
 
   showInviteCreator() : void {
@@ -391,11 +401,25 @@ export class BoardComponent implements OnInit {
     if (inviteDiv.getAttribute("style") == 
     "z-index: 1; display: block; position: absolute; top: 60px; left: 300px") {
       inviteDiv.setAttribute("style", "z-index: 1; display: none");
-      
     }
     else {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");
+      
     }
+
+    
+  }
+
+  getRoomPerms(roomID:number){
+    this.rServ.getRoomPerms(roomID).subscribe(
+      (response)=>{
+        //A json array of Parameter objects for the room.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
   }
 
   ngOnInit() {

@@ -21,25 +21,23 @@
     <!-- Invite Creator -->
     <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
       <select class="Interaction">
-        <option *ngFor = "let selectedUserBoard of selectedUserBoards">
-          {{selectedUserBoard.roomname | sanitizeStr}}
-        </option>
-      </select>
-      <select class="Interaction">
-          <option *ngFor = "let user of users">
+          <option *ngFor = "let user of users" (click) = "this.targetUser = user">
             {{user.username}}
           </option>
       </select>
       <!-- Certain options would only be available to users with certain permissions. -->
-      <select class="Interaction">
-        <option id = "userOption">User</option>
-        <option id = "modOption">Mod</option>
-        <option id = "removeModOption">Remove Mod</option>
-        <option id = "banOption">Ban</option>
+      <select class="Interaction" id="permSelector">
+        <option (click) = "this.permType = ''"></option>
+        <option id = "userOption" (click) = "this.permType = 'user'">User</option>
+        <option id = "modOption" (click) = "this.permType = 'mod'">Mod</option>
+        <option id = "removeModOption" (click) = "this.permType = 'removemod'">Remove Mod</option>
+        <option id = "banOption" (click) = "this.permType = 'ban'">Ban</option>
       </select>
       <br/>
       <span id="permissionError"></span>
-      <button class="Interaction" (click) = "changePermission()">Send</button>
+      <button class="Interaction" id = "permissionButton" (click) = "changePermission()" disabled="true">
+        Send
+      </button>
     </div>
   </div>
   <!-- Log in section. -->
