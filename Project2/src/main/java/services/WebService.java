@@ -463,6 +463,11 @@ public class WebService {
 		}
 		String username = request.getParameter("username");//Maybe get from session
 		Permission newperm = MainService.rejectInvite(roomID,username);
+		if (newperm!=null) {
+			pr.append("true").close();
+		} else {
+			pr.append("false").close();
+		}
 	}
 
 	/**
