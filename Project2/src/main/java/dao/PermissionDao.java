@@ -26,29 +26,33 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public List<Permission> getUserPermissions(String username) {
+		List<Permission> p=null;
+		Session sess=sf.openSession();
 		try {
-			Session sess = sf.openSession();
 			String hql = "select P from Permission as P "
 					+ "where P.parchUser.username = ?";
 			Query q = sess.createQuery(hql);
 			q.setString(0, username);
 			
-			List<Permission> p = q.list();
+			p = q.list();
 			if (p.size()==0) {
 				p=null;
 			}
-			sess.close();
-			return p;
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			p=null;
+		} finally {
+			sess.close();
 		}
+		return p;
 	}
 
 	@Override
 	public List<Permission> getRoomPermissions(int roomID) {
+		List<Permission> p=null;
+		Session sess=sf.openSession();
 		try {
-			Session sess = sf.openSession();
 			String hql = "select P from Permission as P "
 					+ "where P.room.id = ?";
 			Query q = sess.createQuery(hql);
