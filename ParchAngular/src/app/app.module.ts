@@ -14,6 +14,7 @@ import { BoardComponent } from './component/board/board.component';
 import { ParchSnackbarComponent } from './component/parch-snackbar/parch-snackbar.component';
 import { MatSnackBarModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SanitizeStrPipe } from './pipes/sanitize-str.pipe';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent,
     LoginComponent,
     BoardComponent,
-    ParchSnackbarComponent
+    ParchSnackbarComponent,
+    SanitizeStrPipe
   ],
   imports: [
     BrowserModule,
