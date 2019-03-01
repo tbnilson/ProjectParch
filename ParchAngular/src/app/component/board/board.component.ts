@@ -89,6 +89,11 @@ export class BoardComponent implements OnInit {
         document.getElementById("permissionButton").removeAttribute("disabled");
       }
     }
+    else {
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").setAttribute("disabled", "true");
+      }
+    }
 
     
   }
