@@ -47,16 +47,10 @@ public class Room implements Jsonable {
 	}
 	@Override
 	public String toJsonString() {
-		try {
-			return "{" + 
-					" \"roomID\": \""+this.id+"\"," + 
-					" \"roomname\": \""+ new URI(null,null,this.roomname,null).getRawPath() +"\"" + 
-					"}";
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "";
-		}
+		return "{" + 
+				" \"roomID\": \""+this.id+"\"," + 
+				" \"roomname\": \""+ this.roomname +"\"" + 
+				"}";
 	}
 	
 }
