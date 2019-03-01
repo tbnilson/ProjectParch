@@ -8,7 +8,8 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
 		
 //		features = {"src/test/resources/Login.feature"},
-		features = {"C:\\Users\\tbnil\\Documents\\GitHub\\ProjectTwo\\ProjectParch\\Project2\\src\\test\\resources\\Login.feature",
+		features = {
+//				"C:\\Users\\tbnil\\Documents\\GitHub\\ProjectTwo\\ProjectParch\\Project2\\src\\test\\resources\\Login.feature",
 				"C:\\Users\\tbnil\\Documents\\GitHub\\ProjectTwo\\ProjectParch\\Project2\\src\\test\\resources\\RoomActions.feature"},
 		glue = {"behaviortests"}
 
@@ -19,6 +20,7 @@ public class CucumberRunner extends AbstractTestNGCucumberTests {
 	@AfterSuite
 	public void after() {
 		LoginStepImplementation.driver.quit();
+		RoomActionsStepImplementations.driver.quit();
 	}
 
 }

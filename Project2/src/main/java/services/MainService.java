@@ -204,6 +204,11 @@ public class MainService {
 			return false;
 		}
 	}
+
+	public static List<ParchUser> getAllUsers() {
+		// TODO Auto-generated method stub
+		return ud.getAllUsers();
+	}
 	
 
 }

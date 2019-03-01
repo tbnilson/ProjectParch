@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -136,6 +138,18 @@ public class UserDao implements IUser {
 	public boolean userExists(String username) {
 		// TODO Auto-generated method stub
 		return this.getUser(username)!=null;
+	}
+
+	@Override
+	public List<ParchUser> getAllUsers() {
+		try {
+			Session sess = sf.openSession();
+			Criteria crit = sess.createCriteria(ParchUser.class);
+			return crit.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	

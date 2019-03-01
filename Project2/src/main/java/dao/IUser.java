@@ -1,6 +1,8 @@
 package dao;
 
 
+import java.util.List;
+
 import model.ParchUser;
 
 public interface IUser {
@@ -12,4 +14,5 @@ public interface IUser {
 	public boolean setEmail(String username,String newemail);
 	public boolean setUsername(String username, String newusername);
 	public boolean userExists(String username);
+	public List<ParchUser> getAllUsers();
 }

@@ -1,8 +1,12 @@
 package behaviortests;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
@@ -33,13 +37,22 @@ public class RoomActionsStepImplementations {
 	@When("^: The user creates a room called \"([^\"]*)\"$")
 	public void the_user_creates_a_room_called(String arg1) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    WebElement createBoardButton = boardmain.getCreateBoardButton();
+	    createBoardButton.click();
+	    WebElement addBoardButton = boardmain.getAddNewBoardButton();
+	    WebElement newBoardNameTextbox = boardmain.getNewBoardNameTextbox();
+	    System.out.println(newBoardNameTextbox.getAttribute("class"));
+	    newBoardNameTextbox.sendKeys(arg1);
+	    addBoardButton.click();
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" created$")
 	public void is_created(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    List<WebElement> roomSelectors = boardmain.getRoomList();
+	    Assert.assertTrue(roomSelectors.size()>0);
+	    for (WebElement webElement : roomSelectors) {
+			System.out.println(webElement.getText() + "------------\n");
+		}
 	}
 
 	@Given("^: The user selects the room \"([^\"]*)\"$")

@@ -1,3 +1,6 @@
+getAllUsers.do
+	Parameters:none
+	Response: A json array representing all users in the database.
 getUser.do
     Parameters
         username: the username of the user you want
