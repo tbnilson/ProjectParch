@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { UsernameService } from 'src/app/services/username.service';
 import {MatSnackBar} from '@angular/material';
 import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.component';
-import { PostingService } from 'src/app/services/posting.service';
+
 
 
 
@@ -77,11 +77,10 @@ export class LoginComponent implements OnInit {
     );
 
   };
-  newemail: string;
-  newusername: string;
-  newpassword: string;
-
-  check: string;
+  newemail: string = "";
+  newusername: string = "";
+  newpassword: string = "";
+  
   Register() {
     let reg: Observable<boolean> = this.logserv.register(this.newusername, this.newpassword, this.newemail);
     reg.subscribe(
