@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <div style="background: rgb(15, 15, 15)">
-  <div class = "NavBar">{{selectedBoard.roomname}}</div>
+  <div class = "NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
       <span (click) = "showInvites()">
@@ -64,14 +64,14 @@
   <!-- Selected Board List Display -->
   <div style="display: inline-block">
     <div class="Interaction boardSelectionButton" *ngFor = "let selectedUserBoard of selectedUserBoards" 
-      (click) = selectBoard(selectedUserBoard.roomname)>
-      {{selectedUserBoard.roomname}}
+      (click) = selectBoard(selectedUserBoard.roomID)>
+      {{selectedUserBoard.roomname | sanitizeStr}}
     </div>
   </div>
   <!-- Post View -->
   <div style="display: inline-block">
     <div *ngFor = "let post of posts" class = "Post AdminOnly">
-      <span>{{post.username + " " + post.message}}</span>
+      <span>{{post.username + " " + post.message | sanitizeStr}}</span>
       <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.postID)">Delete</button>
     </div>
     <div class="Post">
