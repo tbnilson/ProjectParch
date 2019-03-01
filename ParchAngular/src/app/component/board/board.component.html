@@ -72,9 +72,9 @@
   </div>
   <!-- Post View -->
   <div style="display: inline-block">
-    <div *ngFor = "let post of posts" class = "Post AdminOnly" (click) = deletePost(post.id)>
-      <span>{{post.user.name + " " + post.text}}</span>
-      <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.id)"></button>
+    <div *ngFor = "let post of posts" class = "Post AdminOnly">
+      <span>{{post.username + " " + post.message}}</span>
+      <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.postID)">Delete</button>
     </div>
     <div class="Post">
       <div style="display: inline-block">
@@ -82,7 +82,7 @@
           max-width: 500px; min-width: 100px" disabled = "true"/>
       </div>
       <div style="display: inline-block">
-          <button class="Interaction" id="newPostButton" (click) = "createPost()" disabled = "true">
+          <button class="Interaction" id="newPostButton" (click) = "postMessage()" disabled = "true">
             Create Post
           </button>
       </div>

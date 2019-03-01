@@ -26,17 +26,15 @@ import { Permission } from 'src/app/models/Permission';
 export class BoardComponent implements OnInit {
   selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
-  user : String = "";
+  user : string = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
   posts : Post[] = [];
   invites : Permission[] = [];
-  newBoardText : String = "";
-  newPostText : String = "";
+  newBoardText : string = "";
+  newPostText : string = "";
 
-  username : string;
-  password : string;
-  roomname : string;
+  
 
 
 
@@ -50,7 +48,7 @@ export class BoardComponent implements OnInit {
                 
 
     //get username
-    let cuno : Observable<String> = this.uServ.currentUsername;
+    let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
       this.update();
@@ -77,75 +75,7 @@ export class BoardComponent implements OnInit {
     //   document.getElementById("modOption").setAttribute("style", "display: none");
     //   document.getElementById("removeModOption").setAttribute("style", "display: none");
     // } 
-    
-
     this.update();
-  }
-
-  getNewMessages(postID:number){
-    this.pServ.getNewMessages(postID).subscribe(
-      (response)=>{
-        //response is a json array representing all posts created after postID in the same room
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
-    )
-  }
-
-  getMessagesBefore(start:number, num:number,roomID:number){
-    let recentMessages: Observable<Array<Post>> = this.pServ.getMessagesBefore(start,num,roomID);
-    recentMessages.subscribe(
-      (response)=>{
-        this.posts = response;
-
-      }
-      ,
-      (response)=>{
-        this.posts = [];
-        //console.log(response);
-
-      }
-    )
-  }
-
-
-  editPost(id:number,newmessage:string) : void {
-    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.username,newmessage);
-    editPost.subscribe(
-      (response)=>{
-        console.log(response)
-        this.update();
-      },
-      (response)=>{
-        this.snackBar.openFromComponent( ParchSnackbarComponent, {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          data: {message: "The post could not be edited"}
-      })
-  })
-}
-  deletePost(id : number) : void {
-    //delete post
-    let deletePost: Observable<boolean>=this.pServ.deleteMessage(id,this.username);
-    deletePost.subscribe(
-      (response)=>{
-        console.log(response)
-        this.update();
-      },
-      (response)=>{
-        this.snackBar.openFromComponent( ParchSnackbarComponent, {
-          duration: 3000,
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          data: {message: "The post could not be deleted"}
-        })
-      }
-      
-    )
-    
   }
 
   update() : void{
@@ -157,11 +87,13 @@ export class BoardComponent implements OnInit {
     }
     );
 
-    // if (this.selectedBoard.roomID != -1) {
-    //   this.getRecentMessages(this.selectedBoard.roomID,0, 1000);
-    // }
+    if (this.selectedBoard.roomID != -1) {
+      this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+    }
+
   }
 
+  //----------------------------User Operations
   getRoomUsers(roomID:number){
     this.rServ.getRoomUsers(roomID).subscribe(
       (response)=>{
@@ -174,6 +106,7 @@ export class BoardComponent implements OnInit {
     )
   }
 
+  //----------------------------Board Operations
   selectBoard(boardText : String) {
     //select board
     for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
@@ -196,19 +129,6 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  postMessage(username:string,roomID:number,message:string){
-    this.pServ.postMessage(username,roomID,message).subscribe(
-      (response)=>{
-        //response is the post they added to the DB
-        //so you can probably just update 
-      }
-      ,
-      (response)=>{
-        console.log(response);
-      }
-    )
-  }
-
   createBoard() : void {
     //create board
     this.rServ.createRoom(this.user + "" ,  this.newBoardText + "").subscribe( (response) => {
@@ -222,8 +142,6 @@ export class BoardComponent implements OnInit {
     );
 
     this.showCreateBoard();
-    
-
   }
 
   deleteRoom(admin:string,roomID:number){
@@ -237,7 +155,87 @@ export class BoardComponent implements OnInit {
       }
     )
   }
+  
+  //----------------------------Post Operations
+  getNewMessages(postID:number){
+    this.pServ.getNewMessages(postID).subscribe(
+      (response)=>{
+        //response is a json array representing all posts created after postID in the same room
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
 
+  postMessage(){
+    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, this.newPostText + "").subscribe(
+      (response)=>{
+        //response is the post they added to the DB
+        //so you can probably just update 
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  getMessagesBefore(start:number, num:number,roomID:number){
+    let recentMessages: Observable<Array<Post>> = this.pServ.getMessagesBefore(start,num,roomID);
+    recentMessages.subscribe(
+      (response)=>{
+        this.posts = response;
+      }
+      ,
+      (response)=>{
+        this.posts = [];
+
+      }
+    )
+  }
+
+  editPost(id:number,newmessage:string) : void {
+    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
+    editPost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        this.snackBar.openFromComponent( ParchSnackbarComponent, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          data: {message: "The post could not be edited"}
+        })
+      })
+  }
+
+  deletePost(id : number) : void {
+    console.log(id);
+    //delete post
+    let deletePost: Observable<boolean>=this.pServ.deleteMessage(id, this.user + "");
+    deletePost.subscribe(
+      (response)=>{
+        console.log(response)
+        this.update();
+      },
+      (response)=>{
+        console.log(response);
+        // this.snackBar.openFromComponent( ParchSnackbarComponent, {
+        //   duration: 3000,
+        //   verticalPosition: 'top',
+        //   horizontalPosition: 'center',
+        //   data: {message: "The post could not be deleted"}
+        // })
+      }
+    )
+    this.update();
+  }
+
+  //----------------------------Permission Operations
   banUser(roomID:number,admin:string,banneduser:string){
     this.rServ.banUser(roomID,admin,banneduser).subscribe(
       (response)=>{
@@ -277,7 +275,8 @@ export class BoardComponent implements OnInit {
   getInvites(username:string){
     this.rServ.getInvites(username).subscribe(
       (response)=>{
-        //response is a list of Permission object for the specified user where their permissions are set as "invited". Can return an empty list.
+        //response is a list of Permission object for the specified user 
+        //where their permissions are set as "invited". Can return an empty list.
       }
       ,
       (response)=>{
