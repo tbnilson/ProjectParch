@@ -58,6 +58,9 @@ export class BoardComponent implements OnInit {
     );
 
   }
+  logout(){
+    this.selectedBoard = new Board(-1, "Select Board");
+  }
 
   update() : void{
     //update boardlist, invites, posts
