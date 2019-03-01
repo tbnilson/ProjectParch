@@ -86,9 +86,19 @@ export class BoardComponent implements OnInit {
       }
     );
 
+
+    this.getInvites(this.user);
+
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
-      document.getElementById("permissionButton").removeAttribute("disabled");
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").removeAttribute("disabled");
+      }
+    }
+    else {
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").setAttribute("disabled", "true");
+      }
     }
 
     
