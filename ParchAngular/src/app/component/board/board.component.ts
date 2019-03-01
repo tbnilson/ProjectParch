@@ -58,9 +58,6 @@ export class BoardComponent implements OnInit {
     }
     );
 
-    
-
-    
   }
 
   update() : void{
@@ -182,6 +179,7 @@ export class BoardComponent implements OnInit {
   postMessage(){
     this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, this.newPostText + "").subscribe(
       (response)=>{
+        this.update();
         //response is the post they added to the DB
         //so you can probably just update 
       }
@@ -190,6 +188,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    
   }
 
   getMessagesBefore(start:number, num:number,roomID:number){
@@ -221,6 +220,7 @@ export class BoardComponent implements OnInit {
           data: {message: "The post could not be edited"}
         })
       })
+      
   }
 
   deletePost(id : number) : void {
@@ -242,7 +242,6 @@ export class BoardComponent implements OnInit {
         // })
       }
     )
-    this.update();
   }
 
   //----------------------------Permission Operations
