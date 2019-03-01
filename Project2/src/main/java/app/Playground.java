@@ -13,10 +13,10 @@ import model.Room;
 import util.HibernateUtil;
 
 public class Playground {
-	public static UserDao ud = new UserDao();
-	public static RoomDao rd = new RoomDao();
-	public static PermissionDao pd = new PermissionDao();
-	public static PostDao pod = new PostDao();
+	private static UserDao ud = new UserDao();
+	private static RoomDao rd = new RoomDao();
+	private static PermissionDao pd = new PermissionDao();
+	private static PostDao pod = new PostDao();
 	public static void main(String[] args) {
 		
 		populateTestDB();

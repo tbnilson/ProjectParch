@@ -14,10 +14,10 @@ import model.Room;
 
 public class MainService {
 	
-	public static UserDao ud = new UserDao();
-	public static RoomDao rd = new RoomDao();
-	public static PermissionDao permd = new PermissionDao();
-	public static PostDao postd = new PostDao();
+	private static UserDao ud = new UserDao();
+	private static RoomDao rd = new RoomDao();
+	private static PermissionDao permd = new PermissionDao();
+	private static PostDao postd = new PostDao();
 
 	/**
 	 * @param username
