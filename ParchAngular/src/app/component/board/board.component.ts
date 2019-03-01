@@ -85,7 +85,9 @@ export class BoardComponent implements OnInit {
 
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
-      document.getElementById("permissionButton").removeAttribute("disabled");
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").removeAttribute("disabled");
+      }
     }
 
     
