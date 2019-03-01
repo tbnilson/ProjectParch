@@ -107,6 +107,14 @@ public class WebService {
 			pr.append( "Password must be at least 6 characters, and contain only letters and numbers").close();
 			return;
 		}
+		if (email==null) {
+			pr.append("Cannot Have Empty Email").close();
+			return;
+		}
+		if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+			pr.append("Not a valid email").close();
+			return;
+		}
 		
 		boolean b = MainService.addUser(username, password, email);
 		
