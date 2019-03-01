@@ -35,12 +35,8 @@ export class BoardComponent implements OnInit {
   newPostText : string = "";
   permType : string = "";
   targetUser : User = null;
-  targetBoard : Board = null;
 
   
-
-
-
   constructor(private router: Router, 
                private route: ActivatedRoute, 
                private uServ : UsernameService, 
@@ -74,6 +70,12 @@ export class BoardComponent implements OnInit {
 
     this.rServ.getAllUsers().subscribe( (response) => {
         this.users = response;
+        for (let i = 0 ; i < this.users.length; i++) {
+          if (this.users[i].username == this.user) {
+            this.users.splice(i, 1);
+            break;
+          }
+        }
         //console.log(response);
       }, 
       (response) => {
@@ -384,11 +386,12 @@ export class BoardComponent implements OnInit {
   }
 
   changePermission() : void {
-    if (this.permType == "" || this.targetUser == null || this.targetBoard == null) {
+    if (this.permType == "" || this.targetUser == null || this.selectedBoard.roomID == -1) {
       return;
     }
     if (this.permType == "user") {
-      this.inviteUser(this.targetBoard.roomID, this.user, this.targetUser.username);
+      console.log("user");
+      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser.username);
     }
   }
 
@@ -397,7 +400,6 @@ export class BoardComponent implements OnInit {
     if (inviteDiv.getAttribute("style") == 
     "z-index: 1; display: block; position: absolute; top: 60px; left: 300px") {
       inviteDiv.setAttribute("style", "z-index: 1; display: none");
-      
     }
     else {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");

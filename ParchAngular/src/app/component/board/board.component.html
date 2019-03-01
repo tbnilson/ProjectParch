@@ -21,12 +21,7 @@
     <!-- Invite Creator -->
     <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
       <select class="Interaction">
-        <option *ngFor = "let selectedUserBoard of selectedUserBoards">
-          {{selectedUserBoard.roomname}}
-        </option>
-      </select>
-      <select class="Interaction">
-          <option *ngFor = "let user of users">
+          <option *ngFor = "let user of users" (click) = "this.targetUser = user">
             {{user.username}}
           </option>
       </select>
