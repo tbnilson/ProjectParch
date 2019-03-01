@@ -86,6 +86,20 @@ public class LoginStepImplementation {
 		System.out.println("Register: " + username + " : " + successString);
 		WebElement snackbar = parchmain.getSnackbar();
 		System.out.println(snackbar.getText());
+		
+		boolean success=false;
+		if (successString.equals("successfully")) {
+			success=true;
+		} else if (successString.equals("unsuccessfully")) {
+			success=false;
+		}
+		
+		
+		if (success==true) {
+			Assert.assertTrue(snackbar.getText().contains("successfully"));
+		} else {
+			Assert.assertFalse(snackbar.getText().contains("successfully"));
+		}
 	}
 
 }
