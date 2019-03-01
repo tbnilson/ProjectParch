@@ -69,6 +69,15 @@ export class BoardComponent implements OnInit {
     }
     );
 
+    this.rServ.getAllUsers().subscribe( (response) => {
+        this.users = response;
+        //console.log(response);
+      }, 
+      (response) => {
+
+      }
+    );
+
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
     }
@@ -209,7 +218,7 @@ export class BoardComponent implements OnInit {
     let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
     editPost.subscribe(
       (response)=>{
-        console.log(response)
+        //console.log(response)
         this.update();
       },
       (response)=>{
@@ -224,12 +233,10 @@ export class BoardComponent implements OnInit {
   }
 
   deletePost(id : number) : void {
-    console.log(id);
     //delete post
     let deletePost: Observable<boolean>=this.pServ.deleteMessage(id, this.user + "");
     deletePost.subscribe(
       (response)=>{
-        console.log(response)
         this.update();
       },
       (response)=>{
