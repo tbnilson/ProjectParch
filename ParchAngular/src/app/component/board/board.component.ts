@@ -59,23 +59,8 @@ export class BoardComponent implements OnInit {
     );
 
     
-  }
 
-  completeSetup() : void {
-    let userAdmin : boolean = false;
-    let userMod : boolean = false;
-    let targetAdmin : boolean = false;
-    let targetMod : boolean = false;
-    let targetUser : boolean = false;
-
-    if (!userMod) {
-      document.getElementById("permissionShow").setAttribute("style", "display: none");
-    }
-    // else if (!userAdmin) {
-    //   document.getElementById("modOption").setAttribute("style", "display: none");
-    //   document.getElementById("removeModOption").setAttribute("style", "display: none");
-    // } 
-    this.update();
+    
   }
 
   update() : void{
@@ -91,6 +76,7 @@ export class BoardComponent implements OnInit {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
     }
 
+    
   }
 
   //----------------------------User Operations
@@ -246,6 +232,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
   }
 
   getBannedUsers(roomID:number){
@@ -258,6 +245,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
   }
 
   unBanUser(roomID,admin,banneduser){
@@ -270,6 +258,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
   }
 
   getInvites(username:string){
@@ -283,26 +272,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-  }
-
-  acceptInvitation(roomID:number, username:string){
-    this.rServ.acceptInvite(roomID, username).subscribe(
-      (response)=>{
-        if(response){
-          this.update();
-        }
-        else{
-          //user is banned
-          
-        }
-      }
-      ,
-      (response)=>{
-        console.log(response);
-
-      }
-    )
-    
+    this.update();
   }
 
   inviteUser(roomID:number, inviter:string, invitee:string){
@@ -321,6 +291,27 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
+  }
+  
+  acceptInvitation(roomID:number, username:string){
+    this.rServ.acceptInvite(roomID, username).subscribe(
+      (response)=>{
+        if(response){
+          
+        }
+        else{
+          //user is banned
+          
+        }
+      }
+      ,
+      (response)=>{
+        console.log(response);
+
+      }
+    )
+    this.update();
   }
 
   rejectInvitation(roomID:number,username:string) : void {
@@ -333,6 +324,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
   }
 
   showInvites() : void {
@@ -343,6 +335,7 @@ export class BoardComponent implements OnInit {
     else if (this.invites.length != 0) {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px");
     }
+    this.update();
   }
 
   makeModerator(roomID:number,admin:string,user:string){
@@ -355,6 +348,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    this.update();
   }
 
   changePermission() : void {
