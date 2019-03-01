@@ -177,6 +177,7 @@ export class BoardComponent implements OnInit {
     this.pServ.getNewMessages(postID).subscribe(
       (response)=>{
         //response is a json array representing all posts created after postID in the same room
+        //
       }
       ,
       (response)=>{
