@@ -122,3 +122,8 @@ getBannedUsers.do
 	Parameters
 		roomID:
 	Response: returns a list of User objects which have been banned from the specified room.
+	
+getRoomPerms.do
+	Parameters
+		roomID:
+	Response: A json array of Parameter objects for the room.
