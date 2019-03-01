@@ -64,8 +64,8 @@ export class BoardComponent implements OnInit {
   }
 
   
-  getRecentMessages(roomID:number, start:number, numposts:number){
-    let recentMessages: Observable<Array<Post>> = this.pServ.getRecentMessages(roomID,start,numposts);
+  getMessagesBefore(start:number, num:number,roomID:number){
+    let recentMessages: Observable<Array<Post>> = this.pServ.getMessagesBefore(start,num,roomID);
     recentMessages.subscribe(
       (response)=>{
         this.posts = response;
