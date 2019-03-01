@@ -58,26 +58,30 @@ public class PermissionDao implements IPermission {
 			Query q = sess.createQuery(hql);
 			q.setInteger(0, roomID);
 			
-			List<Permission> p = q.list();
+			p = q.list();
 			if (p.size()==0) {
 				p=null;
 			}
-			sess.close();
-			return p;
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			p = null;
+		} finally {
+			sess.close();
 		}
+		return p;
 	}
 
 	@Override
 	public Permission setPermission(String username, int roomID, String permissions) {
 		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;} //This should maybe throw an exception
+		Permission p=null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
+			
 			sess.beginTransaction();
 			
-			Permission p = getPermission(username, roomID);
+			p = getPermission(username, roomID);
 			if (p!=null) {
 				p.setPermissions(permissions);
 				sess.update(p);
@@ -90,19 +94,24 @@ public class PermissionDao implements IPermission {
 			}
 			
 			sess.getTransaction().commit();
-			sess.close();
-			return p;
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			p = null;
+		} finally {
+			sess.close();
 		}
+		
+		return p;
 	}
 
 	@Override
 	public Permission getPermission(String username, int roomID) {
 		if (!ud.userExists(username) || rd.getRoom(roomID)==null) {return null;}//This should maybe throw an exception
+		Session sess = sf.openSession();
+		Permission p=null;
 		try {
-			Session sess = sf.openSession();
+			
 			String hql = "select P from Permission as P "
 					+ "where P.parchUser.username = ? and P.room.id = ?";
 			Query q = sess.createQuery(hql);
@@ -110,42 +119,22 @@ public class PermissionDao implements IPermission {
 			q.setInteger(1, roomID);
 //			q.setParameter(1, roomID);
 			
-			Permission p = (Permission) q.uniqueResult();
+			p = (Permission) q.uniqueResult();
 //			q.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 //			List aliasToValueMapList=q.getResultList();
-			sess.close();
+			
 			return p;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			p = null;
+		} finally {
+			sess.close();
 		}
+		return p;
 	}
 
 	@Override
 	public boolean inviteUser(int roomID, String username) {
-//		try {
-//			Session sess = sf.openSession();
-//			sess.beginTransaction();
-//			ParchUser user = ud.getUser(username);
-//			Room room = rd.getRoom(roomID);
-//			if (room!=null && user!=null) {
-//				Permission p = new Permission();
-//				p.setRoom(room);
-//				p.setUser(user);
-//				p.setPermissions("invited");
-//				sess.persist(p);
-//				sess.getTransaction().commit();
-//				sess.close();
-//				return true;
-//			} else {
-//				sess.close();
-//				return false;
-//			}
-//		} catch (HibernateException e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-		// Make sure the user isn't already a part of the room
 		Permission testperm = getPermission(username, roomID);
 		if (testperm==null) {
 			return setPermission(username, roomID, "invited")!=null;
@@ -156,9 +145,10 @@ public class PermissionDao implements IPermission {
 
 	@Override
 	public boolean deleteRoomPerms(int roomID) {
-
+		Session sess = sf.openSession();
+		boolean returnval = false;
 		try {
-			Session sess = sf.openSession();
+			
 			Transaction transaction = sess.beginTransaction();
 			try {
 				
@@ -172,19 +162,24 @@ public class PermissionDao implements IPermission {
 
 				transaction.commit();
 				sess.close();
-				return true;
+				returnval = true;
 			} catch (Throwable t) {
 				transaction.rollback();
+				
 				throw t;
 			}
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			returnval=false;
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			returnval=false;
+		} finally {
+			sess.close();
 		}
-		return false;
+		return returnval;
 	}
 
 }
