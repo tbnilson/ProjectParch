@@ -328,7 +328,7 @@ public class WebService {
 		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
 		List<Room> rooms = new ArrayList<Room>();
-		
+		System.out.println(perms);
 		if (perms!=null) {
 			for (Permission p : perms) {
 				if (!p.getPermissions().equals("invited") && !p.getPermissions().equals("banned")) {
@@ -336,6 +336,7 @@ public class WebService {
 				}
 			}
 			String jsonarray = MainService.toJsonArray(rooms);
+			pr.append(jsonarray).close();
 		} else {
 			pr.append("[]").close();
 		}
