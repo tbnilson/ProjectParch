@@ -22,29 +22,34 @@ public class PostDao implements IPost {
 
 	@Override
 	public Post getPost(int messageID) {
+		Post post=null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
+			
 			sess.beginTransaction();
 			
-			Post post = sess.get(Post.class, messageID);
+			post = sess.get(Post.class, messageID);
 			
 			sess.getTransaction().commit();
-			sess.close();
-			return post;
+			
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			post = null;
+		} finally {
+			sess.close();
 		}
+		return post;
 	}
 
 	@Override
 	public List<Post> getRoomPosts(int roomID) {
+		List<Post> posts = null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
-			
 			Criteria crit = sess.createCriteria(Post.class);
 			crit.add(Restrictions.like("ROOM_ID", roomID));
-			List<Post> posts = crit.list();
+			posts = crit.list();
 			
 			if (posts!=null) {
 				sess.close();
@@ -55,39 +60,43 @@ public class PostDao implements IPost {
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			posts = null;
+		} finally {
+			sess.close();
 		}
+		return posts;
 	}
 
 	@Override
 	public List<Post> getUserPosts(String username) {
+		List<Post> posts = null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
 			
 			String hql = "select P from Post as P "
 					+ "where P.parchUser.username=? ORDER BY P.timestamp DESC";
 			Query q = sess.createQuery(hql);
 			q.setParameter(0, username);
 			
-			List<Post> posts = q.getResultList();
+			posts = q.getResultList();
 			
-			if (posts!=null && posts.size()>0) {
-				sess.close();
-				return posts;
-			} else {
-				sess.close();
-				return null;
+			if (posts.size()==0) {
+				posts=null;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			posts = null;
+		} finally {
+			sess.close();
 		}
+		return posts;
 	}
 
 	@Override
 	public boolean deletePost(int messageID) {
+		boolean result=false;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
 			sess.beginTransaction();
 			
 			Post post = sess.get(Post.class, messageID);
@@ -96,17 +105,23 @@ public class PostDao implements IPost {
 			
 			sess.getTransaction().commit();
 			sess.close();
-			return true;
+			result = true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return false;
+			sess.getTransaction().rollback();
+			result = false;
+		} finally {
+			sess.close();
 		}
+		return result;
 	}
 
 	@Override
 	public boolean editPost(int messageID, String newmessage) {
+		boolean result=false;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
+			
 			sess.beginTransaction();
 			
 			Post post = sess.get(Post.class, messageID);
@@ -119,18 +134,24 @@ public class PostDao implements IPost {
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return false;
+			sess.getTransaction().rollback();
+			result = false;
+		} finally {
+			sess.close();
 		}
+		return result;
 	}
 
 	@Override
 	public Post makePost(Room room, ParchUser user, String message) {
 		if (room==null || user==null) {return null;}
+		Post post = new Post();
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
+			
 			sess.beginTransaction();
 			
-			Post post = new Post();
+			
 			
 			post.setUser(user);
 			post.setRoom(room);
@@ -139,12 +160,16 @@ public class PostDao implements IPost {
 			sess.persist(post);
 			
 			sess.getTransaction().commit();
-			sess.close();
-			return post;
+			
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			sess.getTransaction().rollback();
+			post = null;
+		} finally {
+			sess.close();
 		}
+		return post;
 	}
 
 	@Override
@@ -177,9 +202,9 @@ public class PostDao implements IPost {
 
 	@Override
 	public List<Post> getRoomPosts(int roomID, int startnum, int endnum) {
-		
+		List<Post> posts = null;
+		Session sess = sf.openSession();
 		try {
-			Session sess = sf.openSession();
 
 			String hql = "select P from Post as P "
 					+ "where P.room.id = ? ORDER BY P.timestamp DESC";
@@ -188,19 +213,18 @@ public class PostDao implements IPost {
 			q.setFirstResult(startnum);
 			q.setMaxResults(endnum);
 			
-			List<Post> posts = q.getResultList();
+			posts = q.getResultList();
 			
-			if (posts!=null && posts.size()>0) {
-				sess.close();
-				return posts;
-			} else {
-				sess.close();
-				return null;
+			if (posts.size()==0) {
+				posts=null;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			posts = null;
+		} finally {
+			sess.close();
 		}
+		return posts;
 	}
 
 }
