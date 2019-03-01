@@ -360,6 +360,7 @@ export class BoardComponent implements OnInit {
     if (inviteDiv.getAttribute("style") == 
     "z-index: 1; display: block; position: absolute; top: 60px; left: 300px") {
       inviteDiv.setAttribute("style", "z-index: 1; display: none");
+      
     }
     else {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px; left: 300px");
