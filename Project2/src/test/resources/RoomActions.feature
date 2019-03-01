@@ -10,7 +10,7 @@ Feature: User creates a new room invites another user to a room
 
     Examples: 
       | username | password | status         | roomname |
-      | admin    | admin    | succesfully    | testroom |
+      | test2    | testpass | succesfully    | testroom |
       | name2    |        7 | unsuccessfully | <>asdad  |
 
   Scenario Outline: User invites another user to a room
@@ -74,7 +74,7 @@ Feature: User creates a new room invites another user to a room
       | username | password | status      | roomname | banneduser |
       | admin    | admin    | succesfully | testroom | name2      |
 
-	Scenario Outline: User deletes a message
+  Scenario Outline: User deletes a message
     Given : The User logs in as "<username>", "<password>"
     Given : The user selects the room "<roomname>"
     When : The user attempts to delete "<roomname>"

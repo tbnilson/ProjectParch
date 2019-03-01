@@ -24,8 +24,10 @@ public class RoomActionsStepImplementations {
 	
 	@Given("^: The User logs in as \"([^\"]*)\", \"([^\"]*)\"$")
 	public void the_User_logs_in_as(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		driver.get("http://ec2-18-207-247-77.compute-1.amazonaws.com:4200/");
+		parchmain.getUsernameInput().sendKeys(arg1);
+		parchmain.getPasswordInput().sendKeys(arg2);
+		parchmain.getLoginBut().click();
 	}
 
 	@When("^: The user creates a room called \"([^\"]*)\"$")
