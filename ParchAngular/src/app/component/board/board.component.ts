@@ -58,9 +58,6 @@ export class BoardComponent implements OnInit {
     }
     );
 
-    
-
-    
   }
 
   update() : void{
@@ -70,6 +67,15 @@ export class BoardComponent implements OnInit {
     },
     (response) => {
     }
+    );
+
+    this.rServ.getAllUsers().subscribe( (response) => {
+        this.users = response;
+        //console.log(response);
+      }, 
+      (response) => {
+
+      }
     );
 
     if (this.selectedBoard.roomID != -1) {
@@ -182,6 +188,7 @@ export class BoardComponent implements OnInit {
   postMessage(){
     this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, this.newPostText + "").subscribe(
       (response)=>{
+        this.update();
         //response is the post they added to the DB
         //so you can probably just update 
       }
@@ -190,6 +197,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
+    
   }
 
   getMessagesBefore(start:number, num:number,roomID:number){
@@ -210,7 +218,7 @@ export class BoardComponent implements OnInit {
     let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
     editPost.subscribe(
       (response)=>{
-        console.log(response)
+        //console.log(response)
         this.update();
       },
       (response)=>{
@@ -221,15 +229,14 @@ export class BoardComponent implements OnInit {
           data: {message: "The post could not be edited"}
         })
       })
+      
   }
 
   deletePost(id : number) : void {
-    console.log(id);
     //delete post
     let deletePost: Observable<boolean>=this.pServ.deleteMessage(id, this.user + "");
     deletePost.subscribe(
       (response)=>{
-        console.log(response)
         this.update();
       },
       (response)=>{
@@ -242,7 +249,6 @@ export class BoardComponent implements OnInit {
         // })
       }
     )
-    this.update();
   }
 
   //----------------------------Permission Operations

@@ -43,6 +43,7 @@ div.NavBar {
     background: rgb(0, 0, 10);
     border: solid rgb(50, 50 ,50);
     border-radius: 10px;
+    font-weight: bold;
 }
 .Interaction:disabled {
     font-size: 16px;
@@ -50,6 +51,7 @@ div.NavBar {
     background: rgb(0, 0, 10);
     border: solid rgb(50, 50 ,50);
     border-radius: 10px;
+    font-weight: bold;
 }
 .InteractionFree {
     font-size: 16px;
@@ -59,7 +61,7 @@ div.NavBar {
     background: rgb(0, 0, 10);
     outline: solid 10px rgba(100, 100, 150, 0.8);
     padding: 10px;
-    
+    font-weight: bold;
 }
 
 
