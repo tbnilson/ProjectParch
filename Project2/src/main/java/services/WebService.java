@@ -370,6 +370,7 @@ public class WebService {
 				}
 			}
 			String jsonarray = MainService.toJsonArray(rooms);
+			pr.append(jsonarray).close();
 		} else {
 			pr.append("[]").close();
 		}
