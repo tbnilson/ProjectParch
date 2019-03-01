@@ -147,7 +147,7 @@ export class BoardComponent implements OnInit {
 
   createBoard() : void {
     //create board
-    this.rServ.createRoom(this.user,  encodeURI(this.newBoardText)).subscribe( (response) => {
+    this.rServ.createRoom(this.user,  escape(this.newBoardText)).subscribe( (response) => {
       this.selectedBoard = response;
       this.update();
     },
@@ -186,7 +186,7 @@ export class BoardComponent implements OnInit {
   }
 
   postMessage(){
-    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, encodeURI(this.newPostText) ).subscribe(
+    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, escape(this.newPostText) ).subscribe(
       (response)=>{
         this.update();
         //response is the post they added to the DB
