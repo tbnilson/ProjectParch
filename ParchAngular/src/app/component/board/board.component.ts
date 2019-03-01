@@ -82,7 +82,18 @@ export class BoardComponent implements OnInit {
     this.update();
   }
 
-  
+  getNewMessages(postID:number){
+    this.pServ.getNewMessages(postID).subscribe(
+      (response)=>{
+        //response is a json array representing all posts created after postID in the same room
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
   getMessagesBefore(start:number, num:number,roomID:number){
     let recentMessages: Observable<Array<Post>> = this.pServ.getMessagesBefore(start,num,roomID);
     recentMessages.subscribe(
@@ -99,14 +110,7 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  createPost() : void {
-    
-    //create post
 
-    
-
-    this.update();
-  }
   editPost(id:number,newmessage:string) : void {
     let editPost: Observable<boolean>=this.pServ.editMessage(id,this.username,newmessage);
     editPost.subscribe(
@@ -158,6 +162,18 @@ export class BoardComponent implements OnInit {
     // }
   }
 
+  getRoomUsers(roomID:number){
+    this.rServ.getRoomUsers(roomID).subscribe(
+      (response)=>{
+        //response is A json array of all users that are admins, moderators, or users of a room.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
   selectBoard(boardText : String) {
     //select board
     for (let i = 0 ; i < this.selectedUserBoards.length; i++) {
@@ -184,7 +200,7 @@ export class BoardComponent implements OnInit {
     this.pServ.postMessage(username,roomID,message).subscribe(
       (response)=>{
         //response is the post they added to the DB
-        //so you can probably just update the
+        //so you can probably just update 
       }
       ,
       (response)=>{
@@ -208,6 +224,66 @@ export class BoardComponent implements OnInit {
     this.showCreateBoard();
     
 
+  }
+
+  deleteRoom(admin:string,roomID:number){
+    this.rServ.deleteRoom(admin,roomID).subscribe(
+      (response)=>{
+        //response is "true" if the room was successfully deleted, "false" otherwise.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  banUser(roomID:number,admin:string,banneduser:string){
+    this.rServ.banUser(roomID,admin,banneduser).subscribe(
+      (response)=>{
+        //response is "true" if the user was successfully banned, "false" otherwise.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  getBannedUsers(roomID:number){
+    this.rServ.getBannedUsers(roomID).subscribe(
+      (response)=>{
+        //response is a list of User objects which have been banned from the specified room.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  unBanUser(roomID,admin,banneduser){
+    this.rServ.unBanUser(roomID,admin,banneduser).subscribe(
+      (response)=>{
+        //response is "true" if the user was given "invited" permissions, "false" otherwise
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
+  }
+
+  getInvites(username:string){
+    this.rServ.getInvites(username).subscribe(
+      (response)=>{
+        //response is a list of Permission object for the specified user where their permissions are set as "invited". Can return an empty list.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
   }
 
   acceptInvitation(roomID:number, username:string){
@@ -248,12 +324,16 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  rejectInvitation(invite : Permission) : void {
-
-    this.update();
-    if (this.invites.length == 0) {
-      this.showInvites();
-    }
+  rejectInvitation(roomID:number,username:string) : void {
+    this.rServ.rejectInvite(roomID,username).subscribe(
+      (response)=>{
+        //response is "true" if the user's invitation was successfuly rejected, "false" otherwise.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
   }
 
   showInvites() : void {
@@ -264,6 +344,18 @@ export class BoardComponent implements OnInit {
     else if (this.invites.length != 0) {
       inviteDiv.setAttribute("style", "z-index: 1; display: block; position: absolute; top: 60px");
     }
+  }
+
+  makeModerator(roomID:number,admin:string,user:string){
+    this.rServ.makeModerator(roomID,admin,user).subscribe(
+      (response)=>{
+        //response is "true" if the user was successfully made into a mod, "false" otherwise.
+      }
+      ,
+      (response)=>{
+        console.log(response);
+      }
+    )
   }
 
   changePermission() : void {
