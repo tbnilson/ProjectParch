@@ -38,6 +38,7 @@ public class RoomActionsStepImplementations {
 	public void the_user_creates_a_room_called(String arg1) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    WebElement createBoardButton = boardmain.getCreateBoardButton();
+	    System.out.println(createBoardButton.getText());
 	    createBoardButton.click();
 	    WebElement addBoardButton = boardmain.getAddNewBoardButton();
 	    WebElement newBoardNameTextbox = boardmain.getNewBoardNameTextbox();
