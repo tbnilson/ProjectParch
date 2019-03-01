@@ -348,21 +348,31 @@ public class WebService {
 	 * Writes a jsonarray representing the rooms where a user has been invited.
 	 */
 	public static void getUserInvites(HttpServletRequest request, HttpServletResponse response) {
+		PrintWriter pr;
+		
+		try {
+			 pr = response.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return;
+		}
+		
 		String username = request.getParameter("username");//Maybe get from session
 		List<Permission> perms = MainService.getUserPerms(username);
 		List<Room> rooms = new ArrayList<Room>();
-		for (Permission p : perms) {
-			if (p.getPermissions().equals("invited")) {
-				rooms.add(p.getRoom());
+		
+		if (perms!=null) {
+			for (Permission p : perms) {
+				if (p.getPermissions().equals("invited")) {
+					rooms.add(p.getRoom());
+				}
 			}
+			String jsonarray = MainService.toJsonArray(rooms);
+		} else {
+			pr.append("[]").close();
 		}
-		String jsonarray = MainService.toJsonArray(rooms);
-		try {
-			response.getWriter().append(jsonarray).close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	/**
