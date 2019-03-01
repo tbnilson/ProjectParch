@@ -2,6 +2,8 @@ package dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -144,8 +146,10 @@ public class UserDao implements IUser {
 	public List<ParchUser> getAllUsers() {
 		try {
 			Session sess = sf.openSession();
-			Criteria crit = sess.createCriteria(ParchUser.class);
-			return crit.list();
+			String hql = "FROM ParchUser";
+			Query q = sess.createQuery(hql);
+			
+			return q.getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
