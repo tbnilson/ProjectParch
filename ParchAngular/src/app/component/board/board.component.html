@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<div style="background: rgb(15, 15, 15)">
+<div style="background: rgb(15, 15, 15); border: solid rgb(0, 0, 100); border-width: 0px 0px 5px 0px">
   <div class = "NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
@@ -45,7 +45,7 @@
     <a routerLink="/login" style = "font-size: 12px" name="logout" (click)="logout()">Log Out</a>
   </div>
 </div>
-<div class="PostBottomless" style = "border-radius: 0px">
+<div class="PostBorderless" style = "border-radius: 0px">
   <!-- Board Creator -->
   <div>
     <button id="addNewBoardButton" class="Interaction" (click) = "showCreateBoard()">Add New</button>
@@ -68,9 +68,11 @@
     </div>
   </div>
   <!-- Room Users view -->
-  <div style="display: inline-block" class="RoomUsers">
-    <div *ngFor = "let rusers of selectedBoardUsers.slice().reverse()">
-      <span>{{rusers.username}}: {{rusers.permissions}}</span>
+  <div style="display: inline-block" class="Post" style="float: right">
+    <div>
+      <div *ngFor = "let rusers of selectedBoardUsers.slice().reverse()">
+        <span><span style="font-weight: bold">{{rusers.username}}:</span> {{rusers.permissions}}</span>
+      </div>
     </div>
   </div>
   <!-- Post View -->
