@@ -26,6 +26,7 @@ public class RoomActionsStepImplementations {
 	static ChromeDriver driver = new ChromeDriver();
 	static ParchMain parchmain = new ParchMain(driver);
 	static BoardMain boardmain = new BoardMain(driver);
+	private int numrooms=0;
 	
 	@Given("^: The User logs in as \"([^\"]*)\", \"([^\"]*)\"$")
 	public void the_User_logs_in_as(String arg1, String arg2) throws Throwable {
@@ -37,6 +38,9 @@ public class RoomActionsStepImplementations {
 
 	@When("^: The user creates a room called \"([^\"]*)\"$")
 	public void the_user_creates_a_room_called(String arg1) throws Throwable {
+		List<WebElement> roomSelectors = boardmain.getRoomList(false);
+		numrooms = roomSelectors.size();
+		
 		WebElement addBoardButton = boardmain.getAddNewBoardButton();
 		MyLogger.logger.debug(driver.getCurrentUrl());
 	    MyLogger.logger.debug(addBoardButton);
@@ -45,16 +49,26 @@ public class RoomActionsStepImplementations {
 	    WebElement newBoardNameTextbox = boardmain.getNewBoardNameTextbox();
 	    System.out.println(newBoardNameTextbox.getAttribute("class"));
 	    newBoardNameTextbox.sendKeys(arg1);
-	    
+	    System.out.println(newBoardNameTextbox.getText());
 	    createBoardButton.click();
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" created$")
-	public void is_created(String arg1, String arg2) throws Throwable {
-	    List<WebElement> roomSelectors = boardmain.getRoomList();
-	    Assert.assertTrue(roomSelectors.size()>0);
-	    for (WebElement webElement : roomSelectors) {
-			System.out.println(webElement.getText() + "------------\n");
+	public void is_created(String arg1, String successString) throws Throwable {
+		boolean success=false;
+		if (successString.equals("successfully")) {
+			success=true;
+		} else if (successString.equals("unsuccessfully")) {
+			success=false;
+		}
+		
+	    List<WebElement> roomSelectors = boardmain.getRoomList(true);
+	    
+	    Assert.assertEquals(roomSelectors.size() == (numrooms + 1), success);
+		
+		for (WebElement webElement : roomSelectors) {
+			System.out.println("Baord: " + webElement.getText());
+			
 		}
 	}
 

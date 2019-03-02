@@ -10,7 +10,7 @@ Feature: User creates a new room invites another user to a room
 
     Examples: 
       | username | password | status       | roomname |
-      | test21   | testpass | succesfully  | testroom |
+      | test21   | testpass | successfully | testroom |
       | test22   | testpass | successfully | <>asdad  |
 
   Scenario Outline: User invites another user to a room
