@@ -720,7 +720,9 @@ public class WebService {
 
 			List<Permission> invites = new ArrayList<Permission>();
 			for (int i = 0; i < perms.size(); i++) {
+//				System.out.println(perms.get(i).toJsonString());
 				if (perms.get(i).getPermissions().equals("invited")) {
+//					System.out.println("got inside if");
 					invites.add(perms.get(i));
 				}
 			}
