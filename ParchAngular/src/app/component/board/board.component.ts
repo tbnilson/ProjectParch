@@ -58,7 +58,12 @@ export class BoardComponent implements OnInit {
     let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
-      this.update();
+      setInterval(
+        ()=>{
+          this.update();
+        },
+        3000
+      )
     },
     (response) => {
       this.router.navigateByUrl("login");
