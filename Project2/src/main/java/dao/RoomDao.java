@@ -62,7 +62,7 @@ public class RoomDao implements IRoom {
 			room = sess.get(Room.class, roomID);
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			room = null;
 		} finally {
 			sess.close();
 		}
@@ -76,9 +76,12 @@ public class RoomDao implements IRoom {
 		List<ParchUser> users = new ArrayList<ParchUser>();
 		try {
 			Room room = sess.get(Room.class, roomID);
-			if (room==null) {return null;}
-			for (Permission p : room.getPermissions()) {
-				users.add(p.getUser());
+			if (room!=null) {
+				for (Permission p : room.getPermissions()) {
+					users.add(p.getUser());
+				}
+			} else {
+				users=null;
 			}
 			
 		} catch (HibernateException e) {
