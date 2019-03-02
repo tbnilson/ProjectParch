@@ -34,7 +34,14 @@ export class BoardComponent implements OnInit {
   newBoardText : string = "";
   newPostText : string = "";
   permType : string = "";
-  targetUser : User = null;
+  targetUser : string="";
+
+  options = [
+    {name: "User"},
+    {name: "Mod"},
+    {name: "Remove Mod"},
+    {name: "Ban"}
+  ]
 
   
   constructor(private router: Router, 
@@ -66,6 +73,7 @@ export class BoardComponent implements OnInit {
     //update boardlist, invites, posts
     this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
       this.selectedUserBoards = response;
+      
     },
     (response) => {
       console.log(response);
@@ -323,13 +331,15 @@ export class BoardComponent implements OnInit {
   //###################################################################################################
   //
   inviteUser(roomID:number, inviter:string, invitee:string){
-    this.rServ.inviteUser(this.selectedBoard.roomID, this.user, invitee).subscribe(
+    this.rServ.inviteUser(roomID, inviter, invitee).subscribe(
       (response)=>{
         if(response){
           //true when invite sent successfully
+          console.log(response);
         }
         else{
           //false if the user is already in the room or banned
+          console.log(response);
         }
 
       }
@@ -403,9 +413,9 @@ export class BoardComponent implements OnInit {
     if (this.permType == "" || this.targetUser == null || this.selectedBoard.roomID == -1) {
       return;
     }
-    if (this.permType == "user") {
-      console.log("user");
-      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser.username);
+    if (this.permType == "User") {
+      console.log(this.permType);
+      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser);
     }
   }
 

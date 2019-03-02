@@ -2,7 +2,7 @@ export class User {
     username:string;
     email:string;
     
-    constructor(em:string,unme:string) {
+    constructor(unme:string,em:string) {
       this.username=unme;
       this.email=em;
     }
