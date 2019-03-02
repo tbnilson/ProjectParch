@@ -21,7 +21,7 @@ Feature: User creates a new room invites another user to a room
 
     Examples: 
       | username | password | roomname | invitee | status       |
-      | admin    | admin    | testroom | name2   | successfully |
+      | test22   | testpass | <>asdad  | test21  | successfully |
 
   Scenario Outline: User views a room
     Given : The User logs in as "<username>", "<password>"

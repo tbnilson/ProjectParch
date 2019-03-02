@@ -176,6 +176,7 @@ public class MainService {
 
 	public static boolean deleteRoom(int roomID, String adminname) {
 		Permission adminperm = permd.getPermission(adminname, roomID);
+		
 		if (adminperm!=null && adminperm.getPermissions().equals("admin")) {
 			return rd.deleteRoom(roomID);
 		} else {

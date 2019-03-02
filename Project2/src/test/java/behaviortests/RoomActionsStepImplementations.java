@@ -42,6 +42,7 @@ public class RoomActionsStepImplementations {
 		numrooms = roomSelectors.size();
 		
 		WebElement addBoardButton = boardmain.getAddNewBoardButton();
+		
 		MyLogger.logger.debug(driver.getCurrentUrl());
 	    MyLogger.logger.debug(addBoardButton);
 	    addBoardButton.click();
@@ -73,9 +74,14 @@ public class RoomActionsStepImplementations {
 	}
 
 	@Given("^: The user selects the room \"([^\"]*)\"$")
-	public void the_user_selects_the_room(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void the_user_selects_the_room(String roomname) throws Throwable {
+		List<WebElement> roomSelectors = boardmain.getRoomList(false);
+		for (WebElement rs : roomSelectors) {
+			if (rs.getText().equals(roomname)) {
+				rs.click();
+				break;
+			}
+		}
 	}
 
 	@When("^: The user invites user \"([^\"]*)\"$")
