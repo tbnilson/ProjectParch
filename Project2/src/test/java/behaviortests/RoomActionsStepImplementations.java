@@ -139,9 +139,15 @@ public class RoomActionsStepImplementations {
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" displayed$")
-	public void is_displayed(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void is_displayed(String boardname, String successString) throws Throwable {
+		boolean success=false;
+		if (successString.equals("successfully")) {
+			success=true;
+		} else if (successString.equals("unsuccessfully")) {
+			success=false;
+		}
+	    WebElement boardelem = boardmain.getBoardNameDisplay();
+	    Assert.assertEquals(boardelem.getText().trim().equals(boardname), success);
 	}
 
 	@Given("^: The user types \"([^\"]*)\"Hi\"([^\"]*)\" in room$")
