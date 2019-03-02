@@ -299,18 +299,20 @@ export class BoardComponent implements OnInit {
     this.update();
   }
 
-  getInvites(username:string){
-    this.rServ.getInvites(username).subscribe(
+  getInvites(){
+    this.rServ.getInvites(this.user).subscribe(
       (response)=>{
         //response is a list of Permission object for the specified user 
         //where their permissions are set as "invited". Can return an empty list.
+        console.log(response);
+        this.invites = response;
+        this.showInvites();
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
   //
@@ -342,14 +344,17 @@ export class BoardComponent implements OnInit {
     this.update();
   }
   
-  acceptInvitation(roomID:number, username:string){
+  acceptInvitation(roomID:number,username:string){
     this.rServ.acceptInvite(roomID, username).subscribe(
       (response)=>{
         if(response){
+          console.log(response);
+          this.update();
           
         }
         else{
           //user is banned
+          console.log(response);
           
         }
       }
@@ -359,13 +364,13 @@ export class BoardComponent implements OnInit {
 
       }
     )
-    this.update();
   }
 
   rejectInvitation(roomID:number,username:string) : void {
     this.rServ.rejectInvite(roomID,username).subscribe(
       (response)=>{
         //response is "true" if the user's invitation was successfuly rejected, "false" otherwise.
+        console.log(response);
       }
       ,
       (response)=>{
