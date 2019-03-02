@@ -715,12 +715,13 @@ public class WebService {
 		}
 		String username = request.getParameter("username");
 		List<Permission> perms = MainService.getUserPerms(username);
+		List<Permission> invites = new ArrayList<Permission>();
 		for (int i = 0; i < perms.size(); i++) {
-			if (!perms.get(i).getPermissions().equals("invited")) {
-				perms.remove(i);
+			if (perms.get(i).getPermissions().equals("invited")) {
+				invites.add(perms.get(i));
 			}
 		}
-		String jsonarray = MainService.toJsonArray(perms);
+		String jsonarray = MainService.toJsonArray(invites);
 		pr.append(jsonarray).close();
 	}
 

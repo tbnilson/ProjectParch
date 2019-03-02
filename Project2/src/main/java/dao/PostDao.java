@@ -51,12 +51,8 @@ public class PostDao implements IPost {
 			crit.add(Restrictions.like("ROOM_ID", roomID));
 			posts = crit.list();
 			
-			if (posts!=null) {
-				sess.close();
-				return posts;
-			} else {
-				sess.close();
-				return null;
+			if (posts.size()==0) {
+				posts=null;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -130,8 +126,7 @@ public class PostDao implements IPost {
 			sess.update(post);
 			
 			sess.getTransaction().commit();
-			sess.close();
-			return true;
+			
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			sess.getTransaction().rollback();
@@ -175,9 +170,15 @@ public class PostDao implements IPost {
 	@Override
 	public List<Post> getNewPosts(int postID) {
 		Post latestpost = getPost(postID);
-		if (latestpost==null) {return null;}
+		if (latestpost==null) {
+			return null;
+		}
+
+		Session sess = sf.openSession();
+		List<Post> posts = null;
+		
 		try {
-			Session sess = sf.openSession();
+			
 
 			String hql = "select P from Post as P "
 					+ "where P.room.id = ? and P.timestamp>? ORDER BY P.timestamp DESC";
@@ -185,19 +186,18 @@ public class PostDao implements IPost {
 			q.setParameter(0, latestpost.getRoom().getId());
 			q.setParameter(1, latestpost.getTimestamp());
 			
-			List<Post> posts = q.getResultList();
+			posts = q.getResultList();
 			
-			if (posts!=null) {
-				sess.close();
-				return posts;
-			} else {
-				sess.close();
-				return null;
+			if (posts.size()==0) {
+				posts=null;
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return null;
+			posts = null;
+		} finally {
+			sess.close();
 		}
+		return posts;
 	}
 
 	@Override

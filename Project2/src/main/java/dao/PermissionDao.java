@@ -122,8 +122,6 @@ public class PermissionDao implements IPermission {
 			p = (Permission) q.uniqueResult();
 //			q.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
 //			List aliasToValueMapList=q.getResultList();
-			
-			return p;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			p = null;
