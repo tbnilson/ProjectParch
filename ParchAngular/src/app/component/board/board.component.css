@@ -5,30 +5,22 @@ button {
     box-shadow: 0;
     border: solid rgb(40, 40, 255);
 }
-:host ::ng-deep div.Post {
+/* :host ::ng-deep div.Post {
     font-size: 16px;
     display: block;
     border: solid rgb(0, 0, 100);
     border-width: 5px 5px 0px 5px;
     background: rgb(0, 0, 10);
     border-radius: 10px;
-}
-div.RoomUsers{
-    font-size: 16px;
-    display: block;
-    border: solid rgb(0, 0, 100);
-    border-width: 5px 5px 0px 5px;
-    background: rgb(0, 0, 10);
-    border-radius: 10px;
-    float: right;
-}
+} */
 div.Post {
     font-size: 16px;
     display: block;
     border: solid rgb(0, 0, 100);
-    border-width: 5px 5px 0px 5px;
+    border-width: 5px 5px 5px 5px;
     background: rgb(0, 0, 10);
     border-radius: 10px;
+    padding: 10px;
 }
 div.PostBottomless {
     font-size: 16px;
@@ -36,6 +28,14 @@ div.PostBottomless {
     border: 5px solid rgb(0, 0, 100);
     background: rgb(0, 0, 10);
     border-radius: 10px;
+    padding: 10px;
+}
+div.PostBorderless {
+    font-size: 16px;
+    display: block;
+    background: rgb(0, 0, 10);
+    border-radius: 10px;
+    padding: 10px;
 }
 div.NavBar {
     display: inline-block;
