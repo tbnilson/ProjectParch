@@ -68,6 +68,7 @@ export class BoardComponent implements OnInit {
       this.selectedUserBoards = response;
     },
     (response) => {
+      console.log(response);
     }
     );
 
@@ -82,12 +83,12 @@ export class BoardComponent implements OnInit {
         //console.log(response);
       }, 
       (response) => {
+        console.log(response);
 
       }
     );
 
 
-    this.getInvites(this.user);
 
     if (this.selectedBoard.roomID != -1) {
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
@@ -159,8 +160,7 @@ export class BoardComponent implements OnInit {
       this.update();
     },
     (response) => {
-      this.selectedBoard = response;
-      this.update();
+      console.log(response);
     }
     );
 
@@ -270,7 +270,6 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   getBannedUsers(roomID:number){
@@ -283,7 +282,6 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   unBanUser(roomID,admin,banneduser){
@@ -296,7 +294,6 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   getInvites(){
@@ -341,7 +338,7 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
+
   }
   
   acceptInvitation(roomID:number,username:string){
@@ -377,7 +374,6 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   showInvites() : void {
@@ -401,7 +397,6 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   changePermission() : void {
