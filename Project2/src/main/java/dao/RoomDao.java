@@ -13,6 +13,7 @@ import model.ParchUser;
 import model.Permission;
 import model.Room;
 import util.HibernateUtil;
+import util.MyLogger;
 
 public class RoomDao implements IRoom {
 	

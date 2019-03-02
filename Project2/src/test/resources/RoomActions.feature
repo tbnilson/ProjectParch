@@ -9,9 +9,9 @@ Feature: User creates a new room invites another user to a room
     Then : "<roomname>" is "<status>" created
 
     Examples: 
-      | username | password | status         | roomname |
-      | test2    | testpass | succesfully    | testroom |
-      | name2    |        7 | unsuccessfully | <>asdad  |
+      | username | password | status       | roomname  |
+      | test21   | testpass | successfully | testroom2 |
+      | test22   | testpass | successfully | <>asdad2  |
 
   Scenario Outline: User invites another user to a room
     Given : The User logs in as "<username>", "<password>"
@@ -21,7 +21,7 @@ Feature: User creates a new room invites another user to a room
 
     Examples: 
       | username | password | roomname | invitee | status       |
-      | admin    | admin    | testroom | name2   | successfully |
+      | test22   | testpass | <>asdad  | test21  | successfully |
 
   Scenario Outline: User views a room
     Given : The User logs in as "<username>", "<password>"
@@ -33,37 +33,6 @@ Feature: User creates a new room invites another user to a room
       | admin    | admin    | succesfully    | testroom |
       | name2    |        7 | unsuccessfully | <>asdad  |
 
-  Scenario Outline: User posts a message to a room
-    Given : The User logs in as "<username>", "<password>"
-    Given : The user selects the room "<roomname>"
-    Given : The user types "<message>" in room
-    When : The user "<action>"
-    Then : The message is "<status>" displayed
-
-    Examples: 
-      | username | password | status      | roomname | message |
-      | admin    | admin    | succesfully | testroom | "Hi"    |
-
-  Scenario Outline: User deletes a message
-    Given : The User logs in as "<username>", "<password>"
-    Given : The user selects the room "<roomname>"
-    When : The user attempts to delete "<messageID>"
-    Then : The message "<messageID>" is "<status>" deleted
-
-    Examples: 
-      | username | password | status      | roomname | messageID |
-      | admin    | admin    | succesfully | testroom |        12 |
-
-  Scenario Outline: User edits a message
-    Given : The User logs in as "<username>", "<password>"
-    Given : The user selects the room "<roomname>"
-    When : The user attempts to edit "<messageID>" with new text "<newmessage>"
-    Then : The message "<messageID>" is "<status>" edited.
-
-    Examples: 
-      | username | password | status      | roomname | messageID | newmessage |
-      | admin    | admin    | succesfully | testroom |        12 | "Hi!"      |
-
   Scenario Outline: User bans another user from a room
     Given : The User logs in as "<username>", "<password>"
     Given : The user selects the room "<roomname>"
@@ -73,13 +42,3 @@ Feature: User creates a new room invites another user to a room
     Examples: 
       | username | password | status      | roomname | banneduser |
       | admin    | admin    | succesfully | testroom | name2      |
-
-  Scenario Outline: User deletes a message
-    Given : The User logs in as "<username>", "<password>"
-    Given : The user selects the room "<roomname>"
-    When : The user attempts to delete "<roomname>"
-    Then : The room "<roomname>" is "<status>" deleted
-
-    Examples: 
-      | username | password | status      | roomname |
-      | admin    | admin    | succesfully | testroom |

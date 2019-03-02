@@ -17,6 +17,7 @@ import model.ParchUser;
 import model.Permission;
 import model.Room;
 import util.HibernateUtil;
+import util.MyLogger;
 
 public class PermissionDao implements IPermission {
 	
@@ -145,6 +146,7 @@ public class PermissionDao implements IPermission {
 	public boolean deleteRoomPerms(int roomID) {
 		Session sess = sf.openSession();
 		boolean returnval = false;
+		System.out.println("Deleting...");
 		try {
 			
 			Transaction transaction = sess.beginTransaction();
@@ -152,27 +154,27 @@ public class PermissionDao implements IPermission {
 				
 				
 				// your code
-				String hql = "delete from Permission where roomID=?";
+				String hql = "delete from Permission as P where P.room.id=?";
 				Query query = sess.createQuery(hql);
 				query.setParameter(0, roomID);
-				System.out.println(query.executeUpdate());
+				System.out.println("Deleted Perms: " + query.executeUpdate());
 				// your code end
 
 				transaction.commit();
-				sess.close();
+				
 				returnval = true;
 			} catch (Throwable t) {
 				transaction.rollback();
-				
+				System.out.println(t.getLocalizedMessage());
 				throw t;
 			}
 		} catch (HibernateException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MyLogger.logger.trace(e);
 			returnval=false;
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			MyLogger.logger.trace(e);
 			returnval=false;
 		} finally {
 			sess.close();
