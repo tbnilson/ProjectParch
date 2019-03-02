@@ -117,9 +117,24 @@ public class BoardMain {
 		}
 	}
 
-	public WebElement getPermissionsDiv() {
+	public WebElement getPermissionsShow() {
 		// TODO Auto-generated method stub
-		return null;
+		return driver.findElement(By.id("permissionsShow"));
+	}
+
+	public WebElement getInviteUserSelector() {
+		// TODO Auto-generated method stub
+		return driver.findElement(By.id("inviteUserSelector"));
+	}
+
+	public WebElement getPermissionsSelector() {
+		// TODO Auto-generated method stub
+		return driver.findElement(By.id("permSelector"));
+	}
+
+	public WebElement getPermissionsButton() {
+		// TODO Auto-generated method stub
+		return driver.findElement(By.id("permissionButton"));
 	}
 	
 }

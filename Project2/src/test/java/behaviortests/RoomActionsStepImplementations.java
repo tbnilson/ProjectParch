@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -12,6 +13,9 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import dao.IPermission;
+import dao.PermissionDao;
+import model.Permission;
 import pages.BoardMain;
 import pages.ParchMain;
 import util.MyLogger;
@@ -86,13 +90,52 @@ public class RoomActionsStepImplementations {
 
 	@When("^: The user invites user \"([^\"]*)\"$")
 	public void the_user_invites_user(String invitee) throws Throwable {
+	    WebElement permdiv = boardmain.getPermissionsShow();
+	    permdiv.click();
+	    WebElement userselect = boardmain.getInviteUserSelector();
+	    WebElement permselect = boardmain.getPermissionsSelector();
+	    userselect.click();
+	    
+	    List<WebElement> userelems = userselect.findElements(By.tagName("option"));
+	    
+	    for (WebElement webElement : userelems) {
+	    	
+			if (webElement.getText().trim().equals(invitee)) {
+				webElement.click();
+			}
+		}
+	    permselect.click();
+	    List<WebElement> permelems = permselect.findElements(By.tagName("option"));
+	    
+	    for (WebElement webElement : permelems) {
+	    	System.out.println(webElement.getText().trim() + " : " + webElement.getText().trim().equals("User"));
+			if (webElement.getText().trim().equals("User")) {
+				webElement.click();
+			}
+		}
+	    
+	    boardmain.getPermissionsButton().click();
 	    
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" invited to \"([^\"]*)\"$")
-	public void is_invited_to(String arg1, String arg2, String arg3) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void is_invited_to(String invitee, String successString, String roomname) throws Throwable {
+		boolean success=false;
+		if (successString.equals("successfully")) {
+			success=true;
+		} else if (successString.equals("unsuccessfully")) {
+			success=false;
+		}
+		
+	    IPermission permd = new PermissionDao();
+	    List<Permission> perms = permd.getUserPermissions(invitee);
+	    boolean assertval=false;
+	    for (Permission permission : perms) {
+			if (permission.getRoom().getRoomname().equals(roomname) && permission.getPermissions().equals("invited")) {
+				assertval=true;
+			}
+		}
+	    Assert.assertEquals(assertval, success);
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" displayed$")
