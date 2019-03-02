@@ -1,30 +1,30 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <div style="background: rgb(15, 15, 15)">
-  <div class = "NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
-  <div class = "NavBar">
-    <div >
-      <span (click) = "getInvites()">
+  <div class="NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
+  <div class="NavBar">
+    <div>
+      <span (click)="getInvites()">
         Invitations
       </span>
-      <span id = "permissionsShow" (click) = "showInviteCreator()">
+      <span id="permissionsShow" (click)="showInviteCreator()">
         Permissions
       </span>
     </div>
     <!-- Invitation Viewer -->
-    <div class="InteractionFree" id = "invites" style = "z-index: 1; display: none;">
-      <div *ngFor = "let invite of invites">
+    <div class="InteractionFree" id="invites" style="z-index: 1; display: none;">
+      <div *ngFor="let invite of invites">
         <span>{{invite.roomID}}</span>
-        <button class="Interaction" (click) = acceptInvitation(invite.roomID,invite.username)>Accept</button>
-        <button class="Interaction" (click) = rejectInvitation(invite.roomID,invite.username)>Reject</button>
+        <button class="Interaction" (click)=acceptInvitation(invite.roomID,invite.username)>Accept</button>
+        <button class="Interaction" (click)=rejectInvitation(invite.roomID,invite.username)>Reject</button>
       </div>
     </div>
     <!-- Invite Creator -->
-    <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
+    <div class="InteractionFree" id="inviteCreator" style="z-index: 2; display: none">
       <select [(ngModel)]="targetUser" class="Interaction" id="inviteUserSelector">
-          <option value="" selected disabled></option>
-          <option *ngFor="let u of users">
-            {{u.username}}
-          </option>
+        <option value="" selected disabled></option>
+        <option *ngFor="let u of users">
+          {{u.username}}
+        </option>
       </select>
       <!-- Certain options would only be available to users with certain permissions. -->
       <select [(ngModel)]="permType" class="Interaction" id="permSelector">
@@ -32,64 +32,88 @@
           {{o.name}}
         </option>
       </select>
-      <br/>
+      <br />
       <span id="permissionError"></span>
-      <button class="Interaction" id = "permissionButton" (click) = "changePermission()" disabled="true">
+      <button class="Interaction" id="permissionButton" (click)="changePermission()" disabled="true">
         Send
       </button>
     </div>
   </div>
   <!-- Log in section. -->
-  <div class = "NavBar">
+  <div class="NavBar">
     <span id="currentUsernameDisplay">{{user}}</span>
-    <a routerLink="/login" style = "font-size: 12px" name="logout" (click)="logout()">Log Out</a>
+    <a routerLink="/login" style="font-size: 12px" name="logout" (click)="logout()">Log Out</a>
   </div>
 </div>
-<div class="PostBottomless" style = "border-radius: 0px">
+<div class="PostBottomless" style="border-radius: 0px">
   <!-- Board Creator -->
   <div>
-    <button id="addNewBoardButton" class="Interaction" (click) = "showCreateBoard()">Add New</button>
-    <br/>
-    <div id="createBoard" style= "display: none">
+    <button id="addNewBoardButton" class="Interaction" (click)="showCreateBoard()">Add New</button>
+    <br />
+    <div id="createBoard" style="display: none">
       <div style="display: inline-block">
-        <input class="Interaction" [(ngModel)] = "newBoardText" style = "max-width: 500px;
-          min-width: 100px"/>
+        <input class="Interaction" [(ngModel)]="newBoardText" style="max-width: 500px;
+          min-width: 100px" />
       </div>
       <div style="display: inline-block">
-        <button id="createBoardButton" class="Interaction" (click) = "createBoard()">Create Board</button>
+        <button id="createBoardButton" class="Interaction" (click)="createBoard()">Create Board</button>
+      </div>
+    </div>
+    <!-- Delete Board -->
+    <button id="deleteRoomButton" class="Interaction" (click)="showDeleteBoard()">Delete Room</button>
+    <br />
+    <div id="deleteRoom" style="display:none">
+      <div style="display:inline-block">
+        <select [(ngModel)]="targetDeleteRoom" class="Interaction" id="deleteRoomSelect">
+          <option value=""></option>
+          <option *ngFor="let rooms of selectedUserBoards">
+            {{rooms.roomID}}
+          </option>
+        </select>
+        <div style="display:inline-block">
+          <button id="deleteSpecificRoomButton" class="Interaction" (click)="deleteRoom()">Delete</button>
+        </div>
       </div>
     </div>
   </div>
   <!-- Selected Board List Display -->
   <div style="display: inline-block">
-    <div class="Interaction boardSelectionButton" *ngFor = "let selectedUserBoard of selectedUserBoards" 
-      (click) = selectBoard(selectedUserBoard.roomID)>
-      {{selectedUserBoard.roomname | sanitizeStr}}
+    <div class="Interaction boardSelectionButton" *ngFor="let selectedUserBoard of selectedUserBoards"
+      (click)=selectBoard(selectedUserBoard.roomID)>
+      {{selectedUserBoard.roomID}}: {{selectedUserBoard.roomname | sanitizeStr}}
     </div>
   </div>
   <!-- Room Users view -->
   <div style="display: inline-block" class="RoomUsers">
-    <div *ngFor = "let rusers of selectedBoardUsers.slice().reverse()">
+    <div *ngFor="let rusers of selectedBoardUsers.slice().reverse()">
       <span>{{rusers.username}}: {{rusers.permissions}}</span>
     </div>
   </div>
   <!-- Post View -->
   <div style="display: inline-block">
-    <div *ngFor = "let post of posts.slice().reverse()" class = "Post AdminOnly">
+    <div *ngFor="let post of posts.slice().reverse()" class="Post AdminOnly">
       <span>{{post.username + ": " + post.message | sanitizeStr}}</span>
-      <button class="Interaction" id="deletePostButton" (click) = "deletePost(post.postID)">Delete</button>
+      <button class="Interaction" id="deletePostButton" (click)="deletePost(post.postID)">Delete</button>
+      <button class="Interaction" id="editPostButton" (click)="showEditField(post)">Edit</button>
+      <div id="{{post.postID}}" style="display: none">
+        <div style="display:inline-block">
+          <input type="text" class="Interaction" [(ngModel)]="newEditText" style="max-width:500px; min-width: 100px"/>
+        </div>
+        <div style="display: inline-block">
+          <button id="sendNewEditText" class="Interaction" (click)="editPost(post.postID)">Submit Edit</button>
+        </div>
+      </div>
     </div>
     <div class="Post">
       <div style="display: inline-block">
-        <input class="Interaction" id="postText" [(ngModel)] = "newPostText" style = "width: 90%; 
-          max-width: 500px; min-width: 100px" disabled = "true"/>
+        <input class="Interaction" id="postText" [(ngModel)]="newPostText" style="width: 90%; 
+          max-width: 500px; min-width: 100px" disabled="true" />
       </div>
       <div style="display: inline-block">
-          <button class="Interaction" id="newPostButton" (click) = "postMessage()" disabled = "true">
-            Create Post
-          </button>
+        <button class="Interaction" id="newPostButton" (click)="postMessage()" disabled="true">
+          Create Post
+        </button>
       </div>
     </div>
   </div>
 </div>
-
