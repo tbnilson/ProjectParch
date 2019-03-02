@@ -20,7 +20,7 @@
     </div>
     <!-- Invite Creator -->
     <div class="InteractionFree" id = "inviteCreator" style = "z-index: 2; display: none">
-      <select [(ngModel)]="targetUser" class="Interaction">
+      <select [(ngModel)]="targetUser" class="Interaction" id="inviteUserSelector">
           <option value="" selected disabled></option>
           <option *ngFor="let u of users">
             {{u.username}}
