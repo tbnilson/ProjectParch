@@ -136,5 +136,10 @@ public class BoardMain {
 		// TODO Auto-generated method stub
 		return driver.findElement(By.id("permissionButton"));
 	}
+
+	public WebElement getBoardNameDisplay() {
+		// TODO Auto-generated method stub
+		return driver.findElement(By.id("boardNameDisplay"));
+	}
 	
 }
