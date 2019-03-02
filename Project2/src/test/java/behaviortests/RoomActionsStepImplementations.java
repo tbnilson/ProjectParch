@@ -85,9 +85,8 @@ public class RoomActionsStepImplementations {
 	}
 
 	@When("^: The user invites user \"([^\"]*)\"$")
-	public void the_user_invites_user(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void the_user_invites_user(String invitee) throws Throwable {
+	    
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" invited to \"([^\"]*)\"$")

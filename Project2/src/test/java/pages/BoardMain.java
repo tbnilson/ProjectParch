@@ -116,5 +116,10 @@ public class BoardMain {
 			return null;
 		}
 	}
+
+	public WebElement getPermissionsDiv() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
