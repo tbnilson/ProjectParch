@@ -5,8 +5,11 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BoardMain {
 	
@@ -18,7 +21,7 @@ public class BoardMain {
 	}
 	
 	public List<WebElement>getRoomList() {
-		return driver.findElements(By.className("Interaction boardSelectionButton"));
+		return driver.findElements(By.className("boardSelectionButton"));
 	}
 
 	public WebElement getUserDisplay() {
@@ -39,11 +42,14 @@ public class BoardMain {
 		// TODO Auto-generated method stub
 
 		try {
-			WebElement userDisplayElem = driver.findElement(By.id("currentUsernameDisplay"));
+			WebElement userDisplayElem = new WebDriverWait(driver,5).until(
+					ExpectedConditions.presenceOfElementLocated(By.id("addNewBoardButton")));
 			return userDisplayElem;
 		} catch (NoSuchElementException e) {
 			// TODO Auto-generated catch block
 			//					e.printStackTrace();
+			return null;
+		} catch (TimeoutException te) {
 			return null;
 		}
 	}

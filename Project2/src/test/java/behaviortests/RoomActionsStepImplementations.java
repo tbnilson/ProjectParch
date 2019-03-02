@@ -37,15 +37,16 @@ public class RoomActionsStepImplementations {
 
 	@When("^: The user creates a room called \"([^\"]*)\"$")
 	public void the_user_creates_a_room_called(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
+		WebElement addBoardButton = boardmain.getAddNewBoardButton();
+		MyLogger.logger.debug(driver.getCurrentUrl());
+	    MyLogger.logger.debug(addBoardButton);
+	    addBoardButton.click();
 	    WebElement createBoardButton = boardmain.getCreateBoardButton();
-	    MyLogger.logger.debug(createBoardButton);
-	    createBoardButton.click();
-	    WebElement addBoardButton = boardmain.getAddNewBoardButton();
 	    WebElement newBoardNameTextbox = boardmain.getNewBoardNameTextbox();
 	    System.out.println(newBoardNameTextbox.getAttribute("class"));
 	    newBoardNameTextbox.sendKeys(arg1);
-	    addBoardButton.click();
+	    
+	    createBoardButton.click();
 	}
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" created$")

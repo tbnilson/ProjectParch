@@ -9,9 +9,9 @@ Feature: User creates a new room invites another user to a room
     Then : "<roomname>" is "<status>" created
 
     Examples: 
-      | username | password | status         | roomname |
-      | test2    | testpass | succesfully    | testroom |
-      | name2    |        7 | unsuccessfully | <>asdad  |
+      | username | password | status       | roomname |
+      | test21   | testpass | succesfully  | testroom |
+      | test22   | testpass | successfully | <>asdad  |
 
   Scenario Outline: User invites another user to a room
     Given : The User logs in as "<username>", "<password>"
