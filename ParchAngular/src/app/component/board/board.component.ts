@@ -43,7 +43,7 @@ export class BoardComponent implements OnInit {
   options = [
     {name: "User"},
     {name: "Mod"},
-    {name: "Remove Mod"},
+    {name: "Unban"},
     {name: "Ban"}
   ]
 
@@ -118,6 +118,7 @@ export class BoardComponent implements OnInit {
 
 
     if (this.selectedBoard.roomID != -1) {
+      this.getRoomPerms(this.selectedBoard.roomID);
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
       if (document.getElementById("permissionButton") != null) {
         document.getElementById("permissionButton").removeAttribute("disabled");
@@ -321,6 +322,8 @@ export class BoardComponent implements OnInit {
     this.rServ.banUser(roomID,admin,banneduser).subscribe(
       (response)=>{
         //response is "true" if the user was successfully banned, "false" otherwise.
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
@@ -345,6 +348,8 @@ export class BoardComponent implements OnInit {
     this.rServ.unBanUser(roomID,admin,banneduser).subscribe(
       (response)=>{
         //response is "true" if the user was given "invited" permissions, "false" otherwise
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
@@ -384,8 +389,8 @@ export class BoardComponent implements OnInit {
       (response)=>{
         if(response){
           //true when invite sent successfully
-          console.log(response);
           this.showInviteCreator();
+          this.update();
         }
         else{
           //false if the user is already in the room or banned
@@ -452,6 +457,8 @@ export class BoardComponent implements OnInit {
     this.rServ.makeModerator(roomID,admin,user).subscribe(
       (response)=>{
         //response is "true" if the user was successfully made into a mod, "false" otherwise.
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
@@ -465,8 +472,17 @@ export class BoardComponent implements OnInit {
       return;
     }
     if (this.permType == "User") {
-      console.log(this.permType);
       this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser);
+    }
+    if(this.permType == "Mod"){
+      this.makeModerator(this.selectedBoard.roomID,this.user,this.targetUser);
+    }
+    if(this.permType == "Unban"){
+      this.unBanUser(this.selectedBoard.roomID,this.user,this.targetUser);
+    }
+    if(this.permType == "Ban"){
+      this.banUser(this.selectedBoard.roomID,this.user,this.targetUser);
+
     }
   }
 
