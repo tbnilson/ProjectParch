@@ -14,6 +14,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.BoardMain;
 import pages.ParchMain;
+import util.MyLogger;
 
 public class RoomActionsStepImplementations {
 	static {
@@ -38,7 +39,7 @@ public class RoomActionsStepImplementations {
 	public void the_user_creates_a_room_called(String arg1) throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    WebElement createBoardButton = boardmain.getCreateBoardButton();
-	    System.out.println(createBoardButton.getText());
+	    MyLogger.logger.debug(createBoardButton);
 	    createBoardButton.click();
 	    WebElement addBoardButton = boardmain.getAddNewBoardButton();
 	    WebElement newBoardNameTextbox = boardmain.getNewBoardNameTextbox();
