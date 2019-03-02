@@ -83,8 +83,8 @@ makeModerator(roomID:number,admin:string,user:string):Observable<boolean>{
 }
 
 //a list of Permission object for the specified user where their permissions are set as "invited". Can return an empty list.
-getInvites(username:string):Observable<Permission>{
-  return this.http.get<Permission>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getInvites.do?username="+username);
+getInvites(username:string):Observable<Array<Permission>>{
+  return this.http.get<Array<Permission>>("http://ec2-18-204-216-193.compute-1.amazonaws.com:8080/Project2/getInvites.do?username="+username);
 }
 
 //"true" if the room was successfully deleted, "false" otherwise.

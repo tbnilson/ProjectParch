@@ -3,7 +3,7 @@
   <div class = "NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
-      <span (click) = "showInvites()">
+      <span (click) = "getInvites()">
         Invitations
       </span>
       <span id = "permissionsShow" (click) = "showInviteCreator()">
@@ -13,9 +13,9 @@
     <!-- Invitation Viewer -->
     <div class="InteractionFree" id = "invites" style = "z-index: 1; display: none;">
       <div *ngFor = "let invite of invites">
-        <span>{{invite.board.roomname}}</span>
-        <button class="Interaction" (click) = acceptInvitation(invite)>Accept</button>
-        <button class="Interaction" (click) = rejectInvitation(invite)>Reject</button>
+        <span>{{invite.roomID}}</span>
+        <button class="Interaction" (click) = acceptInvitation(invite.roomID,invite.username)>Accept</button>
+        <button class="Interaction" (click) = rejectInvitation(invite.roomID,invite.username)>Reject</button>
       </div>
     </div>
     <!-- Invite Creator -->
