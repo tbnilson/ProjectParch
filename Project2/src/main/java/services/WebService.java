@@ -715,14 +715,20 @@ public class WebService {
 		}
 		String username = request.getParameter("username");
 		List<Permission> perms = MainService.getUserPerms(username);
-		List<Permission> invites = new ArrayList<Permission>();
-		for (int i = 0; i < perms.size(); i++) {
-			if (perms.get(i).getPermissions().equals("invited")) {
-				invites.add(perms.get(i));
+		
+		if (perms!=null) {
+
+			List<Permission> invites = new ArrayList<Permission>();
+			for (int i = 0; i < perms.size(); i++) {
+				if (perms.get(i).getPermissions().equals("invited")) {
+					invites.add(perms.get(i));
+				}
 			}
+			String jsonarray = MainService.toJsonArray(invites);
+			pr.append(jsonarray).close();
+		} else {
+			pr.append("[]").close();
 		}
-		String jsonarray = MainService.toJsonArray(invites);
-		pr.append(jsonarray).close();
 	}
 
 	public static void getRoomPerms(HttpServletRequest request, HttpServletResponse response) {
