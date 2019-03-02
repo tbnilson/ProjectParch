@@ -26,6 +26,7 @@ import { Permission } from 'src/app/models/Permission';
 export class BoardComponent implements OnInit {
   selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
+  selectedBoardUsers: Permission[] =[];
   user : string = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
@@ -146,6 +147,7 @@ export class BoardComponent implements OnInit {
         this.selectedBoard = this.selectedUserBoards[i];
       }
     }
+    this.getRoomPerms(boardID);
     this.update();
     document.getElementById("postText").removeAttribute("disabled");
     document.getElementById("newPostButton").removeAttribute("disabled");
@@ -336,6 +338,7 @@ export class BoardComponent implements OnInit {
         if(response){
           //true when invite sent successfully
           console.log(response);
+          this.showInviteCreator();
         }
         else{
           //false if the user is already in the room or banned
@@ -357,6 +360,7 @@ export class BoardComponent implements OnInit {
         if(response){
           console.log(response);
           this.update();
+          this.showInvites();
           
         }
         else{
@@ -436,7 +440,8 @@ export class BoardComponent implements OnInit {
   getRoomPerms(roomID:number){
     this.rServ.getRoomPerms(roomID).subscribe(
       (response)=>{
-        //A json array of Parameter objects for the room.
+        //A json array of Permission objects for the room.
+        this.selectedBoardUsers=response;
       }
       ,
       (response)=>{

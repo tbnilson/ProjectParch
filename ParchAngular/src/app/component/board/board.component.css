@@ -13,6 +13,15 @@ button {
     background: rgb(0, 0, 10);
     border-radius: 10px;
 }
+div.RoomUsers{
+    font-size: 16px;
+    display: block;
+    border: solid rgb(0, 0, 100);
+    border-width: 5px 5px 0px 5px;
+    background: rgb(0, 0, 10);
+    border-radius: 10px;
+    float: right;
+}
 div.Post {
     font-size: 16px;
     display: block;
