@@ -34,8 +34,11 @@ export class BoardComponent implements OnInit {
   invites : Permission[] = [];
   newBoardText : string = "";
   newPostText : string = "";
+  newEditText : string = "";
   permType : string = "";
   targetUser : string="";
+  targetDeleteRoom:number;
+  timer: any;
 
   options = [
     {name: "User"},
@@ -58,12 +61,13 @@ export class BoardComponent implements OnInit {
     let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
-      setInterval(
+      this.timer = setInterval(
         ()=>{
-          this.update();
+          this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
         },
         3000
-      )
+      );
+      this.update();
     },
     (response) => {
       this.router.navigateByUrl("login");
@@ -73,6 +77,15 @@ export class BoardComponent implements OnInit {
   }
   logout(){
     this.selectedBoard = new Board(-1, "Select Board");
+  }
+
+  restartTimer(){
+    this.timer = setInterval(
+      ()=>{
+        this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+      },
+      3000
+    );
   }
 
   update() : void{
@@ -168,6 +181,31 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  showDeleteBoard(){
+    if (document.getElementById("deleteRoom").getAttribute("style") == "display: inline-block") {
+      document.getElementById("deleteRoom").setAttribute("style", "display: none");
+    }
+    else {
+      document.getElementById("deleteRoom").setAttribute("style", "display: inline-block");
+    }
+    
+  }
+
+  showEditField(post:Post){
+
+    if(post.username==this.user){
+      if (document.getElementById(post.postID+"").getAttribute("style") == "display: inline-block") {
+        this.restartTimer();
+        document.getElementById(post.postID+"").setAttribute("style", "display: none");
+      }
+      else {
+        document.getElementById(post.postID+"").setAttribute("style", "display: inline-block");
+        clearInterval(this.timer);
+      }
+    }
+    
+  }
+
   createBoard() : void {
     //create board
     this.rServ.createRoom(this.user,  escape(this.newBoardText)).subscribe( (response) => {
@@ -182,10 +220,13 @@ export class BoardComponent implements OnInit {
     this.showCreateBoard();
   }
 
-  deleteRoom(admin:string,roomID:number){
-    this.rServ.deleteRoom(admin,roomID).subscribe(
+  deleteRoom(){
+    this.rServ.deleteRoom(this.user,this.targetDeleteRoom).subscribe(
       (response)=>{
         //response is "true" if the room was successfully deleted, "false" otherwise.
+        this.selectedBoard = new Board(-1, "Select Board");
+        this.update();
+        this.showDeleteBoard();
       }
       ,
       (response)=>{
@@ -237,11 +278,12 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  editPost(id:number,newmessage:string) : void {
-    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
+  editPost(id:number) : void {
+    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,this.newEditText);
     editPost.subscribe(
       (response)=>{
         //console.log(response)
+        this.restartTimer();
         this.update();
       },
       (response)=>{
