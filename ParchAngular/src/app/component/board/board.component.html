@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <div style="background: rgb(15, 15, 15); border: solid rgb(0, 0, 100); border-width: 0px 0px 5px 0px">
-  <div class = "NavBar">{{selectedBoard.roomname | sanitizeStr}}</div>
+  <div class = "NavBar" id="boardNameDisplay">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
       <span (click) = "getInvites()">
