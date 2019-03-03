@@ -131,6 +131,10 @@ export class BoardComponent implements OnInit {
       if (document.getElementById("roomUsers") != null) {
         document.getElementById("roomUsers").setAttribute("style", "float: right");
       }
+      if (document.getElementById("boardNameDisplay") != null) {
+        document.getElementById("boardNameDisplay").setAttribute("style", "display: inline-block");
+      }
+      
       
     }
     else {
@@ -139,6 +143,9 @@ export class BoardComponent implements OnInit {
       }
       if (document.getElementById("roomUsers") != null) {
         document.getElementById("roomUsers").setAttribute("style", "display: none");
+      }
+      if (document.getElementById("boardNameDisplay") != null) {
+        document.getElementById("boardNameDisplay").setAttribute("style", "display: none");
       }
       
     }
