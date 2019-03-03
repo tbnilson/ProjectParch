@@ -11,9 +11,11 @@ public class ShutdownListener implements ServletContextListener {
 	
 	/* (non-Javadoc)
 	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
-	 * Hopefully this runs when the pizza app is rebuilt in jenkins.
+	 * Hopefully this runs when the Parch app is rebuilt in jenkins.
 	 */
 	public void contextDestroyed(ServletContextEvent sce) {
+
 		HibernateUtil.getSessionFactory().close();
+		
 	}
 }
