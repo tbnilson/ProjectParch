@@ -51,6 +51,9 @@ public class LoginStepImplementation {
 		if(arg1.equals("presses enter")) {
 			parchmain.getPasswordInput().sendKeys(Keys.ENTER);
 		}
+		if(arg1.equals("clicks create new post")) {
+			boardmain.getCreatePostButton().click();
+		}
 
 	}
 	

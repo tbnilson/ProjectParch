@@ -31,6 +31,8 @@ public class RoomActionsStepImplementations {
 	static ParchMain parchmain = new ParchMain(driver);
 	static BoardMain boardmain = new BoardMain(driver);
 	private int numrooms=0;
+	private String messagestring="";
+	private int numposts=0;
 	
 	@Given("^: The User logs in as \"([^\"]*)\", \"([^\"]*)\"$")
 	public void the_User_logs_in_as(String arg1, String arg2) throws Throwable {
@@ -60,12 +62,7 @@ public class RoomActionsStepImplementations {
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" created$")
 	public void is_created(String arg1, String successString) throws Throwable {
-		boolean success=false;
-		if (successString.equals("successfully")) {
-			success=true;
-		} else if (successString.equals("unsuccessfully")) {
-			success=false;
-		}
+		boolean success = successVal(successString);
 		
 	    List<WebElement> roomSelectors = boardmain.getRoomList(true);
 	    
@@ -81,7 +78,7 @@ public class RoomActionsStepImplementations {
 	public void the_user_selects_the_room(String roomname) throws Throwable {
 		List<WebElement> roomSelectors = boardmain.getRoomList(false);
 		for (WebElement rs : roomSelectors) {
-			if (rs.getText().equals(roomname)) {
+			if (rs.getText().contains(roomname)) {
 				rs.click();
 				break;
 			}
@@ -120,12 +117,7 @@ public class RoomActionsStepImplementations {
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" invited to \"([^\"]*)\"$")
 	public void is_invited_to(String invitee, String successString, String roomname) throws Throwable {
-		boolean success=false;
-		if (successString.equals("successfully")) {
-			success=true;
-		} else if (successString.equals("unsuccessfully")) {
-			success=false;
-		}
+		boolean success = successVal(successString);
 		
 	    IPermission permd = new PermissionDao();
 	    List<Permission> perms = permd.getUserPermissions(invitee);
@@ -133,6 +125,7 @@ public class RoomActionsStepImplementations {
 	    for (Permission permission : perms) {
 			if (permission.getRoom().getRoomname().equals(roomname) && permission.getPermissions().equals("invited")) {
 				assertval=true;
+				break;
 			}
 		}
 	    Assert.assertEquals(assertval, success);
@@ -140,36 +133,44 @@ public class RoomActionsStepImplementations {
 
 	@Then("^: \"([^\"]*)\" is \"([^\"]*)\" displayed$")
 	public void is_displayed(String boardname, String successString) throws Throwable {
+		boolean success = successVal(successString);
+	    WebElement boardelem = boardmain.getBoardNameDisplay();
+	    Assert.assertEquals(boardelem.getText().trim().equals(boardname), success);
+	}
+	
+	@Given("^: The user types \"([^\"]*)\" in room$")
+    public void _the_user_types_something_in_room(String message) throws Throwable {
+        boardmain.getMessageTextBox().sendKeys(message);
+        this.messagestring=message;
+        this.numposts=boardmain.getPostList(false).size();
+    }
+
+//	@When("^: The user \"([^\"]*)\"$")
+//	public void the_user(String arg1) throws Throwable {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new PendingException();
+//	}
+
+	@Then("^: The message is \"([^\"]*)\" displayed$")
+	public void the_message_is_displayed(String successString) throws Throwable {
+		boolean success = successVal(successString);
+	    WebElement bottompost = boardmain.getPostList(true).get(0);
+	    Assert.assertEquals(bottompost.getText().contains(this.messagestring), success);
+	    Assert.assertEquals(boardmain.getPostList(false).size()>numposts, success);
+	}
+
+	private boolean successVal(String successString) {
 		boolean success=false;
 		if (successString.equals("successfully")) {
 			success=true;
 		} else if (successString.equals("unsuccessfully")) {
 			success=false;
 		}
-	    WebElement boardelem = boardmain.getBoardNameDisplay();
-	    Assert.assertEquals(boardelem.getText().trim().equals(boardname), success);
+		return success;
 	}
 
-	@Given("^: The user types \"([^\"]*)\"Hi\"([^\"]*)\" in room$")
-	public void the_user_types_Hi_in_room(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@When("^: The user \"([^\"]*)\"$")
-	public void the_user(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@Then("^: The message is \"([^\"]*)\" displayed$")
-	public void the_message_is_displayed(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@When("^: The user attempts to delete \"([^\"]*)\"$")
-	public void the_user_attempts_to_delete(String arg1) throws Throwable {
+	@When("^: The user attempts to delete most recent message$")
+	public void the_user_attempts_to_delete() throws Throwable {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new PendingException();
 	}

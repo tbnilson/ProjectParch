@@ -11,7 +11,7 @@ Feature: User Login
 
     Examples: 
       | username | password | action        | status         |
-      | test1    | testpass | clicks login  | successfully   |
+      | test21    | testpass | clicks login  | successfully   |
       | name2    | test     | presses enter | unsuccessfully |
 
   #This scenario should test whether email and usernames are unique
