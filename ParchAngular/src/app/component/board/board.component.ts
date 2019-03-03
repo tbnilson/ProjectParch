@@ -132,7 +132,10 @@ export class BoardComponent implements OnInit {
 
     
   }
-
+  Logout(){
+    localStorage.clear();
+    this.uServ.changeUsername("");
+  }
   //----------------------------User Operations
   getAllUsers(){
     this.rServ.getAllUsers().subscribe(
