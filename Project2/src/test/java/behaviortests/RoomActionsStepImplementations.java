@@ -81,7 +81,7 @@ public class RoomActionsStepImplementations {
 	public void the_user_selects_the_room(String roomname) throws Throwable {
 		List<WebElement> roomSelectors = boardmain.getRoomList(false);
 		for (WebElement rs : roomSelectors) {
-			if (rs.getText().equals(roomname)) {
+			if (rs.getText().contains(roomname)) {
 				rs.click();
 				break;
 			}
@@ -149,23 +149,22 @@ public class RoomActionsStepImplementations {
 	    WebElement boardelem = boardmain.getBoardNameDisplay();
 	    Assert.assertEquals(boardelem.getText().trim().equals(boardname), success);
 	}
+	
+	@Given("^: The user types \"([^\"]*)\" in room$")
+    public void _the_user_types_something_in_room(String message) throws Throwable {
+        boardmain.getMessageTextBox().sendKeys(message);
+    }
 
-	@Given("^: The user types \"([^\"]*)\"Hi\"([^\"]*)\" in room$")
-	public void the_user_types_Hi_in_room(String arg1, String arg2) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
-
-	@When("^: The user \"([^\"]*)\"$")
-	public void the_user(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
-	}
+//	@When("^: The user \"([^\"]*)\"$")
+//	public void the_user(String arg1) throws Throwable {
+//	    // Write code here that turns the phrase above into concrete actions
+//	    throw new PendingException();
+//	}
 
 	@Then("^: The message is \"([^\"]*)\" displayed$")
 	public void the_message_is_displayed(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	    WebElement bottompost = boardmain.getPostList(true).get(0);
+	    System.out.println(bottompost.getText());
 	}
 
 	@When("^: The user attempts to delete \"([^\"]*)\"$")
