@@ -61,13 +61,14 @@ public class MainService {
 	public static String toJsonArray(List<? extends Jsonable> models) {
 		StringBuilder json = new StringBuilder("[");
 		
-		for (int i = 0; i < models.size(); i++) {
-			json.append(models.get(i).toJsonString());
-			if (i < (models.size()-1)) {
-				json.append(", ");
-			}
+		if (models!=null) {
+			for (int i = 0; i < models.size(); i++) {
+				json.append(models.get(i).toJsonString());
+				if (i < (models.size() - 1)) {
+					json.append(", ");
+				}
+			} 
 		}
-		
 		json.append("]");
 		return json.toString();
 	}
