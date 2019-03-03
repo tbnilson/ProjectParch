@@ -15,12 +15,12 @@ public class Permission implements Jsonable {
 	private String permissions;
 	@Id
 	@GeneratedValue
-	private int permID;
+	private int perm_id;
 	public Integer getId() {
-		return permID;
+		return perm_id;
 	}
 	public void setId(Integer id) {
-		this.permID = id;
+		this.perm_id = id;
 	}
 	public ParchUser getUser() {
 		return parchUser;
@@ -42,7 +42,7 @@ public class Permission implements Jsonable {
 	}
 	public String toJsonString() {
 		return "{" + 
-				" \"permID\": \""+this.permID+"\"," + 
+				" \"permID\": \""+this.perm_id+"\"," + 
 				" \"roomID\": \""+this.room.getId()+"\"," + 
 				" \"username\": \""+this.parchUser.getUsername()+"\"," + 
 				" \"permissions\": \""+this.permissions+"\"" + 
