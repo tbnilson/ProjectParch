@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    //checks if user has not logged out, then redirects to board if they haven't
+    if(localStorage.length>0){
+          this.usern.changeUsername(localStorage.getItem('currentUser'));
+          this.router.navigateByUrl("board");
+      }
     this.usern.currentUsername.subscribe(user => this.username = user)
   }
 
@@ -47,6 +52,7 @@ export class LoginComponent implements OnInit {
         if (response) {
           this.setUsername();
           this.answer = "Successful login"
+          localStorage.setItem('currentUser',this.username);
           this.router.navigateByUrl("board");
         }
         else {
