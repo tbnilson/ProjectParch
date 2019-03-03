@@ -24,7 +24,6 @@ public class UserDao implements IUser {
 			u = sess.get(ParchUser.class, username);
 			sess.close();
 		} catch (HibernateException e) {
-			e.printStackTrace();
 			u = null;
 		} finally {
 			sess.close();
