@@ -26,6 +26,7 @@ import { Permission } from 'src/app/models/Permission';
 export class BoardComponent implements OnInit {
   selectedBoard : Board = new Board(-1, "Select Board");
   selectedUserBoards : Board[] = [];
+  selectedBoardUsers: Permission[] =[];
   user : string = "";
   selectedPosts : Post[] = [];
   users : User[] = [];
@@ -33,8 +34,18 @@ export class BoardComponent implements OnInit {
   invites : Permission[] = [];
   newBoardText : string = "";
   newPostText : string = "";
+  newEditText : string = "";
   permType : string = "";
-  targetUser : User = null;
+  targetUser : string="";
+  targetDeleteRoom:number;
+  timer: any;
+
+  options = [
+    {name: "User"},
+    {name: "Mod"},
+    {name: "Unban"},
+    {name: "Ban"}
+  ]
 
   
   constructor(private router: Router, 
@@ -50,6 +61,12 @@ export class BoardComponent implements OnInit {
     let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
+      this.timer = setInterval(
+        ()=>{
+          this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+        },
+        3000
+      );
       this.update();
     },
     (response) => {
@@ -58,13 +75,27 @@ export class BoardComponent implements OnInit {
     );
 
   }
+  logout(){
+    this.selectedBoard = new Board(-1, "Select Board");
+  }
+
+  restartTimer(){
+    this.timer = setInterval(
+      ()=>{
+        this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+      },
+      3000
+    );
+  }
 
   update() : void{
     //update boardlist, invites, posts
     this.rServ.getUserRooms(this.user + "").subscribe( (response) => {
       this.selectedUserBoards = response;
+      
     },
     (response) => {
+      console.log(response);
     }
     );
 
@@ -79,13 +110,24 @@ export class BoardComponent implements OnInit {
         //console.log(response);
       }, 
       (response) => {
+        console.log(response);
 
       }
     );
 
+
+
     if (this.selectedBoard.roomID != -1) {
+      this.getRoomPerms(this.selectedBoard.roomID);
       this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
-      document.getElementById("permissionButton").removeAttribute("disabled");
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").removeAttribute("disabled");
+      }
+    }
+    else {
+      if (document.getElementById("permissionButton") != null) {
+        document.getElementById("permissionButton").setAttribute("disabled", "true");
+      }
     }
 
     
@@ -127,6 +169,7 @@ export class BoardComponent implements OnInit {
         this.selectedBoard = this.selectedUserBoards[i];
       }
     }
+    this.getRoomPerms(boardID);
     this.update();
     document.getElementById("postText").removeAttribute("disabled");
     document.getElementById("newPostButton").removeAttribute("disabled");
@@ -142,6 +185,31 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  showDeleteBoard(){
+    if (document.getElementById("deleteRoom").getAttribute("style") == "display: inline-block") {
+      document.getElementById("deleteRoom").setAttribute("style", "display: none");
+    }
+    else {
+      document.getElementById("deleteRoom").setAttribute("style", "display: inline-block");
+    }
+    
+  }
+
+  showEditField(post:Post){
+
+    if(post.username==this.user){
+      if (document.getElementById(post.postID+"").getAttribute("style") == "display: inline-block") {
+        this.restartTimer();
+        document.getElementById(post.postID+"").setAttribute("style", "display: none");
+      }
+      else {
+        document.getElementById(post.postID+"").setAttribute("style", "display: inline-block");
+        clearInterval(this.timer);
+      }
+    }
+    
+  }
+
   createBoard() : void {
     //create board
     this.rServ.createRoom(this.user,  escape(this.newBoardText)).subscribe( (response) => {
@@ -149,18 +217,20 @@ export class BoardComponent implements OnInit {
       this.update();
     },
     (response) => {
-      this.selectedBoard = response;
-      this.update();
+      console.log(response);
     }
     );
 
     this.showCreateBoard();
   }
 
-  deleteRoom(admin:string,roomID:number){
-    this.rServ.deleteRoom(admin,roomID).subscribe(
+  deleteRoom(){
+    this.rServ.deleteRoom(this.user,this.targetDeleteRoom).subscribe(
       (response)=>{
         //response is "true" if the room was successfully deleted, "false" otherwise.
+        this.selectedBoard = new Board(-1, "Select Board");
+        this.update();
+        this.showDeleteBoard();
       }
       ,
       (response)=>{
@@ -212,11 +282,12 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  editPost(id:number,newmessage:string) : void {
-    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,newmessage);
+  editPost(id:number) : void {
+    let editPost: Observable<boolean>=this.pServ.editMessage(id,this.user,this.newEditText);
     editPost.subscribe(
       (response)=>{
         //console.log(response)
+        this.restartTimer();
         this.update();
       },
       (response)=>{
@@ -254,13 +325,14 @@ export class BoardComponent implements OnInit {
     this.rServ.banUser(roomID,admin,banneduser).subscribe(
       (response)=>{
         //response is "true" if the user was successfully banned, "false" otherwise.
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
   getBannedUsers(roomID:number){
@@ -273,34 +345,36 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
   }
 
   unBanUser(roomID,admin,banneduser){
     this.rServ.unBanUser(roomID,admin,banneduser).subscribe(
       (response)=>{
         //response is "true" if the user was given "invited" permissions, "false" otherwise
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
-  getInvites(username:string){
-    this.rServ.getInvites(username).subscribe(
+  getInvites(){
+    this.rServ.getInvites(this.user).subscribe(
       (response)=>{
         //response is a list of Permission object for the specified user 
         //where their permissions are set as "invited". Can return an empty list.
+        console.log(response);
+        this.invites = response;
+        this.showInvites();
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
   //
@@ -314,13 +388,16 @@ export class BoardComponent implements OnInit {
   //###################################################################################################
   //
   inviteUser(roomID:number, inviter:string, invitee:string){
-    this.rServ.inviteUser(this.selectedBoard.roomID, this.user, invitee).subscribe(
+    this.rServ.inviteUser(roomID, inviter, invitee).subscribe(
       (response)=>{
         if(response){
           //true when invite sent successfully
+          this.showInviteCreator();
+          this.update();
         }
         else{
           //false if the user is already in the room or banned
+          console.log(response);
         }
 
       }
@@ -329,17 +406,21 @@ export class BoardComponent implements OnInit {
         console.log(response);
       }
     )
-    this.update();
+
   }
   
-  acceptInvitation(roomID:number, username:string){
+  acceptInvitation(roomID:number,username:string){
     this.rServ.acceptInvite(roomID, username).subscribe(
       (response)=>{
         if(response){
+          console.log(response);
+          this.update();
+          this.showInvites();
           
         }
         else{
           //user is banned
+          console.log(response);
           
         }
       }
@@ -349,20 +430,19 @@ export class BoardComponent implements OnInit {
 
       }
     )
-    this.update();
   }
 
   rejectInvitation(roomID:number,username:string) : void {
     this.rServ.rejectInvite(roomID,username).subscribe(
       (response)=>{
         //response is "true" if the user's invitation was successfuly rejected, "false" otherwise.
+        console.log(response);
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
   showInvites() : void {
@@ -380,22 +460,32 @@ export class BoardComponent implements OnInit {
     this.rServ.makeModerator(roomID,admin,user).subscribe(
       (response)=>{
         //response is "true" if the user was successfully made into a mod, "false" otherwise.
+        this.showInviteCreator();
+        this.update();
       }
       ,
       (response)=>{
         console.log(response);
       }
     )
-    this.update();
   }
 
   changePermission() : void {
     if (this.permType == "" || this.targetUser == null || this.selectedBoard.roomID == -1) {
       return;
     }
-    if (this.permType == "user") {
-      console.log("user");
-      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser.username);
+    if (this.permType == "User") {
+      this.inviteUser(this.selectedBoard.roomID, this.user, this.targetUser);
+    }
+    if(this.permType == "Mod"){
+      this.makeModerator(this.selectedBoard.roomID,this.user,this.targetUser);
+    }
+    if(this.permType == "Unban"){
+      this.unBanUser(this.selectedBoard.roomID,this.user,this.targetUser);
+    }
+    if(this.permType == "Ban"){
+      this.banUser(this.selectedBoard.roomID,this.user,this.targetUser);
+
     }
   }
 
@@ -416,7 +506,8 @@ export class BoardComponent implements OnInit {
   getRoomPerms(roomID:number){
     this.rServ.getRoomPerms(roomID).subscribe(
       (response)=>{
-        //A json array of Parameter objects for the room.
+        //A json array of Permission objects for the room.
+        this.selectedBoardUsers=response;
       }
       ,
       (response)=>{

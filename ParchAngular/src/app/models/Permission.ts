@@ -1,15 +1,15 @@
 export class Permission {
 
-    perm_id:number;
+    permID:number;
     permissions:string;
-    parchuser_username:string;
-    room_id:number;
+    username:string;
+    roomID:number;
 
     constructor(perm_id:number, permissions:string, parchuser_username:string, room_id:number) {
-        this.perm_id = perm_id;
+        this.permID = perm_id;
         this.permissions = permissions;
-        this.parchuser_username = parchuser_username;
-        this.room_id = room_id;
+        this.username = parchuser_username;
+        this.roomID = room_id;
         
     }
 
