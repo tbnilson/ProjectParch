@@ -149,22 +149,15 @@ public class BoardMain {
 		String className = "Post";
 		int startnum = driver.findElements(By.className(className)).size();
 
-		try {
+		if (doWait) {
+			try {
+				waitUntilClassListUpdates(5, startnum,className);
+			} catch (TimeoutException e) {
 
-			if (doWait) {
-				try {
-					waitUntilClassListUpdates(5, startnum,className);
-				} catch (TimeoutException e) {
-
-					MyLogger.logger.trace("Error in BoardMain", e);
-				} 
-			}
-
-		} catch (NoSuchElementException e) {
-			MyLogger.logger.trace("Error in BoardMain", e);
-			return null;
+				MyLogger.logger.trace("Error in BoardMain", e);
+			} 
 		}
-		
+
 		WebElement postactiondiv = driver.findElement(By.id(Integer.toString(postID)));
 		return postactiondiv.findElement(By.xpath("..")).findElement(By.tagName("span"));
 	}

@@ -17,7 +17,7 @@ Feature: Making, editing, and deleting posts
   Scenario Outline: User deletes a message
     Given : The User logs in as "<username>", "<password>"
     Given : The user selects the room "<roomname>"
-    When : The user attempts to delete "<messageID>"
+    When : The user attempts to delete most recent message
     Then : The message "<messageID>" is "<status>" deleted
 
     Examples: 
