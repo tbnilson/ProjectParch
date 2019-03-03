@@ -45,7 +45,6 @@ public class UserDao implements IUser {
 			
 			result = true;
 		} catch (HibernateException e) {
-			e.printStackTrace();
 			sess.getTransaction().rollback();
 			result = false;
 		} finally {
