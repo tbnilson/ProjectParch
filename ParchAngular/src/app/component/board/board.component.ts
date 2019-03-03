@@ -8,8 +8,6 @@ import { ParchSnackbarComponent } from '../parch-snackbar/parch-snackbar.compone
 import { MatSnackBar } from '@angular/material';
 import { PostingService } from 'src/app/services/posting.service';
 
-
-
 import { Board } from 'src/app/models/Board';
 import { User } from 'src/app/models/User';
 import { Post } from 'src/app/models/Post';
@@ -61,12 +59,7 @@ export class BoardComponent implements OnInit {
     let cuno : Observable<string> = this.uServ.currentUsername;
     cuno.subscribe( (response) => {
       this.user = response;
-      this.timer = setInterval(
-        ()=>{
-          this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
-        },
-        3000
-      );
+      this.restartTimer();
       this.update();
     },
     (response) => {
@@ -77,12 +70,25 @@ export class BoardComponent implements OnInit {
   }
   logout(){
     this.selectedBoard = new Board(-1, "Select Board");
+    localStorage.clear();
+    this.uServ.changeUsername("");
   }
 
   restartTimer(){
     this.timer = setInterval(
       ()=>{
-        this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+        if (this.selectedBoard.roomID != -1) {
+          this.getRoomPerms(this.selectedBoard.roomID);
+          this.getMessagesBefore(0, 1000, this.selectedBoard.roomID);
+          if (document.getElementById("permissionButton") != null) {
+            document.getElementById("permissionButton").removeAttribute("disabled");
+          }
+        }
+        else {
+          if (document.getElementById("permissionButton") != null) {
+            document.getElementById("permissionButton").setAttribute("disabled", "true");
+          }
+        }
       },
       3000
     );
@@ -132,10 +138,7 @@ export class BoardComponent implements OnInit {
 
     
   }
-  Logout(){
-    localStorage.clear();
-    this.uServ.changeUsername("");
-  }
+  
   //----------------------------User Operations
   getAllUsers(){
     this.rServ.getAllUsers().subscribe(
@@ -511,6 +514,7 @@ export class BoardComponent implements OnInit {
       }
       ,
       (response)=>{
+        this.selectedBoard = new Board(-1, "Select Board");
         console.log(response);
       }
     )
