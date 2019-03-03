@@ -324,7 +324,7 @@ public class WebService {
 	public static void getActiveUserRooms(HttpServletRequest request, HttpServletResponse response) {
 		
 		PrintWriter pr;
-		
+		//s
 		try {
 			 pr = response.getWriter();
 		} catch (IOException e1) {
