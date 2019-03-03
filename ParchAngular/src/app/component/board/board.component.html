@@ -86,7 +86,7 @@
     </div>
   </div>
   <!-- Room Users view -->
-  <div style="display: inline-block" class="Post" style="float: right">
+  <div style="display: inline-block" class="Post" id="roomUsers" style="float: right">
     <div>
       <div *ngFor = "let rusers of selectedBoardUsers.slice().reverse()">
         <span><span style="font-weight: bold">{{rusers.username}}:</span> {{rusers.permissions}}</span>
