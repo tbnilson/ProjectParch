@@ -270,11 +270,13 @@ export class BoardComponent implements OnInit {
   }
 
   postMessage(){
-    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, escape(this.newPostText) ).subscribe(
+    this.pServ.postMessage(this.user + "", this.selectedBoard.roomID, 
+    escape(this.newPostText.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\t/g, "\\t").trim()) ).subscribe(
       (response)=>{
         this.update();
         //response is the post they added to the DB
         //so you can probably just update 
+        this.newPostText="";
       }
       ,
       (response)=>{
@@ -293,7 +295,7 @@ export class BoardComponent implements OnInit {
       ,
       (response)=>{
         this.posts = [];
-
+        console.log(response.error.text)
       }
     )
   }
