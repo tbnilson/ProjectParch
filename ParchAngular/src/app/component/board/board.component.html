@@ -100,7 +100,8 @@
   <div class="PostView" id="PostScroll">
     
     <div *ngFor="let post of posts.slice().reverse()" class="Post AdminOnly">
-      <p>{{post.username + ": " + post.message | sanitizeStr}}</p>
+      <span>{{post.username + ": " + post.message | sanitizeStr}}</span>
+      <br>
       <button class="Interaction" id="deletePostButton" (click)="deletePost(post.postID)">Delete</button>
       <button class="Interaction" id="editPostButton" (click)="showEditField(post)">Edit</button>
       <div id="{{post.postID}}" style="display: none">
