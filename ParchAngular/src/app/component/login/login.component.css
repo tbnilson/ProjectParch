@@ -1,13 +1,14 @@
 
-
 .box{
-    width: 350px;
+    margin-top: 10%;
+    width: 50%;
     padding: 40px;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    /* position: absolute; */
+    /* top: 50%; */
+    /* transform: translate(-50%,-50%); */
     text-align: center;
    /* background: rgb(44, 130, 201);*/
+   display: inline-block;
 }
 .box h1{
     color:rgb(232, 236, 241);
