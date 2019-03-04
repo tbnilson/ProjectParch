@@ -3,7 +3,7 @@ div {
 }
 button {
     box-shadow: 0;
-    border: solid rgb(40, 40, 255);
+    border: solid rgb(140, 20, 252);
 }
 /* :host ::ng-deep div.Post {
     font-size: 16px;
@@ -16,7 +16,7 @@ button {
 div.Post {
     font-size: 16px;
     display: block;
-    border: solid rgb(0, 0, 100);
+    border: solid rgb(140, 20, 252);
     border-width: 5px 5px 5px 5px;
     background: rgb(50, 50, 50);
     border-radius: 10px;
@@ -25,7 +25,7 @@ div.Post {
 div.PostBottomless {
     font-size: 16px;
     display: block;
-    border: 5px solid rgb(0, 0, 100);
+    border: 5px solid rgb(140, 20, 252);
     background: rgb(50, 50, 50);
     border-radius: 10px;
     padding: 10px;
@@ -41,7 +41,7 @@ div.NavBar {
     display: inline-block;
     font-size: 24pt;
     padding: 5px;
-    border: solid rgb(0, 0, 100);
+    border: solid rgb(140, 20, 252);
     border-width: 5px 5px 5px 5px;
     border-radius: 20px;
     /* min-height: 200px; */
@@ -65,7 +65,7 @@ div.NavBar {
 .InteractionFree {
     font-size: 16px;
     display: block;
-    border: solid rgb(0, 0, 100);
+    border: solid rgb(140, 20, 252);
     border-width: 3px;
     background: rgb(50, 50, 50);
     outline: solid 10px rgba(100, 100, 150, 0.8);
@@ -91,7 +91,7 @@ div.NavBar {
     height: 200px;
     overflow-y: scroll;
     width: 40%;
-    border: solid rgb(0, 0, 100);
+    border: solid rgb(140, 20, 252);
     border-width: 5px 5px 5px 5px;
     background: rgb(50, 50, 50);
     border-radius: 10px;
