@@ -14,16 +14,17 @@ button {
     border-radius: 10px;
 } */
 .Post{
-    height: 92%;
+    height: calc(100% - 100px);
 }
 .AdminOnly{
     height:15%;
+    margin: 3px;
 }
 div.Post {
     font-size: 16px;
     display: block;
     border: solid rgb(140, 20, 252);
-    border-width: 5px 5px 5px 5px;
+    border-width: 2px;
     background: rgb(46, 49, 49);
     border-radius: 10px;
     padding: 10px;
@@ -52,6 +53,7 @@ div.NavBar {
     border-radius: 20px;
     /* min-height: 200px; */
     min-width: 50px;
+    margin:10px;
 }
 .Interaction {
     font-size: 16px;
@@ -80,9 +82,13 @@ div.NavBar {
 }
 .PostView {
     display: inline-block;
-    height: 400px;
+    max-height: calc(100% - 200px);
     overflow-y: scroll;
     width: 100%;
+    border: solid rgb(140, 20, 252);
+    border-width: 2px;
+    border-radius: 10px;
+    /* padding: 5px; */
 }
 .RoomUsersView {
     display: inline-block;
@@ -98,14 +104,37 @@ div.NavBar {
     overflow-y: scroll;
     width: 40%;
     border: solid rgb(140, 20, 252);
-    border-width: 5px 5px 5px 5px;
+    border-width: 2px;
     background: rgb(46, 49, 49);
     border-radius: 10px;
     padding: 10px;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 15px;
+    
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(140, 20, 252); 
+    border-radius: 10px;
+}
 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(140, 20, 252); 
+}
+
+#topButtonBar {
+    height: 100px;
+}
 
 
