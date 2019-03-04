@@ -13,6 +13,12 @@ button {
     background: rgb(0, 0, 10);
     border-radius: 10px;
 } */
+.Post{
+    height: 92%;
+}
+.AdminOnly{
+    height:15%;
+}
 div.Post {
     font-size: 16px;
     display: block;
