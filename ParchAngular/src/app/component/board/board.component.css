@@ -14,7 +14,7 @@ button {
     border-radius: 10px;
 } */
 .Post{
-    height: 92%;
+    height: calc(100% - 100px);
 }
 .AdminOnly{
     height:15%;
@@ -53,6 +53,7 @@ div.NavBar {
     border-radius: 20px;
     /* min-height: 200px; */
     min-width: 50px;
+    margin:10px;
 }
 .Interaction {
     font-size: 16px;
@@ -87,7 +88,7 @@ div.NavBar {
     border: solid rgb(140, 20, 252);
     border-width: 2px;
     border-radius: 10px;
-    padding: 5px;
+    /* padding: 5px; */
 }
 .RoomUsersView {
     display: inline-block;
@@ -132,6 +133,8 @@ div.NavBar {
     background: rgb(140, 20, 252); 
 }
 
-
+#topButtonBar {
+    height: 100px;
+}
 
 
