@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<div style="background: rgb(50, 50, 50); border: solid rgb(140, 20, 252); border-width: 0px 0px 5px 0px">
+<div style="background: rgb(50, 50, 50); border: solid rgb(140, 20, 252); border-width: 0px 0px 5px 0px; height: 8%">
   <div class = "NavBar" id="boardNameDisplay">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
@@ -111,7 +111,7 @@
         </div>
       </div>
     </div>
-    <div class="Post">
+    <div class="Post AdminOnly">
       <div style="display: inline-block">
         <input class="Interaction" id="postText" [(ngModel)]="newPostText" style="width: 90%; 
           max-width: 500px; min-width: 100px" disabled="true" />

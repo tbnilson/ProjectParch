@@ -13,11 +13,12 @@ body{
     font-family: sans-serif;
     position: absolute;
     width: 100%;
+    height: 100%;
 }
-::placeholder{
+/* ::placeholder{
     color:rgb(232, 236, 241);
     opacity: .5;
-}
+} */
 
 /* main border color        border: solid rgb(140, 20, 252);
 transformed border color    border-color: rgb(35, 203, 167);
