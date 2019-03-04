@@ -24,7 +24,7 @@ div.Post {
     font-size: 16px;
     display: block;
     border: solid rgb(140, 20, 252);
-    border-width: 5px 5px 5px 5px;
+    border-width: 2px;
     background: rgb(46, 49, 49);
     border-radius: 10px;
     padding: 10px;
@@ -87,6 +87,7 @@ div.NavBar {
     border: solid rgb(140, 20, 252);
     border-width: 2px;
     border-radius: 10px;
+    padding: 5px;
 }
 .RoomUsersView {
     display: inline-block;
@@ -102,7 +103,7 @@ div.NavBar {
     overflow-y: scroll;
     width: 40%;
     border: solid rgb(140, 20, 252);
-    border-width: 5px 5px 5px 5px;
+    border-width: 2px;
     background: rgb(46, 49, 49);
     border-radius: 10px;
     padding: 10px;
