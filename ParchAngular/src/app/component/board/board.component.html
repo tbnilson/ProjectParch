@@ -1,10 +1,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<div style="background: rgb(15, 15, 15); border: solid rgb(0, 0, 100); border-width: 0px 0px 5px 0px">
+<div style="background: rgb(50, 50, 50); border: solid rgb(140, 20, 252); border-width: 0px 0px 5px 0px">
   <div class = "NavBar" id="boardNameDisplay">{{selectedBoard.roomname | sanitizeStr}}</div>
   <div class = "NavBar">
     <div >
       <span (click) = "getInvites()">
-
         Invitations
       </span>
       <span id="permissionsShow" (click)="showInviteCreator()">
@@ -47,54 +46,58 @@
   </div>
 </div>
 
-<div class="PostBottomless" style="border-radius: 0px">
-  <!-- Board Creator -->
-  <div>
-    <button id="addNewBoardButton" class="Interaction" (click)="showCreateBoard()">Add New</button>
-    <br />
-    <div id="createBoard" style="display: none">
-      <div style="display: inline-block">
-        <input class="Interaction" [(ngModel)]="newBoardText" style="max-width: 500px;
-          min-width: 100px" />
+<div class="Post" style="border-radius: 0px">
+  <!--Boards-->
+  <div class="BoardView">
+    <!-- Board Creator -->
+    <div>
+      <button id="addNewBoardButton" class="Interaction" (click)="showCreateBoard()">Add New</button>
+      <br />
+      <div id="createBoard" style="display: none">
+        <div style="display: inline-block">
+          <input class="Interaction" [(ngModel)]="newBoardText" style="max-width: 500px;
+            min-width: 100px" />
+        </div>
+        <div style="display: inline-block">
+          <button id="createBoardButton" class="Interaction" (click)="createBoard()">Create Board</button>
+        </div>
       </div>
-      <div style="display: inline-block">
-        <button id="createBoardButton" class="Interaction" (click)="createBoard()">Create Board</button>
-      </div>
-    </div>
-    <!-- Delete Board -->
-    <button id="deleteRoomButton" class="Interaction" (click)="showDeleteBoard()">Delete Room</button>
-    <br />
-    <div id="deleteRoom" style="display:none">
-      <div style="display:inline-block">
-        <select [(ngModel)]="targetDeleteRoom" class="Interaction" id="deleteRoomSelect">
-          <option value=""></option>
-          <option *ngFor="let rooms of selectedUserBoards">
-            {{rooms.roomID}}
-          </option>
-        </select>
+      <!-- Delete Board -->
+      <button id="deleteRoomButton" class="Interaction" (click)="showDeleteBoard()">Delete Room</button>
+      <br />
+      <div id="deleteRoom" style="display:none">
         <div style="display:inline-block">
-          <button id="deleteSpecificRoomButton" class="Interaction" (click)="deleteRoom()">Delete</button>
+          <select [(ngModel)]="targetDeleteRoom" class="Interaction" id="deleteRoomSelect">
+            <option value=""></option>
+            <option *ngFor="let rooms of selectedUserBoards">
+              {{rooms.roomID}}
+            </option>
+          </select>
+          <div style="display:inline-block">
+            <button id="deleteSpecificRoomButton" class="Interaction" (click)="deleteRoom()">Delete</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Selected Board List Display -->
-  <div style="display: inline-block">
-    <div class="Interaction boardSelectionButton" *ngFor="let selectedUserBoard of selectedUserBoards"
-      (click)=selectBoard(selectedUserBoard.roomID)>
-      {{selectedUserBoard.roomID}}: {{selectedUserBoard.roomname | sanitizeStr}}
+    <!-- Selected Board List Display -->
+    <div style="display: inline-block">
+      <div class="Interaction boardSelectionButton" *ngFor="let selectedUserBoard of selectedUserBoards"
+        (click)=selectBoard(selectedUserBoard.roomID)>
+        {{selectedUserBoard.roomID}}: {{selectedUserBoard.roomname | sanitizeStr}}
+      </div>
     </div>
   </div>
   <!-- Room Users view -->
-  <div style="display: inline-block" class="Post" style="float: right">
+  <div class="Post RoomUsersView" id="roomUsers" >
     <div>
       <div *ngFor = "let rusers of selectedBoardUsers.slice().reverse()">
         <span><span style="font-weight: bold">{{rusers.username}}:</span> {{rusers.permissions}}</span>
       </div>
     </div>
   </div>
+  <br/>
   <!-- Post View -->
-  <div style="display: inline-block">
+  <div class="PostView">
     <div *ngFor="let post of posts.slice().reverse()" class="Post AdminOnly">
       <span>{{post.username + ": " + post.message | sanitizeStr}}</span>
       <button class="Interaction" id="deletePostButton" (click)="deletePost(post.postID)">Delete</button>

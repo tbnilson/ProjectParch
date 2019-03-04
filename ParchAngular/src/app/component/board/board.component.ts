@@ -66,8 +66,8 @@ export class BoardComponent implements OnInit {
       this.router.navigateByUrl("login");
     }
     );
-
   }
+
   logout(){
     this.selectedBoard = new Board(-1, "Select Board");
     localStorage.clear();
@@ -117,7 +117,6 @@ export class BoardComponent implements OnInit {
       }, 
       (response) => {
         console.log(response);
-
       }
     );
 
@@ -129,13 +128,27 @@ export class BoardComponent implements OnInit {
       if (document.getElementById("permissionButton") != null) {
         document.getElementById("permissionButton").removeAttribute("disabled");
       }
+      if (document.getElementById("roomUsers") != null) {
+        document.getElementById("roomUsers").setAttribute("style", "float: right");
+      }
+      if (document.getElementById("boardNameDisplay") != null) {
+        document.getElementById("boardNameDisplay").setAttribute("style", "display: inline-block");
+      }
+      
+      
     }
     else {
       if (document.getElementById("permissionButton") != null) {
         document.getElementById("permissionButton").setAttribute("disabled", "true");
       }
+      if (document.getElementById("roomUsers") != null) {
+        document.getElementById("roomUsers").setAttribute("style", "display: none");
+      }
+      if (document.getElementById("boardNameDisplay") != null) {
+        document.getElementById("boardNameDisplay").setAttribute("style", "display: none");
+      }
+      
     }
-
     
   }
   
@@ -380,16 +393,7 @@ export class BoardComponent implements OnInit {
     )
   }
 
-  //
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //###################################################################################################
-  //
+  
   inviteUser(roomID:number, inviter:string, invitee:string){
     this.rServ.inviteUser(roomID, inviter, invitee).subscribe(
       (response)=>{
@@ -524,6 +528,8 @@ export class BoardComponent implements OnInit {
     if(this.user == ""){
       this.router.navigateByUrl("login");
     }
+    //is needed to affect the displaying of things that need to be rendered
+    this.update();
   }
 
 }
