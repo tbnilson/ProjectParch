@@ -100,7 +100,7 @@
   <div class="PostView" id="PostScroll">
     
     <div *ngFor="let post of posts.slice().reverse()" class="Post AdminOnly">
-      <span>{{post.username + ": " + post.message | sanitizeStr}}</span>
+      <span style="white-space: pre-wrap">{{post.username + ": \n" + post.message | sanitizeStr}}</span>
       <br>
       <button class="Interaction" id="deletePostButton" (click)="deletePost(post.postID)">Delete</button>
       <button class="Interaction" id="editPostButton" (click)="showEditField(post)">Edit</button>
@@ -115,8 +115,8 @@
     </div>
     <div class="Post AdminOnly">
       <div style="display: inline-block">
-        <input class="Interaction" id="postText" [(ngModel)]="newPostText" style="width: 90%; 
-          max-width: 500px; min-width: 100px" disabled="true" />
+        <textarea class="Interaction" id="postText" [(ngModel)]="newPostText" style="width: 90%; 
+          max-width: 800px; min-width: 400px" disabled="true" ></textarea>
       </div>
       <div style="display: inline-block">
         <button class="Interaction" id="newPostButton" (click)="postMessage()" disabled="true">
