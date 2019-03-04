@@ -276,12 +276,11 @@ export class BoardComponent implements OnInit {
         this.update();
         //response is the post they added to the DB
         //so you can probably just update 
-        
+        this.newPostText="";
       }
       ,
       (response)=>{
         console.log(response);
-        console.log(escape(this.newPostText.replace(/\n/, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t").trim()));
       }
     )
     
