@@ -18,7 +18,7 @@ div.Post {
     display: block;
     border: solid rgb(0, 0, 100);
     border-width: 5px 5px 5px 5px;
-    background: rgb(0, 0, 10);
+    background: rgb(50, 50, 50);
     border-radius: 10px;
     padding: 10px;
 }
@@ -26,14 +26,14 @@ div.PostBottomless {
     font-size: 16px;
     display: block;
     border: 5px solid rgb(0, 0, 100);
-    background: rgb(0, 0, 10);
+    background: rgb(50, 50, 50);
     border-radius: 10px;
     padding: 10px;
 }
 div.PostBorderless {
     font-size: 16px;
     display: block;
-    background: rgb(0, 0, 10);
+    background: rgb(50, 50, 50);
     border-radius: 10px;
     padding: 10px;
 }
@@ -49,16 +49,16 @@ div.NavBar {
 }
 .Interaction {
     font-size: 16px;
-    background: rgb(0, 0, 10);
-    border: solid rgb(50, 50 ,50);
+    background: rgb(50, 50, 50);
+    border: solid rgb(100, 100, 100);
     border-radius: 10px;
     font-weight: bold;
 }
 .Interaction:disabled {
     font-size: 16px;
     text-decoration: line-through;
-    background: rgb(0, 0, 10);
-    border: solid rgb(50, 50 ,50);
+    background: rgb(50, 50, 50);
+    border: solid rgb(100, 100, 100);
     border-radius: 10px;
     font-weight: bold;
 }
@@ -67,7 +67,7 @@ div.NavBar {
     display: block;
     border: solid rgb(0, 0, 100);
     border-width: 3px;
-    background: rgb(0, 0, 10);
+    background: rgb(50, 50, 50);
     outline: solid 10px rgba(100, 100, 150, 0.8);
     padding: 10px;
     font-weight: bold;
@@ -93,7 +93,7 @@ div.NavBar {
     width: 40%;
     border: solid rgb(0, 0, 100);
     border-width: 5px 5px 5px 5px;
-    background: rgb(0, 0, 10);
+    background: rgb(50, 50, 50);
     border-radius: 10px;
     padding: 10px;
 }
