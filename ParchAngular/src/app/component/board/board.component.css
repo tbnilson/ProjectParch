@@ -118,23 +118,26 @@ div.NavBar {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
+    box-shadow: inset 0 0 5px rgb(150, 194, 184); 
     border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(140, 20, 252); 
+    background: rgb(35, 203, 167); 
     border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(140, 20, 252); 
+    background: rgb(35, 203, 167); 
 }
 
 #topButtonBar {
     height: 100px;
 }
 
+#newPostContainer {
+    border-color: rgb(35, 203, 167);
+}
 
